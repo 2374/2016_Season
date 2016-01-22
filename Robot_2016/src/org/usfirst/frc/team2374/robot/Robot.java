@@ -53,7 +53,7 @@ public class Robot extends SampleRobot {
     public void worstCaseAutonomous() {
         myRobot.setSafetyEnabled(false);
         drivetrain.update(1, 1, false, false);
-        Timer.delay(2.0);
+        Timer.delay(2.0);//delay duration subject to change
         drivetrain.update(0, 0, false, false);//move forward full speed 2 seconds
     }
     
@@ -61,10 +61,10 @@ public class Robot extends SampleRobot {
     	myRobot.setSafetyEnabled(false);
     	gyro.initGyro();
     	drivetrain.update(1, 1, true, false);
-        Timer.delay(4.0);
-    	if(gyro.getRate()<=1 && gyro.getRate()>=-1) {
+        Timer.delay(4.0);//delay duration subject to change
+    	if(gyro.getRate()<=1 && gyro.getRate()>=-1) {//values subject to change in future
     		drivetrain.update(1, 1, true, false);
-            Timer.delay(2.0);
+            Timer.delay(2.0);//delay duration subject to change
     	}
     	drivetrain.update(0, 0, false, false);
     	}
@@ -73,10 +73,10 @@ public class Robot extends SampleRobot {
     	myRobot.setSafetyEnabled(false);
     	gyro.initGyro();
         drivetrain.update(1, 1, true, false);
-        Timer.delay(4.0);
-    	if(gyro.getRate()<=1 && gyro.getRate()>=-1) {
+        Timer.delay(4.0);//delay duration subject to change
+    	if(gyro.getRate()<=1 && gyro.getRate()>=-1) {//values subject to change as well
     		drivetrain.update(1, 1, true, false);
-            Timer.delay(2.0);
+            Timer.delay(2.0);//delay duration subject to change
     	}
     	drivetrain.update(0, 0, false, false);
     	angledShooter.update(1, true, false);
