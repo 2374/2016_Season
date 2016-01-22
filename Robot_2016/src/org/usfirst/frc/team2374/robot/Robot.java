@@ -60,19 +60,14 @@ public class Robot extends SampleRobot {
     public void terrainAutonomous() {//make more terrain autonomous modes
     	myRobot.setSafetyEnabled(false);
     	gyro.initGyro();
-    	while (gyro.getAngle()<=15 && gyro.getAngle()>=-15) {
-        drivetrain.update(1, 1, false, false);
-        Timer.delay(2.0);
-    	}
-    	if(gyro.getAngle()>15 || gyro.getAngle()<-15) {
+    	drivetrain.update(1, 1, true, false);
+        Timer.delay(4.0);
+    	if(gyro.getRate()<=1 && gyro.getRate()>=-1) {
     		drivetrain.update(1, 1, true, false);
             Timer.delay(2.0);
     	}
-    	if(gyro.getAngle()<=15 && gyro.getAngle()>=-15) {
-    		drivetrain.update(0, 0, true, false);
-            Timer.delay(2.0);
+    	drivetrain.update(0, 0, false, false);
     	}
-    }
 
     public void terrainAndShootAutonomous() {
     	myRobot.setSafetyEnabled(false);
