@@ -5,10 +5,11 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 
 public class Shooter {
-	Talon wheel;
+	Talon wheel1;
+	Talon wheel2;
 	Encoder wheelEncoder;
 
-	public Shooter(int wheelPort, int encoderPort1, int encoderPort2) { // Remember
+	public Shooter(int wheelPort1, int wheelPort2, int encoderPort1, int encoderPort2) { // Remember
 																		// to
 																		// add
 																		// up-down
@@ -16,7 +17,8 @@ public class Shooter {
 																		// with
 																		// the
 																		// wheel!
-		wheel = new Talon(wheelPort);
+		wheel1 = new Talon(wheelPort1);
+		wheel2 = new Talon(wheelPort2);
 		wheelEncoder = new Encoder(encoderPort1, encoderPort2, true,
 				EncodingType.k4X); // Please look into how encoders really work
 									// in the context of the wheel
@@ -40,7 +42,8 @@ public class Shooter {
 			PIDShooter(wheelSpeed);
 		}
 		if (!wheelForwardEngaged) {
-			wheel.set(0);
+			wheel1.set(0);
+			wheel2.set(0);
 			wheelEncoder.reset();
 			resetPid();
 		}
@@ -51,12 +54,14 @@ public class Shooter {
 			PIDShooter(-wheelSpeed);
 		}
 		if (!wheelReverseEngaged) {
-			wheel.set(0);
+			wheel1.set(0);
+			wheel2.set(0);
 			wheelEncoder.reset();
 			resetPid();
 		}
 		if (wheelForwardEngaged && wheelReverseEngaged) {
-			wheel.set(-wheelSpeed);
+			wheel1.set(-wheelSpeed);
+			wheel2.set(-wheelSpeed);
 			wheelForwardEngaged = false;
 		}
 	}
@@ -84,7 +89,8 @@ public class Shooter {
 			} else if (motorVoltage < -maxRate) {
 				motorVoltage = -maxRate;
 			}
-			wheel.set(motorVoltage/maxRate);
+			wheel1.set(motorVoltage/maxRate);
+			wheel2.set(motorVoltage/maxRate);
 			integral += error;
 			prevError = error;
 		}

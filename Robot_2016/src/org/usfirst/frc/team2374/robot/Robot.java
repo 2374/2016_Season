@@ -39,10 +39,10 @@ public class Robot extends SampleRobot {
         myRobot = new RobotDrive(0, 1);
         myRobot.setExpiration(0.1);
         stick = new Joystick(0);
-        angledShooter=new Shooter(10, 11, 12); //PLEASE CHANGE THIS PORT IN THE FUTURE! DO IT!
+        angledShooter=new Shooter(4, 5, 11, 12); //PLEASE CHANGE THIS PORT IN THE FUTURE! DO IT!
         drivetrain = new Drivetrain();
-        chainlift = new ChainLift(13);
-        intake = new Intake(14);
+        chainlift = new ChainLift(6);
+        intake = new Intake(7);
         gyro = new AnalogGyro(12);
         buttonControl = new ButtonControl(angledShooter,chainlift,drivetrain,intake);
     }
