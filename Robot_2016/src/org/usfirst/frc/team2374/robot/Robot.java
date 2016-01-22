@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.AnalogGyro;
 /**
  * This is a demo program showing the use of the RobotDrive class.
  * The SampleRobot class is the base of a robot application that will automatically call your
@@ -33,6 +33,7 @@ public class Robot extends SampleRobot {
     Intake intake;
     Drivetrain drivetrain;
     ButtonControl buttonControl;
+    AnalogGyro gyro;
 
     public Robot() {
         myRobot = new RobotDrive(0, 1);
@@ -42,6 +43,7 @@ public class Robot extends SampleRobot {
         drivetrain = new Drivetrain();
         chainlift = new ChainLift(13);
         intake = new Intake(14);
+        gyro = new AnalogGyro(12);
         buttonControl = new ButtonControl(angledShooter,chainlift,drivetrain,intake);
     }
 
@@ -57,21 +59,32 @@ public class Robot extends SampleRobot {
     
     public void terrainAutonomous() {//make more terrain autonomous modes
     	myRobot.setSafetyEnabled(false);
-        drivetrain.update(1, 1, true, false);
+    	gyro.initGyro();
+    	while (gyro.getAngle()<=15 && gyro.getAngle()>=-15) {
+        drivetrain.update(1, 1, false, false);
         Timer.delay(2.0);
-        drivetrain.update(0.5, 0.5, false, false);
-        Timer.delay(2.0);
-        drivetrain.update(0, 0, true, false);
+    	}
+    	if(gyro.getAngle()>15 || gyro.getAngle()<-15) {
+    		drivetrain.update(1, 1, true, false);
+            Timer.delay(2.0);
+    	}
+    	if(gyro.getAngle()<=15 && gyro.getAngle()>=-15) {
+    		drivetrain.update(0, 0, true, false);
+            Timer.delay(2.0);
+    	}
     }
 
     public void terrainAndShootAutonomous() {
     	myRobot.setSafetyEnabled(false);
+    	gyro.initGyro();
         drivetrain.update(1, 1, true, false);
-        Timer.delay(2.0);
-        drivetrain.update(0.5, 0.5, false, false);
-        Timer.delay(2.0);
-        drivetrain.update(0, 0, true, false);
-        angledShooter.update(1, true, false);
+        Timer.delay(4.0);
+    	if(gyro.getRate()<=1 && gyro.getRate()>=-1) {
+    		drivetrain.update(1, 1, true, false);
+            Timer.delay(2.0);
+    	}
+    	drivetrain.update(0, 0, false, false);
+    	angledShooter.update(1, true, false);
     }
     /**
      * Runs the motors with arcade steering.
