@@ -24,7 +24,7 @@ public class Drivetrain {
 
     public void setSpeed(double leftSpeed, double rightSpeed) {
         PID(leftSpeed, l1, l2);
-        PID(rightSpeed, r1, r2);
+        PID(-rightSpeed, r1, r2);
     }
 
     public void setSolenoids(Value frontSol, Value backSol) {
@@ -85,6 +85,10 @@ public class Drivetrain {
     double prevError;
 
     private void PID(double targetSpeed, Talon... motors) {
+    	for (Talon t : motors) {
+    		t.set(targetSpeed);
+    	}
+    	/*
         double error = targetSpeed * maxRate - getRate();
         double P = 0.005;
         double I = 0.00005;
@@ -102,5 +106,6 @@ public class Drivetrain {
             integral += error;
             prevError = error;
         }
+        */
     }
 }
