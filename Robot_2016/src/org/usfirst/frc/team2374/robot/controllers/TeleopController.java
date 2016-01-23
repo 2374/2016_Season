@@ -24,8 +24,8 @@ public class TeleopController extends RobotController {
             if (Math.abs(d) < .2) {
                 return 0.;
             }
-            d -= .2 * Math.signum(d);
-            d *= d * d * 1.95;
+            d -= .4 * Math.signum(d);
+            d *= d * d * -4.63;
             return 0.;
         };
         double leftSpeed = myRobot.joystick.getRawAxis(1);
