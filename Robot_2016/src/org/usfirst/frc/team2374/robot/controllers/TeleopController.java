@@ -1,0 +1,44 @@
+package org.usfirst.frc.team2374.robot.controllers;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import org.usfirst.frc.team2374.robot.Robot;
+
+public class TeleopController extends RobotController {
+
+    public TeleopController(Robot robot) {
+        super(robot);
+    }
+
+    @Override
+    protected void onStart() {
+        delay(5, () -> {
+            //do something
+        });
+    }
+
+    @Override
+    protected void onUpdate() {
+        //Control wheel speeds
+        myRobot.drivetrain.setSpeed(myRobot.joystick.getRawAxis(1), myRobot.joystick.getRawAxis(5));
+        //Control solenoids
+        boolean frontSol = myRobot.joystick.getRawAxis(3) != 0;
+        boolean backSol = myRobot.joystick.getRawAxis(2) != 0;
+        myRobot.drivetrain.setSolenoids(frontSol ? Value.kForward : Value.kReverse, backSol ? Value.kForward : Value.kReverse);
+        //Control shooter
+        myRobot.angledShooter.update(2, myRobot.joystick.getRawButton(5), myRobot.joystick.getRawButton(6));
+        //Control intake
+        myRobot.intake.update(myRobot.joystick.getRawButton(1), myRobot.joystick.getRawButton(3));
+        //Control chainlift
+        myRobot.chainlift.update(myRobot.joystick.getRawButton(2), myRobot.joystick.getRawButton(4));
+    }
+
+    @Override
+    protected void onFinish() {
+        myRobot.drivetrain.setSolenoids(Value.kOff, Value.kOff);
+    }
+
+    @Override
+    protected boolean shouldFinish() {
+        return myRobot.isDisabled() || !myRobot.isOperatorControl();
+    }
+}
