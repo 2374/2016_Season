@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2374.robot.controllers;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import java.util.function.UnaryOperator;
 import org.usfirst.frc.team2374.robot.Robot;
 
 public class TeleopController extends RobotController {
@@ -19,7 +20,17 @@ public class TeleopController extends RobotController {
     @Override
     protected void onUpdate() {
         //Control wheel speeds
-        myRobot.drivetrain.setSpeed(myRobot.joystick.getRawAxis(1), myRobot.joystick.getRawAxis(5));
+        UnaryOperator<Double> editSpeed = d -> {
+            if (Math.abs(d) < .2) {
+                return 0.;
+            }
+            d -= .2 * Math.signum(d);
+            d *= d * d * 1.95;
+            return 0.;
+        };
+        double leftSpeed = myRobot.joystick.getRawAxis(1);
+        double rightSpeed = myRobot.joystick.getRawAxis(5);
+        myRobot.drivetrain.setSpeed(editSpeed.apply(leftSpeed), editSpeed.apply(rightSpeed));
         //Control solenoids
         boolean frontSol = myRobot.joystick.getRawAxis(3) != 0;
         boolean backSol = myRobot.joystick.getRawAxis(2) != 0;
