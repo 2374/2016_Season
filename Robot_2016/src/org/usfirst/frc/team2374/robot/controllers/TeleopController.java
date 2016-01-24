@@ -1,7 +1,6 @@
 package org.usfirst.frc.team2374.robot.controllers;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import java.util.function.UnaryOperator;
 import org.usfirst.frc.team2374.robot.Robot;
 
 public class TeleopController extends RobotController {
@@ -20,21 +19,13 @@ public class TeleopController extends RobotController {
     @Override
     protected void onUpdate() {
         //Control wheel speeds
-        UnaryOperator<Double> editSpeed = d -> {
-            if (Math.abs(d) < .2) {
-                return 0.;
-            }
-            d -= .4 * Math.signum(d);
-            d *= d * d * -4.63;
-            return 0.;
-        };
-        double leftSpeed = myRobot.joystick.getRawAxis(1);
-        double rightSpeed = myRobot.joystick.getRawAxis(5);
-        myRobot.drivetrain.setSpeed(editSpeed.apply(leftSpeed), editSpeed.apply(rightSpeed));
+        myRobot.drivetrain.setSpeed(myRobot.joystick.getRawAxis(1), myRobot.joystick.getRawAxis(5));
         //Control solenoids
-        boolean frontSol = myRobot.joystick.getRawAxis(3) != 0;
-        boolean backSol = myRobot.joystick.getRawAxis(2) != 0;
-        myRobot.drivetrain.setSolenoids(frontSol ? Value.kForward : Value.kReverse, backSol ? Value.kForward : Value.kReverse);
+        boolean frontLeftSol = myRobot.joystick.getRawAxis(2) != 0;
+        boolean frontRightSol = myRobot.joystick.getRawAxis(3) != 0;
+        boolean backLeftSol = myRobot.joystick.getRawButton(1);
+        boolean backRightSol = myRobot.joystick.getRawButton(2);
+        myRobot.drivetrain.setSolenoids(frontLeftSol ? Value.kForward : Value.kReverse, frontRightSol ? Value.kForward : Value.kReverse,backLeftSol,backRightSol ? Value.kForward : Value.kReverse);
         //Control shooter
         myRobot.angledShooter.update(2, myRobot.joystick.getRawButton(5), myRobot.joystick.getRawButton(6));
         //Control intake
@@ -45,7 +36,7 @@ public class TeleopController extends RobotController {
 
     @Override
     protected void onFinish() {
-        myRobot.drivetrain.setSolenoids(Value.kOff, Value.kOff);
+        myRobot.drivetrain.setSolenoids(Value.kOff, Value.kOff, false, Value.kOff);
     }
 
     @Override

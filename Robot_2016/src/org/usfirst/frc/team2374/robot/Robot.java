@@ -15,7 +15,7 @@ public class Robot extends SampleRobot {
     public final ChainLift chainlift;
     public final Intake intake;
     public final Drivetrain drivetrain;
-    public final AnalogGyro gyro;
+    //public final AnalogGyro gyro;
 
     public Robot() {
         joystick = new Joystick(0);
@@ -23,7 +23,7 @@ public class Robot extends SampleRobot {
         drivetrain = new Drivetrain();
         chainlift = new ChainLift(6);
         intake = new Intake(7);
-        gyro = new AnalogGyro(12);
+        //gyro = new AnalogGyro(12);
     }
 
     @Override

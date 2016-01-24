@@ -3,13 +3,15 @@ package org.usfirst.frc.team2374.robot;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 
 public class Drivetrain {
 
     private final Talon l1, l2, r1, r2;// talons, pretty normal
     private final Encoder encoder;
-    private final DoubleSolenoid solenoidBack, solenoidFront; // two solenoids, in the future
+    private final DoubleSolenoid solenoidBackRight, solenoidFrontRight, solenoidFrontLeft; // two solenoids, in the future
+    private final Solenoid solenoidBackLeft;
     // specify or modify these names based on the placement on the robot, for specification's sake
 
     public Drivetrain() {
@@ -18,18 +20,22 @@ public class Drivetrain {
         r1 = new Talon(2);
         r2 = new Talon(3);
         encoder = new Encoder(8, 9); // Change ports later if necessary
-        solenoidBack = new DoubleSolenoid(4, 5); // CHANGE PORTS LATER
-        solenoidFront = new DoubleSolenoid(6, 7); // CHANGE THE PORTS PLEASE
+        solenoidFrontRight = new DoubleSolenoid(4, 5); // CHANGE PORTS LATER
+        solenoidFrontLeft = new DoubleSolenoid(0, 1); // CHANGE THE PORTS PLEASE
+        solenoidBackRight = new DoubleSolenoid(2, 3); 
+        solenoidBackLeft = new Solenoid(6);
     }
 
     public void setSpeed(double leftSpeed, double rightSpeed) {
-        PID(leftSpeed, l1, l2);
-        PID(-rightSpeed, r1, r2);
+        PID(-leftSpeed, l1, l2);
+        PID(rightSpeed, r1, r2);
     }
 
-    public void setSolenoids(Value frontSol, Value backSol) {
-        solenoidFront.set(frontSol);
-        solenoidBack.set(backSol);
+    public void setSolenoids(Value frontLeftSol,Value frontRightSol, boolean backLeftSol,Value backRightSol) {
+        solenoidFrontLeft.set(frontLeftSol);
+        solenoidFrontRight.set(frontRightSol);
+        solenoidBackLeft.set(backLeftSol); //For now, this is just controlled by a boolean. Subject to further testing
+        solenoidBackRight.set(backRightSol);
     }
 
     /*
