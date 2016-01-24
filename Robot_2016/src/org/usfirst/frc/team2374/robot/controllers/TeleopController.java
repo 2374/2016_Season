@@ -25,7 +25,7 @@ public class TeleopController extends RobotController {
         boolean frontRightSol = myRobot.joystick.getRawAxis(3) != 0;
         boolean backLeftSol = myRobot.joystick.getRawButton(1);
         boolean backRightSol = myRobot.joystick.getRawButton(2);
-        myRobot.drivetrain.setSolenoids(frontLeftSol ? Value.kForward : Value.kReverse, frontRightSol ? Value.kForward : Value.kReverse,backLeftSol,backRightSol ? Value.kForward : Value.kReverse);
+        myRobot.drivetrain.setSolenoids(frontLeftSol ? Value.kForward : Value.kReverse, frontRightSol ? Value.kForward : Value.kReverse,backLeftSol ? Value.kForward : Value.kReverse,backRightSol ? Value.kForward : Value.kReverse);
         //Control shooter
         myRobot.angledShooter.update(2, myRobot.joystick.getRawButton(5), myRobot.joystick.getRawButton(6));
         //Control intake
@@ -36,7 +36,7 @@ public class TeleopController extends RobotController {
 
     @Override
     protected void onFinish() {
-        myRobot.drivetrain.setSolenoids(Value.kOff, Value.kOff, false, Value.kOff);
+        myRobot.drivetrain.setSolenoids(Value.kOff, Value.kOff, Value.kOff, Value.kOff);
     }
 
     @Override
