@@ -23,8 +23,8 @@ public class TeleopController extends RobotController {
         //Control solenoids
         boolean frontLeftSol = myRobot.joystick.getRawAxis(2) != 0;
         boolean frontRightSol = myRobot.joystick.getRawAxis(3) != 0;
-        boolean backLeftSol = myRobot.joystick.getRawButton(1);
-        boolean backRightSol = myRobot.joystick.getRawButton(2);
+        boolean backLeftSol = myRobot.joystick.getRawButton(2);
+        boolean backRightSol = myRobot.joystick.getRawButton(1);
         myRobot.drivetrain.setSolenoids(frontLeftSol ? Value.kForward : Value.kReverse, frontRightSol ? Value.kForward : Value.kReverse,backLeftSol ? Value.kForward : Value.kReverse,backRightSol ? Value.kForward : Value.kReverse);
         //Control shooter
         myRobot.angledShooter.update(2, myRobot.joystick.getRawButton(5), myRobot.joystick.getRawButton(6));
