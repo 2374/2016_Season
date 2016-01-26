@@ -10,7 +10,8 @@ import org.usfirst.frc.team2374.robot.controllers.TestController;
 
 public class Robot extends SampleRobot {
 
-    public final Joystick joystick;
+    public final Joystick joystick1;
+    public final Joystick joystick2;
     public final Shooter angledShooter;
     public final ChainLift chainlift;
     public final Intake intake;
@@ -18,7 +19,8 @@ public class Robot extends SampleRobot {
     //public final AnalogGyro gyro;
 
     public Robot() {
-        joystick = new Joystick(0);
+        joystick1 = new Joystick(0);
+        joystick2 = new Joystick(1); //Check Ports!!!!!!!!!!!
         angledShooter = new Shooter(4, 5, 11, 12); //PLEASE CHANGE THIS PORT IN THE FUTURE! DO IT!
         drivetrain = new Drivetrain();
         chainlift = new ChainLift(6);

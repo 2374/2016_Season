@@ -19,19 +19,22 @@ public class TeleopController extends RobotController {
     @Override
     protected void onUpdate() {
         //Control wheel speeds
-        myRobot.drivetrain.setSpeed(myRobot.joystick.getRawAxis(1), myRobot.joystick.getRawAxis(5));
+        myRobot.drivetrain.setSpeed(myRobot.joystick1.getRawAxis(1), myRobot.joystick1.getRawAxis(5));
         //Control solenoids
-        boolean frontLeftSol = myRobot.joystick.getRawAxis(2) != 0;
-        boolean frontRightSol = myRobot.joystick.getRawAxis(3) != 0;
-        boolean backLeftSol = myRobot.joystick.getRawButton(2);
-        boolean backRightSol = myRobot.joystick.getRawButton(1); //The buttons are acting strangely, look into it.
+        boolean frontLeftSol = myRobot.joystick1.getRawAxis(2) != 0;
+        boolean frontRightSol = myRobot.joystick1.getRawAxis(3) != 0;
+        boolean backLeftSol = myRobot.joystick1.getRawButton(5);
+        boolean backRightSol = myRobot.joystick1.getRawButton(6); //The buttons are acting strangely, look into it.
         myRobot.drivetrain.setSolenoids(frontLeftSol ? Value.kForward : Value.kReverse, frontRightSol ? Value.kForward : Value.kReverse,backLeftSol ? Value.kForward : Value.kReverse,backRightSol ? Value.kForward : Value.kReverse);
         //Control shooter
-        myRobot.angledShooter.update(2, myRobot.joystick.getRawButton(5), myRobot.joystick.getRawButton(6));
+        myRobot.angledShooter.update(2, myRobot.joystick1.getRawButton(5), myRobot.joystick1.getRawButton(6));
         //Control intake
-        myRobot.intake.update(myRobot.joystick.getRawButton(1), myRobot.joystick.getRawButton(3));
+        myRobot.intake.update(myRobot.joystick1.getRawButton(1), myRobot.joystick1.getRawButton(3));
         //Control chainlift
-        myRobot.chainlift.update(myRobot.joystick.getRawButton(2), myRobot.joystick.getRawButton(4));
+        myRobot.chainlift.update(myRobot.joystick1.getRawButton(2), myRobot.joystick1.getRawButton(4));
+   
+        
+        	
     }
 
     @Override
