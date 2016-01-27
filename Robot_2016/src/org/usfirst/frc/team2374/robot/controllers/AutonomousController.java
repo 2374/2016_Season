@@ -8,6 +8,10 @@ public class AutonomousController extends RobotController {
         super(robot);
     }
 
+    /*
+     * FOCUS ON ROUGH TERRAIN AND MOAT FOR AUTONOMOUS
+     */
+    
     @Override
     protected void onStart() {
         //Move forward full speed
