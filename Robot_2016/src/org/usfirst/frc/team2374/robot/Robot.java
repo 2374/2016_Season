@@ -3,6 +3,8 @@ package org.usfirst.frc.team2374.robot;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SampleRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team2374.robot.controllers.AutonomousController;
 import org.usfirst.frc.team2374.robot.controllers.DisabledController;
 import org.usfirst.frc.team2374.robot.controllers.TeleopController;
@@ -16,6 +18,7 @@ public class Robot extends SampleRobot {
     public final ChainLift chainlift;
     public final Intake intake;
     public final Drivetrain drivetrain;
+    public final SmartDashboard dashboard;
     //public final AnalogGyro gyro;
 
     public Robot() {
@@ -26,6 +29,7 @@ public class Robot extends SampleRobot {
         chainlift = new ChainLift(6);
         intake = new Intake(7);
         //gyro = new AnalogGyro(12);
+        dashboard = new SmartDashboard();
     }
 
     @Override

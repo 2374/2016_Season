@@ -2,8 +2,14 @@ package org.usfirst.frc.team2374.robot.controllers;
 
 import org.usfirst.frc.team2374.robot.Robot;
 
-public class AutonomousController extends RobotController {
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+public class AutonomousController extends RobotController {
+	
+	public SmartDashboard dashboard = myRobot.dashboard;
+	
     public AutonomousController(Robot robot) {
         super(robot);
     }
@@ -11,6 +17,10 @@ public class AutonomousController extends RobotController {
     /*
      * FOCUS ON ROUGH TERRAIN AND MOAT FOR AUTONOMOUS
      */
+    
+    Command roughTerrain;//FIGURE THIS OUT
+    
+    private SendableChooser autoChooser = new SendableChooser(); //Add defaults and options for rough terrain and various other obstacles
     
     @Override
     protected void onStart() {
