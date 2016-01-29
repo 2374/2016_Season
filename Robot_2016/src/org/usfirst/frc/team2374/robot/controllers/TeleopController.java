@@ -74,8 +74,8 @@ public class TeleopController extends RobotController {
         myRobot.angledShooter.update(2, myRobot.joystick1.getRawButton(5), myRobot.joystick1.getRawButton(6));
         //Control intake
         myRobot.intake.update(myRobot.joystick1.getRawButton(1), myRobot.joystick1.getRawButton(3));
-        //Control chainlift
-        myRobot.chainlift.update(myRobot.joystick1.getRawButton(2), myRobot.joystick1.getRawButton(4));
+        //Control manipulator
+        myRobot.manipulator.update(myRobot.joystick1.getRawButton(2), myRobot.joystick1.getRawButton(4));
    
         
         	

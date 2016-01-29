@@ -16,7 +16,7 @@ public class Robot extends SampleRobot {
     public final Joystick joystick1;
     public final Joystick joystick2;
     public final Shooter angledShooter;
-    public final ChainLift chainlift;
+    public final Manipulator manipulator;
     public final Intake intake;
     public final Drivetrain drivetrain;
     public final SmartDashboard dashboard;
@@ -28,7 +28,7 @@ public class Robot extends SampleRobot {
         joystick2 = new Joystick(1); //Check Ports!!!!!!!!!!!
         angledShooter = new Shooter(4, 5, 11, 12); //PLEASE CHANGE THIS PORT IN THE FUTURE! DO IT!
         drivetrain = new Drivetrain();
-        chainlift = new ChainLift(6);
+        manipulator = new Manipulator(6);
         intake = new Intake(7);
         //gyro = new AnalogGyro(12);
         dashboard = new SmartDashboard();
