@@ -36,6 +36,23 @@ public class Drivetrain {
         solenoidBackLeft.set(backLeftSol); //For now, this is just controlled by a boolean. Subject to further testing
         solenoidBackRight.set(backRightSol);
     }
+    
+    public void setSolenoids(int solMode){
+    	switch(solMode){
+    	 case 0: setSolenoids(Value.kReverse, Value.kReverse, Value.kReverse, Value.kReverse);
+         break;
+         case 1: setSolenoids(Value.kReverse, Value.kReverse, Value.kForward, Value.kForward);
+         break;
+         case 2: setSolenoids(Value.kForward, Value.kForward, Value.kReverse, Value.kReverse);
+         break;
+         case 3: setSolenoids(Value.kForward, Value.kForward, Value.kForward, Value.kForward);
+         break;
+         case 4: setSolenoids(Value.kForward, Value.kReverse, Value.kReverse, Value.kForward);
+         break;
+         case 5: setSolenoids(Value.kReverse, Value.kForward, Value.kForward, Value.kReverse);
+         break;
+    	}
+    }
 
     /*
 
