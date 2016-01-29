@@ -2,16 +2,17 @@ package org.usfirst.frc.team2374.robot.controllers;
 
 import org.usfirst.frc.team2374.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AutonomousController extends RobotController {
 	
+	protected int autoCase;
+	
     public AutonomousController(Robot robot) {
         super(robot);
-        final SendableChooser autoChooser = new SendableChooser(); //Add defaults and options for rough terrain and various other obstacles
-        autoChooser.addDefault("Rough Terrain", new RoughTerrainAuto());
     }
     
     /*
@@ -19,10 +20,28 @@ public class AutonomousController extends RobotController {
      */
     
     
-    private SendableChooser autoChooser = new SendableChooser(); //Add defaults and options for rough terrain and various other obstacles
+   //private SendableChooser autoChooser = new SendableChooser(); //Add defaults and options for rough terrain and various other obstacles
     
     @Override
     protected void onStart() {
+    	autoCase=(int) myRobot.autoChooser.getSelected();
+    	switch(autoCase){
+    	case 1: //ROUGH TERRAIN AUTONOMOUS
+    		myRobot.drivetrain.setSolenoids(0);
+    		myRobot.drivetrain.setSpeed(.5,.5);
+    		delay(2, () -> {
+    			myRobot.drivetrain.setSpeed(0, 0);;
+    		});
+    	break;
+    	case 2: //MOAT AUTONOMOUS
+    		myRobot.drivetrain.setSolenoids(0);
+    		myRobot.drivetrain.setSpeed(.5,.5);
+    		delay(2, () -> {
+    			myRobot.drivetrain.setSpeed(0,0);
+    		});
+    		break;
+    		
+    	}
         //Move forward full speed
         myRobot.drivetrain.setSpeed(1, 1);
         //Wait 2 seconds, delay duration subject to change
