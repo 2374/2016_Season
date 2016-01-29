@@ -8,17 +8,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AutonomousController extends RobotController {
 	
-	public SmartDashboard dashboard = myRobot.dashboard;
-	
     public AutonomousController(Robot robot) {
         super(robot);
+        final SendableChooser autoChooser = new SendableChooser(); //Add defaults and options for rough terrain and various other obstacles
+        autoChooser.addDefault("Rough Terrain", new RoughTerrainAuto());
     }
-
+    
     /*
      * FOCUS ON ROUGH TERRAIN AND MOAT FOR AUTONOMOUS
      */
     
-    Command roughTerrain;//FIGURE THIS OUT
     
     private SendableChooser autoChooser = new SendableChooser(); //Add defaults and options for rough terrain and various other obstacles
     
@@ -31,6 +30,7 @@ public class AutonomousController extends RobotController {
             //Stop moving
             myRobot.drivetrain.setSpeed(0, 0);
         });
+        
     }
 
     @Override
