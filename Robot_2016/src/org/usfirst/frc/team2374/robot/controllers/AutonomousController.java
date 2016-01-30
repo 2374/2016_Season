@@ -43,7 +43,7 @@ public class AutonomousController extends RobotController {
 			});
 			autoCase=3;
 			break;
-		case 3: // SHOOTER AUTONOMOUS, WILL BE CALLED BY OTHER SWITCHES?
+		case 3: // SHOOTER AUTONOMOUS, WILL BE CALLED BY OTHER CASES?
 			myRobot.drivetrain.setSolenoids(0);
 			myRobot.drivetrain.setSpeed(1, 1);
 			delay(2, () -> {
@@ -52,14 +52,6 @@ public class AutonomousController extends RobotController {
 			});
 			break;
 		}
-		// Move forward full speed
-		myRobot.drivetrain.setSpeed(1, 1);
-		// Wait 2 seconds, delay duration subject to change
-		delay(2, () -> {
-			// Stop moving
-				myRobot.drivetrain.setSpeed(0, 0);
-			});
-
 	}
 
 	@Override

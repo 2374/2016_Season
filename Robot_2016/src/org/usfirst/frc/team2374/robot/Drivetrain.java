@@ -98,7 +98,7 @@ public class Drivetrain {
         }
     }
      */
-    private double getRate() {
+    public double getRate() {
         return encoder.getRate();
     }
     double maxRate = 9.79; //FIGURE OUT WHAT THE ACTUAL MAXRATE IS ON THE DRIVETRAIN ENCODERS!!!

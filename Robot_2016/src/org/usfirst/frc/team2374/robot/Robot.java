@@ -35,6 +35,8 @@ public class Robot extends SampleRobot {
         autoChooser = new SendableChooser(); //Add defaults and options for rough terrain and various other obstacles
         autoChooser.addDefault("Rough Terrain", 1);
         autoChooser.addObject("Moat", 2);
+        autoChooser.addObject("Shooter", 3);
+        dashboard.putNumber("Encoder Speed", drivetrain.getRate());
     }
     
     @Override
