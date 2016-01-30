@@ -6,9 +6,9 @@ import java.util.Map;
 import org.usfirst.frc.team2374.robot.Robot;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public abstract class RobotController {
-
     private final Map<Runnable, Double> toRun = new HashMap<>();
     protected Robot myRobot;
 

@@ -33,15 +33,24 @@ public class AutonomousController extends RobotController {
 				myRobot.drivetrain.setSpeed(0, 0);
 				;
 			});
+			autoCase=3;
 			break;
 		case 2: // MOAT AUTONOMOUS
-			myRobot.drivetrain.setSolenoids(0);
+			myRobot.drivetrain.setSolenoids(2);
 			myRobot.drivetrain.setSpeed(.5, .5);
 			delay(2, () -> {
 				myRobot.drivetrain.setSpeed(0, 0);
 			});
+			autoCase=3;
 			break;
-
+		case 3: // SHOOTER AUTONOMOUS, WILL BE CALLED BY OTHER SWITCHES?
+			myRobot.drivetrain.setSolenoids(0);
+			myRobot.drivetrain.setSpeed(1, 1);
+			delay(2, () -> {
+				myRobot.drivetrain.setSpeed(0, 0);
+				myRobot.angledShooter.update(1,true,false);
+			});
+			break;
 		}
 		// Move forward full speed
 		myRobot.drivetrain.setSpeed(1, 1);

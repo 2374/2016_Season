@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import org.usfirst.frc.team2374.robot.Robot;
 
 public class TeleopController extends RobotController {
-	int state=0;
+	
     public TeleopController(Robot robot) {
         super(robot);
     }
@@ -37,37 +37,22 @@ public class TeleopController extends RobotController {
         	secondControllerActive=true;
         }
         if(secondControllerActive && myRobot.joystick2.getRawButton(10)){
-        	state=0;
+        	myRobot.drivetrain.setSolenoids(0);
         }
         if(secondControllerActive && myRobot.joystick2.getRawButton(1)){
-        	state=1;
+        	myRobot.drivetrain.setSolenoids(1);
         }
         if(secondControllerActive && myRobot.joystick2.getRawButton(2)){
-        	state=2;
+        	myRobot.drivetrain.setSolenoids(2);
         }
         if(secondControllerActive && myRobot.joystick2.getRawButton(3)){
-        	state=3;
+        	myRobot.drivetrain.setSolenoids(3);
         }
         if(secondControllerActive && myRobot.joystick2.getRawButton(4)){
-        	state=4;
+        	myRobot.drivetrain.setSolenoids(4);
         }
         if(secondControllerActive && myRobot.joystick2.getRawButton(9)){
-        	state=5;
-        }
-        	
-        switch (state){
-        case 0: myRobot.drivetrain.setSolenoids(Value.kReverse, Value.kReverse, Value.kReverse, Value.kReverse);
-        break;
-        case 1: myRobot.drivetrain.setSolenoids(Value.kReverse, Value.kReverse, Value.kForward, Value.kForward);
-        break;
-        case 2: myRobot.drivetrain.setSolenoids(Value.kForward, Value.kForward, Value.kReverse, Value.kReverse);
-        break;
-        case 3: myRobot.drivetrain.setSolenoids(Value.kForward, Value.kForward, Value.kForward, Value.kForward);
-        break;
-        case 4: myRobot.drivetrain.setSolenoids(Value.kForward, Value.kReverse, Value.kReverse, Value.kForward);
-        break;
-        case 5: myRobot.drivetrain.setSolenoids(Value.kReverse, Value.kForward, Value.kForward, Value.kReverse);
-        break;
+        	myRobot.drivetrain.setSolenoids(5);
         }
         myRobot.drivetrain.setSolenoids(frontLeftSol ? Value.kForward : Value.kReverse, frontRightSol ? Value.kForward : Value.kReverse,backLeftSol ? Value.kForward : Value.kReverse,backRightSol ? Value.kForward : Value.kReverse);
         //Control shooter
