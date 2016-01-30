@@ -19,8 +19,8 @@ public class Robot extends SampleRobot {
     public final Manipulator manipulator;
     public final Intake intake;
     public final Drivetrain drivetrain;
-    public final SmartDashboard dashboard;
     public final SendableChooser autoChooser;
+    public final CrusaderDashboard dashboard;
     //public final AnalogGyro gyro;
 
     public Robot() {
@@ -30,13 +30,12 @@ public class Robot extends SampleRobot {
         drivetrain = new Drivetrain();
         manipulator = new Manipulator(6);
         intake = new Intake(7);
+        dashboard = new CrusaderDashboard();
         //gyro = new AnalogGyro(12);
-        dashboard = new SmartDashboard();
         autoChooser = new SendableChooser(); //Add defaults and options for rough terrain and various other obstacles
         autoChooser.addDefault("Rough Terrain", 1);
         autoChooser.addObject("Moat", 2);
         autoChooser.addObject("Shooter", 3);
-        dashboard.putNumber("Encoder Speed", drivetrain.getRate());
     }
     
     @Override
