@@ -20,7 +20,7 @@ public class Robot extends SampleRobot {
     public final Intake intake;
     public final Drivetrain drivetrain;
     public final SendableChooser autoChooser;
-    public final CrusaderDashboard dashboard;
+    public final SmartDashboard dashboard;
     //public final AnalogGyro gyro;
 
     public Robot() {
@@ -30,7 +30,7 @@ public class Robot extends SampleRobot {
         drivetrain = new Drivetrain();
         manipulator = new Manipulator(6);
         intake = new Intake(7);
-        dashboard = new CrusaderDashboard();
+        dashboard = new SmartDashboard();
         //gyro = new AnalogGyro(12);
         autoChooser = new SendableChooser(); //Add defaults and options for rough terrain and various other obstacles
         autoChooser.addDefault("Rough Terrain", 1);
