@@ -25,25 +25,34 @@ public class AutonomousController extends RobotController {
 	@Override
 	protected void onStart() {
 		autoCase = (int) myRobot.autoChooser.getSelected();
+		boolean isOverObstacle = myRobot.gyro.getRate()<-1 || myRobot.gyro.getRate()>1; //These values should be changed!
 		switch (autoCase) {
 		case 1: // ROUGH TERRAIN AUTONOMOUS
 			myRobot.drivetrain.setSolenoids(0);
 			myRobot.drivetrain.setSpeed(.5, .5);
-			delay(2, () -> {
-				myRobot.drivetrain.setSpeed(0, 0);
-				;
-			});
-			autoCase=3;
+			delay(1, () -> {
+				myRobot.drivetrain.setSpeed(.5, .5);
+				if(!isOverObstacle){
+					myRobot.drivetrain.setSpeed(.5, .5);
+				}
+				if(isOverObstacle){
+					autoCase=3;	
+			}
+		});
 			break;
 		case 2: // MOAT AUTONOMOUS
 			myRobot.drivetrain.setSolenoids(2);
-			myRobot.drivetrain.setSpeed(.5, .5);
-			delay(2, () -> {
-				myRobot.drivetrain.setSpeed(0, 0);
-			});
-			autoCase=3;
+			myRobot.drivetrain.setSpeed(1, 1);
+			delay(0.5, () -> {
+				if(!isOverObstacle){
+					myRobot.drivetrain.setSpeed(1, 1);
+				}
+				if(isOverObstacle){
+					autoCase=3;
+			}
+		});
 			break;
-		case 3: // SHOOTER AUTONOMOUS, WILL BE CALLED BY OTHER CASES?
+		case 3: // SHOOTER AUTONOMOUS, WILL BE CALLED BY OTHER CASES? MAKE THIS ACTUALLY WORK WITH SENSORS
 			myRobot.drivetrain.setSolenoids(0);
 			myRobot.drivetrain.setSpeed(1, 1);
 			delay(2, () -> {

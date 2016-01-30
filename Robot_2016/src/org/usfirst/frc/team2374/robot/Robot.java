@@ -20,7 +20,7 @@ public class Robot extends SampleRobot {
     public final Intake intake;
     public final Drivetrain drivetrain;
     public final SendableChooser autoChooser;
-    //public final AnalogGyro gyro;
+    public final AnalogGyro gyro;
 
     public Robot() {
         joystick1 = new Joystick(0);
@@ -29,12 +29,13 @@ public class Robot extends SampleRobot {
         drivetrain = new Drivetrain();
         manipulator = new Manipulator(6);
         intake = new Intake(7);
-        //gyro = new AnalogGyro(12);
-        SmartDashboard.putNumber("",4);
+        gyro = new AnalogGyro(12);
         autoChooser = new SendableChooser(); //Add defaults and options for rough terrain and various other obstacles
         autoChooser.addDefault("Rough Terrain", 1);
         autoChooser.addObject("Moat", 2);
         autoChooser.addObject("Shooter", 3);
+        SmartDashboard.putNumber("Encoder Speed",drivetrain.getRate());
+        SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
     }
     
     @Override
