@@ -11,6 +11,7 @@ public class AutonomousController extends RobotController {
 
 	protected int autoCase;
 	protected int turnDirection;
+	private double xV, yV, zV, xP, yP, zP;
 
 	public AutonomousController(Robot robot) {
 		super(robot);
@@ -54,33 +55,34 @@ public class AutonomousController extends RobotController {
 			}
 		});
 			break;
-		case 3: // SHOOTER AUTONOMOUS, WILL BE CALLED BY OTHER CASES? MAKE THIS ACTUALLY WORK WITH SENSORS
-			myRobot.drivetrain.setSolenoids(0);
-			if(turnDirection==1){//We must find the angle from the robot to the goal and then turn (90-that angle) in order to be perpendicular
-				//turn five degrees left, then 10? degrees right.
-				//We must find the angle from the robot to the goal and then turn (90-that angle) and use ultrasonic to find the distance "x"
-				//then use x times the cos(90-that angle) and travel that distance.
-				//then we can turn 90 degrees back to face the goal and move straight forward to it.
-			}
-			if(turnDirection==2){
-				while(true){//MUST CHANGE! While the camera cannot see the reflective tape, keep turning.
-					myRobot.drivetrain.setSpeed(0, .25);//if this cannot
-			}
-			}
-			if(turnDirection==3){
-				while(true){//SAME AS TWO
-					myRobot.drivetrain.setSpeed(.25, 0);
-				}
-			}
-				else{
-					//SOMETHING SERIOUSLY GOT MESSED UP
-				}
+		
 			}
 		}
 	
 
 	@Override
 	protected void onUpdate() {
+		double xA = myRobot.accelerometer.getX()*9.81;
+		double yA = myRobot.accelerometer.getY()*9.81;
+		double zA = myRobot.accelerometer.getZ()*9.81;
+		xV += xA;
+		yV += yA;
+		zV += zA;
+		xP += xV;
+		yP += yV;
+		zP += zV;
+	if(autoCase==3){
+		myRobot.drivetrain.setSolenoids(0);
+		if(turnDirection==1){//Use the positions to maneuver to the goal
+		}
+		if(turnDirection==2){
+		}
+		if(turnDirection==3){
+		}
+		else{
+			//SOMETHING SERIOUSLY GOT MESSED UP
+		}
+	}
 	}
 
 	@Override

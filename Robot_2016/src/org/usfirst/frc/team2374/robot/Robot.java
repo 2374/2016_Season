@@ -1,10 +1,11 @@
 package org.usfirst.frc.team2374.robot;
-
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.GyroBase;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 
 import org.usfirst.frc.team2374.robot.controllers.AutonomousController;
 import org.usfirst.frc.team2374.robot.controllers.DisabledController;
@@ -22,6 +23,7 @@ public class Robot extends SampleRobot {
     public final SendableChooser autoChooser;
     public final SendableChooser autoTurn;
     public final AnalogGyro gyro;
+    public final BuiltInAccelerometer accelerometer;
 
     public Robot() {
         joystick1 = new Joystick(0);
@@ -31,6 +33,7 @@ public class Robot extends SampleRobot {
         manipulator = new Manipulator(6);
         intake = new Intake(7);
         gyro = new AnalogGyro(12);
+        accelerometer = new BuiltInAccelerometer();
         autoChooser = new SendableChooser(); //Add defaults and options for rough terrain and various other obstacles
         autoTurn = new SendableChooser();
         autoChooser.addDefault("Rough Terrain", 1);
