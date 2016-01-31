@@ -12,6 +12,7 @@ public class AutonomousController extends RobotController {
 	protected int autoCase;
 	protected int turnDirection;
 	private double xV, yV, zV, xP, yP, zP;
+	private boolean isOverObstacle = zP > -.1 && zP < .1;
 
 	public AutonomousController(Robot robot) {
 		super(robot);
@@ -28,61 +29,58 @@ public class AutonomousController extends RobotController {
 	protected void onStart() {
 		autoCase = (int) myRobot.autoChooser.getSelected();
 		turnDirection = (int) myRobot.autoTurn.getSelected();
-		boolean isOverObstacle = myRobot.gyro.getRate()<-1 || myRobot.gyro.getRate()>1; //These values should be changed!
-		switch (autoCase) {
-		case 1: // ROUGH TERRAIN AUTONOMOUS
-			myRobot.drivetrain.setSolenoids(0);
-			myRobot.drivetrain.setSpeed(.5, .5);
-			delay(1, () -> {
-				myRobot.drivetrain.setSpeed(.5, .5);
-				if(!isOverObstacle){
-					myRobot.drivetrain.setSpeed(.5, .5);
-				}
-				if(isOverObstacle){
-					autoCase=3;	
-			}
-		});
-			break;
-		case 2: // MOAT AUTONOMOUS
-			myRobot.drivetrain.setSolenoids(2);
-			myRobot.drivetrain.setSpeed(1, 1);
-			delay(0.5, () -> {
-				if(!isOverObstacle){
-					myRobot.drivetrain.setSpeed(1, 1);
-				}
-				if(isOverObstacle){
-					autoCase=3;
-			}
-		});
-			break;
-		
-			}
-		}
-	
+		xV = 0;
+		yV = 0;
+		zV = 0;
+		xP = 0;
+		yP = 0;
+		zP = 0;
+	}
 
 	@Override
 	protected void onUpdate() {
-		double xA = myRobot.accelerometer.getX()*9.81;
-		double yA = myRobot.accelerometer.getY()*9.81;
-		double zA = myRobot.accelerometer.getZ()*9.81;
+		double xA = myRobot.accelerometer.getX() * 9.81;// Make sure the
+														// accelerometer does
+														// measure in g's
+		double yA = myRobot.accelerometer.getY() * 9.81;
+		double zA = myRobot.accelerometer.getZ() * 9.81;
 		xV += xA;
 		yV += yA;
 		zV += zA;
 		xP += xV;
 		yP += yV;
 		zP += zV;
-	if(autoCase==3){
-		myRobot.drivetrain.setSolenoids(0);
-		if(turnDirection==1){//Use the positions to maneuver to the goal
+		switch (autoCase) {
+		case 1: // ROUGH TERRAIN AUTONOMOUS
+			myRobot.drivetrain.setSolenoids(0);
+			myRobot.drivetrain.setSpeed(0.5, 0.5);
+			if (!isOverObstacle) {
+				myRobot.drivetrain.setSpeed(0.5, 0.5);
+			} else {
+				autoCase = 3;
+			}
+			break;
+		case 2: // MOAT AUTONOMOUS
+			myRobot.drivetrain.setSolenoids(2);// Change as necessary
+			myRobot.drivetrain.setSpeed(1, 1);
+			if (!isOverObstacle) {
+				myRobot.drivetrain.setSpeed(1, 1);
+			} else {
+				autoCase = 3;
+			}
+			break;
+		case 3:
+			myRobot.drivetrain.setSolenoids(0);
+			if (turnDirection == 1) {// Use the positions to maneuver to the
+										// goal
+			}
+			if (turnDirection == 2) {
+			}
+			if (turnDirection == 3) {
+			} else {
+				// SOMETHING SERIOUSLY GOT MESSED UP
+			}
 		}
-		if(turnDirection==2){
-		}
-		if(turnDirection==3){
-		}
-		else{
-			//SOMETHING SERIOUSLY GOT MESSED UP
-		}
-	}
 	}
 
 	@Override
