@@ -12,7 +12,6 @@ public class AutonomousController extends RobotController {
 	protected int autoCase;
 	protected int turnDirection;
 	private double xV, yV, zV, xP, yP, zP;
-	private boolean isOverObstacle = zP > -.1 && zP < .1;
 
 	public AutonomousController(Robot robot) {
 		super(robot);
@@ -50,6 +49,7 @@ public class AutonomousController extends RobotController {
 		xP += xV;
 		yP += yV;
 		zP += zV;
+		boolean isOverObstacle = zP > -.1 && zP < .1 && xP > 2.5;//Ensure that forward is the x axis and 2.5 is a good number for the distance.
 		switch (autoCase) {
 		case 1: // ROUGH TERRAIN AUTONOMOUS
 			myRobot.drivetrain.setSolenoids(0);
@@ -71,7 +71,9 @@ public class AutonomousController extends RobotController {
 			break;
 		case 3:
 			myRobot.drivetrain.setSolenoids(0);
-			
+			if (turnDirection==1){
+				
+			}
 		}
 	}
 
