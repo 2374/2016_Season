@@ -71,15 +71,7 @@ public class AutonomousController extends RobotController {
 			break;
 		case 3:
 			myRobot.drivetrain.setSolenoids(0);
-			if (turnDirection == 1) {// Use the positions to maneuver to the
-										// goal
-			}
-			if (turnDirection == 2) {
-			}
-			if (turnDirection == 3) {
-			} else {
-				// SOMETHING SERIOUSLY GOT MESSED UP
-			}
+			
 		}
 	}
 
