@@ -49,8 +49,8 @@ public class AutonomousController extends RobotController {
 		xP += xV;
 		yP += yV;
 		zP += zV;
-		boolean isOverObstacle = zP > -.1 && zP < .1 && xP > 2.5;//Ensure that forward is the x axis and 2.5 is a good number for the distance from starting point to obstacle.
-		switch (autoCase) {
+		boolean isOverObstacle = zP > -.05 && zP < .05 && xP > 3;//Ensure that forward is the x axis and 3 is a good number for the distance from starting point to obstacle.
+		switch (autoCase) {//Also ensure that -.05 to .05 is a good range for the z disance.
 		case 1: // ROUGH TERRAIN AUTONOMOUS
 			myRobot.drivetrain.setSolenoids(0);
 			myRobot.drivetrain.setSpeed(0.5, 0.5);
