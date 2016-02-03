@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.Talon;
 public class Drivetrain {
 
     private final Talon l1, l2, r1, r2;// talons, pretty normal
-    private final Encoder encoder;
+    private final Encoder encoderLeft, encoderRight;
     private final DoubleSolenoid solenoidBackRight, solenoidFrontRight, solenoidBackLeft, solenoidFrontLeft; // two solenoids, in the future
     // specify or modify these names based on the placement on the robot, for specification's sake
 
@@ -18,11 +18,12 @@ public class Drivetrain {
         l2 = new Talon(1);
         r1 = new Talon(2);
         r2 = new Talon(3);
-        encoder = new Encoder(8, 9); // Change ports later if necessary
-        solenoidFrontRight = new DoubleSolenoid(4, 5); // CHANGE PORTS LATER
-        solenoidFrontLeft = new DoubleSolenoid(0, 1); // CHANGE THE PORTS PLEASE
+        encoderLeft = new Encoder(2, 3); // Change ports later if necessary
+        encoderRight = new Encoder(0, 1);
+        solenoidFrontRight = new DoubleSolenoid(0, 1); // CHANGE PORTS LATER
+        solenoidFrontLeft = new DoubleSolenoid(6, 7); // CHANGE THE PORTS PLEASE
         solenoidBackRight = new DoubleSolenoid(2, 3); 
-        solenoidBackLeft = new DoubleSolenoid(6,7);
+        solenoidBackLeft = new DoubleSolenoid(4, 5);
     }
 
     public void setSpeed(double leftSpeed, double rightSpeed) {
@@ -98,8 +99,12 @@ public class Drivetrain {
         }
     }
      */
-    public double getRate() {
-        return encoder.getRate();
+    public double getLeftRate() {
+        return encoderLeft.getRate();
+    }
+    
+    public double getRightRate(){
+    	return encoderRight.getRate();
     }
     double maxRate = 9.79; //FIGURE OUT WHAT THE ACTUAL MAXRATE IS ON THE DRIVETRAIN ENCODERS!!!
     double motorVoltage = 0;

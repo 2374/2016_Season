@@ -28,10 +28,10 @@ public class Robot extends SampleRobot {
     public Robot() {
         joystick1 = new Joystick(0);
         joystick2 = new Joystick(1); //Check Ports!!!!!!!!!!!
-        angledShooter = new Shooter(4, 5, 11, 12); //PLEASE CHANGE THIS PORT IN THE FUTURE! DO IT!
+        angledShooter = new Shooter(4, 5, 5, 6); //PLEASE CHANGE THIS PORT IN THE FUTURE! DO IT!
         drivetrain = new Drivetrain();
-        manipulator = new Manipulator(6);
-        intake = new Intake(7);
+        manipulator = new Manipulator(7);
+        intake = new Intake(6);
         gyro = new AnalogGyro(12);
         accelerometer = new BuiltInAccelerometer();
         autoChooser = new SendableChooser(); //Add defaults and options for rough terrain and various other obstacles
@@ -42,7 +42,8 @@ public class Robot extends SampleRobot {
         autoTurn.addDefault("Goal is straight ahead", 1);
         autoTurn.addObject("Goal is to the Left", 2);
         autoTurn.addObject("Goal is to the Right", 3);
-        SmartDashboard.putNumber("Encoder Speed",drivetrain.getRate());
+        SmartDashboard.putNumber("Left Encoder Speed",drivetrain.getLeftRate());
+        SmartDashboard.putNumber("Right Encoder Speed", drivetrain.getRightRate());
         SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
         SmartDashboard.putData("Turn to find goal", autoTurn);
     }
