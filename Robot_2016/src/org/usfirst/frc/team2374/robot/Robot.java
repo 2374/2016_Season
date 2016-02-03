@@ -43,6 +43,7 @@ public class Robot extends SampleRobot {
         autoTurn.addObject("Goal is to the Right", 3);
         SmartDashboard.putNumber("Left Encoder Speed",drivetrain.getLeftRate());
         SmartDashboard.putNumber("Right Encoder Speed", drivetrain.getRightRate());
+        SmartDashboard.putNumber("Wheel Encoder Speed",angledShooter.getRate());
         SmartDashboard.putNumber("X Acceleration", accelerometer.getX());
         SmartDashboard.putNumber("Y Acceleration", accelerometer.getY());
         SmartDashboard.putNumber("Z Acceleration", accelerometer.getZ());
