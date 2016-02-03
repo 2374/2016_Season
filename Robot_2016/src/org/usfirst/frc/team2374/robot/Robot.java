@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2374.robot;
 import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.GyroBase;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -44,6 +43,9 @@ public class Robot extends SampleRobot {
         autoTurn.addObject("Goal is to the Right", 3);
         SmartDashboard.putNumber("Left Encoder Speed",drivetrain.getLeftRate());
         SmartDashboard.putNumber("Right Encoder Speed", drivetrain.getRightRate());
+        SmartDashboard.putNumber("X Acceleration", accelerometer.getX());
+        SmartDashboard.putNumber("Y Acceleration", accelerometer.getY());
+        SmartDashboard.putNumber("Z Acceleration", accelerometer.getZ());
         SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
         SmartDashboard.putData("Turn to find goal", autoTurn);
     }
