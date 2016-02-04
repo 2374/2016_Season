@@ -43,14 +43,34 @@ public class AutonomousController extends RobotController {
 														// measure in g's
 		double yA = myRobot.accelerometer.getY() * 9.81;
 		double zA = myRobot.accelerometer.getZ() * 9.81;
-		xV += xA;
-		yV += yA;
-		zV += zA;
-		xP += xV;
-		yP += yV;
-		zP += zV;
-		boolean isOverObstacle = zP > -.05 && zP < .05 && xP > 3;//Ensure that forward is the x axis and 3 is a good number for the distance from starting point to obstacle.
-		switch (autoCase) {//Also ensure that -.05 to .05 is a good range for the z disance.
+		xV += xA * .01;
+		yV += yA * .01; // Just in case you're wondering, you multiply by .01
+						// because that's the time interval in seconds. This
+						// ensures that the velocity and later position is in
+						// meters.
+		zV += zA * .01;
+		xP += xV * .01;
+		yP += yV * .01;
+		zP += zV * .01; // At this point xP, yP, zP are representative of the x,
+						// y, and z coordinates of the robot's position with
+						// respect to the origin (its starting position at
+						// autonomous. It is in meters. You may need to check
+						// these units and revise the method in the future.
+		boolean isOverObstacle = zP > -.05 && zP < .05 && xP > 3;// Ensure that
+																	// forward
+																	// is the x
+																	// axis and
+																	// 3 is a
+																	// good
+																	// number
+																	// for the
+																	// distance
+																	// from
+																	// starting
+																	// point to
+																	// obstacle.
+		switch (autoCase) {// Also ensure that -.05 to .05 is a good range for
+							// the z disance.
 		case 1: // ROUGH TERRAIN AUTONOMOUS
 			myRobot.drivetrain.setSolenoids(0);
 			myRobot.drivetrain.setSpeed(0.5, 0.5);
@@ -71,16 +91,16 @@ public class AutonomousController extends RobotController {
 			break;
 		case 3:
 			myRobot.drivetrain.setSolenoids(0);
-			if (turnDirection==1){
-				//FIND DISTANCES TO GOAL FROM STARTING POINTS
+			if (turnDirection == 1) {
+				// FIND DISTANCES TO GOAL FROM STARTING POINTS
 			}
-			if (turnDirection==2){
-				
+			if (turnDirection == 2) {
+
 			}
-			if (turnDirection==3){
-				
+			if (turnDirection == 3) {
+
 			}
-			
+
 		}
 	}
 
