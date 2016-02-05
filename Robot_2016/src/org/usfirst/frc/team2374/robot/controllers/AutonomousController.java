@@ -90,7 +90,7 @@ public class AutonomousController extends RobotController {
 				autoCase = 3;
 			}
 			break;
-		case 3:
+		case 3: //Re-orient robot after crossing obstacle
 			myRobot.drivetrain.setSolenoids(0);
 			if(myRobot.gyro.getAngle()<-1){
 				myRobot.drivetrain.setSpeed(1, 0);
@@ -100,7 +100,9 @@ public class AutonomousController extends RobotController {
 			}
 			if(myRobot.gyro.getAngle()<1 && myRobot.gyro.getAngle()>-1){
 				myRobot.drivetrain.setSpeed(0, 0);
+				autoCase=4;
 			}
+		case 4: //Move to shooter based on turn direction
 			if (turnDirection == 1) {
 				 //FIND DISTANCES TO GOAL FROM STARTING POINTS
 				
@@ -109,12 +111,11 @@ public class AutonomousController extends RobotController {
 				}
 			}
 			if (turnDirection == 2) {
-
+				
 			}
 			if (turnDirection == 3) {
 
 			}
-
 		}
 	}
 
