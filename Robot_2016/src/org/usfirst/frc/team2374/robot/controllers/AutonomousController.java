@@ -28,6 +28,7 @@ public class AutonomousController extends RobotController {
 	protected void onStart() {
 		autoCase = (int) myRobot.autoChooser.getSelected();
 		turnDirection = (int) myRobot.autoTurn.getSelected();
+		myRobot.gyro.calibrate();
 		xV = 0;
 		yV = 0;
 		zV = 0;
@@ -91,8 +92,21 @@ public class AutonomousController extends RobotController {
 			break;
 		case 3:
 			myRobot.drivetrain.setSolenoids(0);
+			if(myRobot.gyro.getAngle()<-1){
+				myRobot.drivetrain.setSpeed(1, 0);
+			}
+			if(myRobot.gyro.getAngle()>1){
+				myRobot.drivetrain.setSpeed(0, 1);
+			}
+			if(myRobot.gyro.getAngle()<1 && myRobot.gyro.getAngle()>-1){
+				myRobot.drivetrain.setSpeed(0, 0);
+			}
 			if (turnDirection == 1) {
-				// FIND DISTANCES TO GOAL FROM STARTING POINTS
+				 //FIND DISTANCES TO GOAL FROM STARTING POINTS
+				
+				if(xP<25){//fix this!
+					myRobot.drivetrain.setSpeed(1, 1);
+				}
 			}
 			if (turnDirection == 2) {
 
