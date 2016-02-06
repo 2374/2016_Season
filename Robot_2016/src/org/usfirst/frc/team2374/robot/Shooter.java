@@ -30,13 +30,13 @@ public class Shooter {
         // types and all that jazz
 
     }
-    boolean wheelForwardEngaged = false;
-    boolean wheelReverseEngaged = false;
+    /*boolean wheelForwardEngaged = false;
+    boolean wheelReverseEngaged = false;*/
 
     public void update(double wheelSpeed, boolean forwardWheelButtonPressed,
             boolean reverseWheelButtonPressed) { // Comment through this method
         // for review and/or clarity
-        if (forwardWheelButtonPressed) {
+        /*if (forwardWheelButtonPressed) {
             wheelForwardEngaged = !wheelForwardEngaged;
         }
         if (wheelForwardEngaged) {
@@ -64,7 +64,15 @@ public class Shooter {
             wheel1.set(-wheelSpeed);
             wheel2.set(-wheelSpeed);
             wheelForwardEngaged = false;
-        }
+        }*/
+    	if(forwardWheelButtonPressed){
+    		wheel1.set(wheelSpeed);
+    		wheel2.set(wheelSpeed);
+    	}
+    	if(reverseWheelButtonPressed){
+    		wheel1.set(-wheelSpeed);
+    		wheel2.set(-wheelSpeed);
+    	}
     }
 
     public double getRate() {
