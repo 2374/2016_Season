@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 public abstract class RobotController {
     private final Map<Runnable, Double> toRun = new HashMap<>();
     protected Robot myRobot;
+    private double prevTime;
+    private double currentTime;
 
     public RobotController(Robot robot) {
         myRobot = robot;
@@ -19,10 +21,16 @@ public abstract class RobotController {
     protected void delay(double time, Runnable r) {
         toRun.put(r, Timer.getFPGATimestamp() + time);
     }
+    
+    protected double deltaTime() {
+    	return currentTime - prevTime;
+    }
 
     public void run() {
+    	prevTime = Timer.getFPGATimestamp();
         onStart();
         while (!shouldFinish()) {
+        	currentTime = Timer.getFPGATimestamp();
             for (Runnable r : toRun.keySet()) {
                 if (Timer.getFPGATimestamp() > toRun.get(r)) {
                     r.run();
@@ -30,6 +38,7 @@ public abstract class RobotController {
                 }
             }
             onUpdate();
+            prevTime = Timer.getFPGATimestamp();
             Timer.delay(.01);
         }
         onFinish();

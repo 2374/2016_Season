@@ -44,15 +44,15 @@ public class AutonomousController extends RobotController {
 														// measure in g's
 		double yA = myRobot.accelerometer.getY() * 9.81;
 		double zA = myRobot.accelerometer.getZ() * 9.81;
-		xV += xA * .01;
-		yV += yA * .01; // Just in case you're wondering, you multiply by .01
+		xV += xA * deltaTime();
+		yV += yA * deltaTime(); // Just in case you're wondering, you multiply by deltaTime()
 						// because that's the time interval in seconds. This
 						// ensures that the velocity and later position is in
 						// meters.
-		zV += zA * .01;
-		xP += xV * .01;
-		yP += yV * .01;
-		zP += zV * .01; // At this point xP, yP, zP are representative of the x,
+		zV += zA * deltaTime();
+		xP += xV * deltaTime();
+		yP += yV * deltaTime();
+		zP += zV * deltaTime(); // At this point xP, yP, zP are representative of the x,
 						// y, and z coordinates of the robot's position with
 						// respect to the origin (its starting position at
 						// autonomous. It is in meters. You may need to check
@@ -104,8 +104,7 @@ public class AutonomousController extends RobotController {
 			}
 		case 4: //Move to shooter based on turn direction
 			if (turnDirection == 1) {
-				 //FIND DISTANCES TO GOAL FROM STARTING POINTS
-				
+				 //FIND DISTANCES TO GOAL FROM STARTING POINTS	
 				if(xP<25){//fix this!
 					myRobot.drivetrain.setSpeed(1, 1);
 				}
