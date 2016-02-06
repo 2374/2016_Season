@@ -16,8 +16,10 @@ public class Intake {
         if (intakeForwardButton) {
             intakeTalon.set(intakeSpeed);
         }
-        if (intakeReverseButton) {
+        else if (intakeReverseButton) {
             intakeTalon.set(-intakeSpeed);
         }
+        else
+        	intakeTalon.set(0);
     }
 }

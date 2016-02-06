@@ -21,7 +21,7 @@ public class Robot extends SampleRobot {
     public final Drivetrain drivetrain;
     public final SendableChooser autoChooser;
     public final SendableChooser autoTurn;
-    public final AnalogGyro gyro;
+    //public final AnalogGyro gyro;
     public final BuiltInAccelerometer accelerometer;
 
     public Robot() {
@@ -31,7 +31,7 @@ public class Robot extends SampleRobot {
         drivetrain = new Drivetrain();
         manipulator = new Manipulator(7);
         intake = new Intake(6);
-        gyro = new AnalogGyro(12);
+        //gyro = new AnalogGyro(12);
         accelerometer = new BuiltInAccelerometer();
         autoChooser = new SendableChooser(); //Add defaults and options for rough terrain and various other obstacles
         autoTurn = new SendableChooser();

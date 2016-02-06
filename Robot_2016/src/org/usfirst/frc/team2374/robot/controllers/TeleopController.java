@@ -9,6 +9,10 @@ public class TeleopController extends RobotController {
         super(robot);
     }
 
+    public double quadraticScale(double value){
+    	return value*Math.abs(value);
+    }
+    
     @Override
     protected void onStart() {
         delay(5, () -> {
@@ -20,18 +24,24 @@ public class TeleopController extends RobotController {
     @Override
     protected void onUpdate() {
         //Control wheel speeds
-        myRobot.drivetrain.setSpeed(myRobot.joystick1.getRawAxis(1), myRobot.joystick1.getRawAxis(5));
+    	if(myRobot.joystick1.getRawAxis(1) > -0.05 && myRobot.joystick1.getRawAxis(1) < 0.05){
+    		myRobot.drivetrain.setSpeed(0,0);
+    	}if(myRobot.joystick1.getRawAxis(5) > -0.05 && myRobot.joystick1.getRawAxis(5) < 0.05){
+    		myRobot.drivetrain.setSpeed(0,0);
+    	}else{
+    		myRobot.drivetrain.setSpeed(quadraticScale(-myRobot.joystick1.getRawAxis(1)),quadraticScale(-myRobot.joystick1.getRawAxis(5)));//Ian wanted to reverse robot direction, make sure I did this right
+    	}
         //Control solenoids
         boolean frontLeftSol = myRobot.joystick1.getRawAxis(2) != 0;
         boolean frontRightSol = myRobot.joystick1.getRawAxis(3) != 0;
-        boolean backLeftSol = myRobot.joystick1.getRawButton(5);
-        boolean backRightSol = myRobot.joystick1.getRawButton(6); //The buttons are acting strangely, look into it.
+        boolean backLeftSol = myRobot.joystick1.getRawButton(1);
+        boolean backRightSol = myRobot.joystick1.getRawButton(3); //The buttons are acting strangely, look into it.
         if(firstPneumaticsPressed) {
         	secondControllerActive=false;
         	frontLeftSol = myRobot.joystick1.getRawAxis(2) != 0;
         	frontRightSol = myRobot.joystick1.getRawAxis(3) != 0;
-        	backLeftSol = myRobot.joystick1.getRawButton(5);
-        	backRightSol = myRobot.joystick1.getRawButton(6);
+        	backLeftSol = myRobot.joystick1.getRawButton(1);
+        	backRightSol = myRobot.joystick1.getRawButton(4);
         }
         else{
         	secondControllerActive=true;
@@ -58,7 +68,7 @@ public class TeleopController extends RobotController {
         //Control shooter
         myRobot.angledShooter.update(2, myRobot.joystick1.getRawButton(5), myRobot.joystick1.getRawButton(6));
         //Control intake
-        myRobot.intake.update(myRobot.joystick1.getRawButton(1), myRobot.joystick1.getRawButton(3));
+        myRobot.intake.update(myRobot.joystick1.getRawButton(6), myRobot.joystick1.getRawButton(8));
         //Control manipulator
         myRobot.manipulator.update(myRobot.joystick1.getRawButton(2), myRobot.joystick1.getRawButton(4));
    

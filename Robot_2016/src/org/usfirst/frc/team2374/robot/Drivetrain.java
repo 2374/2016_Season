@@ -28,8 +28,12 @@ public class Drivetrain {
 
     public void setSpeed(double leftSpeed, double rightSpeed) {
         PID(-leftSpeed, l1, l2);
-        PID(rightSpeed, r1, r2);
+		PID(rightSpeed, r1, r2);
     }
+    
+	public static double quadraticScale(double value){
+		return value*Math.abs(value);
+	}
 
     public void setSolenoids(Value frontLeftSol,Value frontRightSol, Value backLeftSol,Value backRightSol) {
         solenoidFrontLeft.set(frontLeftSol);
