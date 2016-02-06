@@ -29,10 +29,6 @@ public class Drivetrain {
     public void setSpeed(double leftSpeed, double rightSpeed) {
         PID(-leftSpeed, l1, l2);
 		PID(rightSpeed, r1, r2);
-    }
-    
-	public static double quadraticScale(double value){
-		return value*Math.abs(value);
 	}
 
     public void setSolenoids(Value frontLeftSol,Value frontRightSol, Value backLeftSol,Value backRightSol) {
@@ -116,6 +112,9 @@ public class Drivetrain {
     double prevError;
 
     private void PID(double targetSpeed, Talon... motors) {
+    	if(Math.abs(targetSpeed)<0.05){ //0.05 is arbitrary for now, subject to change
+    		targetSpeed = 0;
+    	}
     	for (Talon t : motors) {
     		t.set(targetSpeed);
     	}

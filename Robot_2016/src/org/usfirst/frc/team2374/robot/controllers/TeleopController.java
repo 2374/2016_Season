@@ -24,13 +24,12 @@ public class TeleopController extends RobotController {
     @Override
     protected void onUpdate() {
         //Control wheel speeds
-    	if(myRobot.joystick1.getRawAxis(1) > -0.05 && myRobot.joystick1.getRawAxis(1) < 0.05){
+    	/*if(myRobot.joystick1.getRawAxis(1) > -0.05 && myRobot.joystick1.getRawAxis(1) < 0.05){
     		myRobot.drivetrain.setSpeed(0,0);
     	}if(myRobot.joystick1.getRawAxis(5) > -0.05 && myRobot.joystick1.getRawAxis(5) < 0.05){
     		myRobot.drivetrain.setSpeed(0,0);
-    	}else{
-    		myRobot.drivetrain.setSpeed(quadraticScale(-myRobot.joystick1.getRawAxis(1)),quadraticScale(-myRobot.joystick1.getRawAxis(5)));//Ian wanted to reverse robot direction, make sure I did this right
-    	}
+    	}*/
+    	myRobot.drivetrain.setSpeed(quadraticScale(-myRobot.joystick1.getRawAxis(1)),quadraticScale(-myRobot.joystick1.getRawAxis(5)));//Ian wanted to reverse robot direction, make sure I did this right
         //Control solenoids
         boolean frontLeftSol = myRobot.joystick1.getRawAxis(2) != 0;
         boolean frontRightSol = myRobot.joystick1.getRawAxis(3) != 0;
