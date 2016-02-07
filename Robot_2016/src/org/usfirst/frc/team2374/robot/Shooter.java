@@ -73,6 +73,10 @@ public class Shooter {
     		wheel1.set(-wheelSpeed);
     		wheel2.set(-wheelSpeed);
     	}
+    	else{
+    		wheel1.set(0);
+    		wheel2.set(0);
+    	}
     }
 
     public double getRate() {
