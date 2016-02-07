@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2374.robot.controllers;
 
+import java.lang.reflect.Method;
+
 import org.usfirst.frc.team2374.robot.Robot;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -103,20 +105,65 @@ public class AutonomousController extends RobotController {
 				autoCase=4;
 			}*/
 		case 4: //Move to shooter based on turn direction
-			if (turnDirection == 1) {
-				 //FIND DISTANCES TO GOAL FROM STARTING POINTS	
+			if (turnDirection == 1) { //GOAL IS STRAIGHT AHEAD
+				 //FIND DISTANCES TO GOAL FROM STARTING POINTS
+				
+				while (myRobot.gyro.getAngle()) < -90{
+					myRobot.drivetrain.setSpeed(0, 1);
+				}
+				while (myRobot.gyro.getAngle()) < 90{
+					myRobot.drivetrain.setSpeed(1, 0);
+				}
+				while (Math.abs.yP>0){
+					myRobot.drivetrain.setSpeed(1,1);
+				}
+				if(myRobot.gyro.getAngle()<-1){
+					myRobot.drivetrain.setSpeed(1, 0);
+				}
+				if(myRobot.gyro.getAngle()>1){
+					myRobot.drivetrain.setSpeed(0, 1);
+				}
+				if(myRobot.gyro.getAngle()<1 && myRobot.gyro.getAngle()>-1){
+					myRobot.drivetrain.setSpeed(0, 0);
+				}
+				
 				if(xP<25){//fix this!
 					myRobot.drivetrain.setSpeed(1, 1);
 				}
 			}
-			if (turnDirection == 2) {
+			if (turnDirection == 2) { //GOAL IS TO THE LEFT, find actual yP and xP values and make sure angles are correct
 				
+				while (myRobot.gyro.getAngle()) < -90{
+					myRobot.drivetrain.setSpeed(0,1);
+				}
+				while (yP<10){
+					myRobot.drivetrain.setSpeed(1,1);
+				}
+				while (myRobot.gyro.getAngle()) < 90{
+					myRobot.drivetrain.setSpeed(1,0);
+				}
+					}
+				if(xP<25){//fix this!
+					myRobot.drivetrain.setSpeed(1, 1);
+				}
 			}
-			if (turnDirection == 3) {
-
-			}
+			
+			if (turnDirection == 3) { //GOAL IS TO THE RIGHT, find actual yP and xP values and make sure angles are correct
+				
+				while (myRobot.gyro.getAngle()) < 90{
+					myRobot.drivetrain.setSpeed(1, 0);
+				}
+				while (yP<10){
+					myRobot.drivetrain.setSpeed(1,1);
+				}
+				while (myRobot.gyro.getAngle()) < -90{
+					myRobot.drivetrain.setSpeed(0,1);
+				}
+					}
+				if(xP<25){//fix this!
+					myRobot.drivetrain.setSpeed(1, 1);
+				}
 		}
-	}
 
 	@Override
 	protected void onFinish() {

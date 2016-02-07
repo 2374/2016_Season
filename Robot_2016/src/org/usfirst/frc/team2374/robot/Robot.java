@@ -49,6 +49,8 @@ public class Robot extends SampleRobot {
         SmartDashboard.putNumber("Z Acceleration", accelerometer.getZ());
         SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
         SmartDashboard.putData("Turn to find goal", autoTurn);
+        
+        
     }
     
     @Override
