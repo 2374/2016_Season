@@ -108,13 +108,13 @@ public class AutonomousController extends RobotController {
 			if (turnDirection == 1) { //GOAL IS STRAIGHT AHEAD
 				 //FIND DISTANCES TO GOAL FROM STARTING POINTS
 				
-				while (myRobot.gyro.getAngle()) < -90{
+				while (myRobot.gyro.getAngle() < -90){
 					myRobot.drivetrain.setSpeed(0, 1);
 				}
-				while (myRobot.gyro.getAngle()) < 90{
+				while (myRobot.gyro.getAngle() < 90){
 					myRobot.drivetrain.setSpeed(1, 0);
 				}
-				while (Math.abs.yP>0){
+				while (Math.abs(yP)>0){
 					myRobot.drivetrain.setSpeed(1,1);
 				}
 				if(myRobot.gyro.getAngle()<-1){
@@ -133,13 +133,13 @@ public class AutonomousController extends RobotController {
 			}
 			if (turnDirection == 2) { //GOAL IS TO THE LEFT, find actual yP and xP values and make sure angles are correct
 				
-				while (myRobot.gyro.getAngle()) < -90{
+				while (myRobot.gyro.getAngle() < -90){
 					myRobot.drivetrain.setSpeed(0,1);
 				}
 				while (yP<10){
 					myRobot.drivetrain.setSpeed(1,1);
 				}
-				while (myRobot.gyro.getAngle()) < 90{
+				while (myRobot.gyro.getAngle() < 90){
 					myRobot.drivetrain.setSpeed(1,0);
 				}
 					}
@@ -150,13 +150,13 @@ public class AutonomousController extends RobotController {
 			
 			if (turnDirection == 3) { //GOAL IS TO THE RIGHT, find actual yP and xP values and make sure angles are correct
 				
-				while (myRobot.gyro.getAngle()) < 90{
+				while (myRobot.gyro.getAngle() < 90){
 					myRobot.drivetrain.setSpeed(1, 0);
 				}
 				while (yP<10){
 					myRobot.drivetrain.setSpeed(1,1);
 				}
-				while (myRobot.gyro.getAngle()) < -90{
+				while (myRobot.gyro.getAngle() < -90){
 					myRobot.drivetrain.setSpeed(0,1);
 				}
 					}
