@@ -108,13 +108,15 @@ public class AutonomousController extends RobotController {
 			if (turnDirection == 1) { //GOAL IS STRAIGHT AHEAD
 				 //FIND DISTANCES TO GOAL FROM STARTING POINTS
 				
-				while (myRobot.gyro.getAngle() < -90){
-					myRobot.drivetrain.setSpeed(0, 1);
+				if(yP>0){//make sure it's actually supposed to be 0
+					if(myRobot.gyro.getAngle()<90)
+						myRobot.drivetrain.setSpeed(1,0);
 				}
-				while (myRobot.gyro.getAngle() < 90){
-					myRobot.drivetrain.setSpeed(1, 0);
+				if(yP<0){
+					if(myRobot.gyro.getAngle()<-90)
+						myRobot.drivetrain.setSpeed(0,1);
 				}
-				while (Math.abs(yP)>0){
+				if (Math.abs(yP)>0){
 					myRobot.drivetrain.setSpeed(1,1);
 				}
 				if(myRobot.gyro.getAngle()<-1){
@@ -143,7 +145,15 @@ public class AutonomousController extends RobotController {
 				while (myRobot.gyro.getAngle() < 90){
 					myRobot.drivetrain.setSpeed(1,0);
 				}
-					}
+				if(myRobot.gyro.getAngle()<-1){
+					myRobot.drivetrain.setSpeed(1, 0);
+				}
+				if(myRobot.gyro.getAngle()>1){
+					myRobot.drivetrain.setSpeed(0, 1);
+				}
+				if(myRobot.gyro.getAngle()<1 && myRobot.gyro.getAngle()>-1){
+					myRobot.drivetrain.setSpeed(0, 0);
+				}
 				if(xP<25){//fix this!
 					myRobot.drivetrain.setSpeed(1, 1);
 					myRobot.angledShooter.update(1,true,false);
@@ -163,8 +173,6 @@ public class AutonomousController extends RobotController {
 				if(xP<25){//fix this!
 					myRobot.drivetrain.setSpeed(1, 1);
 					myRobot.angledShooter.update(1,true,false);
-				}
-				else{
 				}
 			}
 		}
