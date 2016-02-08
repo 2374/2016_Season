@@ -129,6 +129,7 @@ public class AutonomousController extends RobotController {
 				
 				if(xP<25){//fix this!
 					myRobot.drivetrain.setSpeed(1, 1);
+					myRobot.angledShooter.update(1,true,false);
 				}
 			}
 			if (turnDirection == 2) { //GOAL IS TO THE LEFT, find actual yP and xP values and make sure angles are correct
@@ -145,8 +146,8 @@ public class AutonomousController extends RobotController {
 					}
 				if(xP<25){//fix this!
 					myRobot.drivetrain.setSpeed(1, 1);
+					myRobot.angledShooter.update(1,true,false);
 				}
-			}
 			
 			if (turnDirection == 3) { //GOAL IS TO THE RIGHT, find actual yP and xP values and make sure angles are correct
 				
@@ -159,11 +160,15 @@ public class AutonomousController extends RobotController {
 				while (myRobot.gyro.getAngle() < -90){
 					myRobot.drivetrain.setSpeed(0,1);
 				}
-					}
 				if(xP<25){//fix this!
 					myRobot.drivetrain.setSpeed(1, 1);
+					myRobot.angledShooter.update(1,true,false);
 				}
+				else{
+				}
+			}
 		}
+	}
 
 	@Override
 	protected void onFinish() {
