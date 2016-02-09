@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2374.robot;
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -23,6 +24,7 @@ public class Robot extends SampleRobot {
     public final SendableChooser autoTurn;
     public final AnalogGyro gyro;
     public final BuiltInAccelerometer accelerometer;
+    public final AnalogInput analogInputGyro;
 
     public Robot() {
         joystick1 = new Joystick(0);
@@ -31,7 +33,8 @@ public class Robot extends SampleRobot {
         drivetrain = new Drivetrain();
         manipulator = new Manipulator(7);
         intake = new Intake(6);
-        gyro = new AnalogGyro(12);
+        analogInputGyro=new AnalogInput(0);
+        gyro = new AnalogGyro(analogInputGyro);
         accelerometer = new BuiltInAccelerometer();
         autoChooser = new SendableChooser(); //Add defaults and options for rough terrain and various other obstacles
         autoTurn = new SendableChooser();

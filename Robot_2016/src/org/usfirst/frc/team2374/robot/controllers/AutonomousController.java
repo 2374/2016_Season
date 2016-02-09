@@ -44,7 +44,7 @@ public class AutonomousController extends RobotController {
 		double xA = myRobot.accelerometer.getX() * 9.81;// Make sure the
 														// accelerometer does
 														// measure in g's
-		double yA = myRobot.accelerometer.getY() * 9.81;
+		double yA = myRobot.accelerometer.getY() * 9.81;//if axes change with robot, make sure to multiply by cos and sin.
 		double zA = myRobot.accelerometer.getZ() * 9.81;
 		xV += xA * deltaTime();
 		yV += yA * deltaTime(); // Just in case you're wondering, you multiply by deltaTime()
@@ -136,14 +136,11 @@ public class AutonomousController extends RobotController {
 			}
 			if (turnDirection == 2) { //GOAL IS TO THE LEFT, find actual yP and xP values and make sure angles are correct
 				
-				while (myRobot.gyro.getAngle() < -90){
+				if (myRobot.gyro.getAngle() != -90){
 					myRobot.drivetrain.setSpeed(0,1);
 				}
-				while (yP<10){
+				if (yP<10){
 					myRobot.drivetrain.setSpeed(1,1);
-				}
-				while (myRobot.gyro.getAngle() < 90){
-					myRobot.drivetrain.setSpeed(1,0);
 				}
 				if(myRobot.gyro.getAngle()<-1){
 					myRobot.drivetrain.setSpeed(1, 0);
@@ -158,17 +155,24 @@ public class AutonomousController extends RobotController {
 					myRobot.drivetrain.setSpeed(1, 1);
 					myRobot.angledShooter.update(1,true,false);
 				}
+			}
 			
 			if (turnDirection == 3) { //GOAL IS TO THE RIGHT, find actual yP and xP values and make sure angles are correct
 				
-				while (myRobot.gyro.getAngle() < 90){
+				if (myRobot.gyro.getAngle() != 90){
 					myRobot.drivetrain.setSpeed(1, 0);
 				}
 				while (yP<10){
 					myRobot.drivetrain.setSpeed(1,1);
 				}
-				while (myRobot.gyro.getAngle() < -90){
-					myRobot.drivetrain.setSpeed(0,1);
+				if(myRobot.gyro.getAngle()<-1){
+					myRobot.drivetrain.setSpeed(1, 0);
+				}
+				if(myRobot.gyro.getAngle()>1){
+					myRobot.drivetrain.setSpeed(0, 1);
+				}
+				if(myRobot.gyro.getAngle()<1 && myRobot.gyro.getAngle()>-1){
+					myRobot.drivetrain.setSpeed(0, 0);
 				}
 				if(xP<25){//fix this!
 					myRobot.drivetrain.setSpeed(1, 1);
