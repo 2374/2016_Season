@@ -14,6 +14,7 @@ public class AutonomousController extends RobotController {
 	protected int autoCase;
 	protected int turnDirection;
 	private double xV, yV, zV, xP, yP, zP;
+	private double turnSpeed, turnScale, turnMax, angleDifference;
 
 	public AutonomousController(Robot robot) {
 		super(robot);
@@ -37,14 +38,17 @@ public class AutonomousController extends RobotController {
 		xP = 0;
 		yP = 0;
 		zP = 0;
-	}
+		turnSpeed = 0;
+		turnScale = 0.015;
+		turnMax = 0.4;
+		}
 
 	@Override
 	protected void onUpdate() {
-		double xA = myRobot.accelerometer.getX() * 9.81;// Make sure the
+		double xA = myRobot.accelerometer.getX() * 9.81 * Math.cos(myRobot.gyro.getAngle());// Make sure the
 														// accelerometer does
 														// measure in g's
-		double yA = myRobot.accelerometer.getY() * 9.81;//if axes change with robot, make sure to multiply by cos and sin.
+		double yA = myRobot.accelerometer.getY() * 9.81 * Math.sin(myRobot.gyro.getAngle());//if axes change with robot, make sure to multiply by cos and sin.
 		double zA = myRobot.accelerometer.getZ() * 9.81;
 		xV += xA * deltaTime();
 		yV += yA * deltaTime(); // Just in case you're wondering, you multiply by deltaTime()
@@ -109,25 +113,15 @@ public class AutonomousController extends RobotController {
 				 //FIND DISTANCES TO GOAL FROM STARTING POINTS
 				
 				if(yP>0){//make sure it's actually supposed to be 0
-					if(myRobot.gyro.getAngle()<90)
-						myRobot.drivetrain.setSpeed(1,0);
+					turn(90);
 				}
 				if(yP<0){
-					if(myRobot.gyro.getAngle()<-90)
-						myRobot.drivetrain.setSpeed(0,1);
+					turn(-90);
 				}
 				if (Math.abs(yP)>0){
 					myRobot.drivetrain.setSpeed(1,1);
 				}
-				if(myRobot.gyro.getAngle()<-1){
-					myRobot.drivetrain.setSpeed(1, 0);
-				}
-				if(myRobot.gyro.getAngle()>1){
-					myRobot.drivetrain.setSpeed(0, 1);
-				}
-				if(myRobot.gyro.getAngle()<1 && myRobot.gyro.getAngle()>-1){
-					myRobot.drivetrain.setSpeed(0, 0);
-				}
+				turn(0);
 				
 				if(xP<25){//fix this!
 					myRobot.drivetrain.setSpeed(1, 1);
@@ -136,20 +130,11 @@ public class AutonomousController extends RobotController {
 			}
 			if (turnDirection == 2) { //GOAL IS TO THE LEFT, find actual yP and xP values and make sure angles are correct
 				
-				if (myRobot.gyro.getAngle() != -90){
-					myRobot.drivetrain.setSpeed(0,1);
-				}
+				turn(-90);
 				if (yP<10){
 					myRobot.drivetrain.setSpeed(1,1);
 				}
-				if(myRobot.gyro.getAngle()<-1){
-					myRobot.drivetrain.setSpeed(1, 0);
-				}
-				if(myRobot.gyro.getAngle()>1){
-					myRobot.drivetrain.setSpeed(0, 1);
-				}
-				if(myRobot.gyro.getAngle()<1 && myRobot.gyro.getAngle()>-1){
-					myRobot.drivetrain.setSpeed(0, 0);
+				turn(0);
 				}
 				if(xP<25){//fix this!
 					myRobot.drivetrain.setSpeed(1, 1);
@@ -159,28 +144,31 @@ public class AutonomousController extends RobotController {
 			
 			if (turnDirection == 3) { //GOAL IS TO THE RIGHT, find actual yP and xP values and make sure angles are correct
 				
-				if (myRobot.gyro.getAngle() != 90){
-					myRobot.drivetrain.setSpeed(1, 0);
-				}
-				while (yP<10){
+				turn(90);
+				
+				if (yP<10){
 					myRobot.drivetrain.setSpeed(1,1);
 				}
-				if(myRobot.gyro.getAngle()<-1){
-					myRobot.drivetrain.setSpeed(1, 0);
-				}
-				if(myRobot.gyro.getAngle()>1){
-					myRobot.drivetrain.setSpeed(0, 1);
-				}
-				if(myRobot.gyro.getAngle()<1 && myRobot.gyro.getAngle()>-1){
-					myRobot.drivetrain.setSpeed(0, 0);
-				}
+				turn(0);
 				if(xP<25){//fix this!
 					myRobot.drivetrain.setSpeed(1, 1);
 					myRobot.angledShooter.update(1,true,false);
 				}
 			}
 		}
-	}
+	
+	public void turn(double desiredAngle){
+    	angleDifference = desiredAngle-myRobot.gyro.getAngle();
+    	if (Math.abs(angleDifference)>2){
+    		turnSpeed=angleDifference*turnScale;
+    	}
+    	if(Math.abs(turnSpeed)>turnMax){
+    		turnSpeed=turnMax*Math.signum(turnSpeed);
+    	}
+    	while(angleDifference!=0){
+    		myRobot.drivetrain.setSpeed(turnSpeed, -turnSpeed);
+    	}
+    }
 
 	@Override
 	protected void onFinish() {
