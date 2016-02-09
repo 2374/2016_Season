@@ -45,23 +45,61 @@ public class TeleopController extends RobotController {
         else{
         	secondControllerActive=true;
         }
-        if(secondControllerActive && myRobot.joystick2.getRawButton(10)){
-        	myRobot.drivetrain.setSolenoids(0);
-        }
-        if(secondControllerActive && myRobot.joystick2.getRawButton(1)){
-        	myRobot.drivetrain.setSolenoids(1);
+        if(secondControllerActive && myRobot.joystick2.getRawButton(1)){//Figure out actual Solenoid configs.
+        	if(myRobot.joystick1.getPOV(1)!=0){
+        		myRobot.drivetrain.setSolenoids(1);
+        	}
+        	if(myRobot.joystick1.getPOV(2)!=0){
+        		myRobot.drivetrain.setSolenoids(1);
+        	}
+        	if(myRobot.joystick1.getPOV(3)!=0){
+        		myRobot.drivetrain.setSolenoids(1);
+        	}
+        	if(myRobot.joystick1.getPOV(4)!=0){
+        		myRobot.drivetrain.setSolenoids(1);
+        	}
         }
         if(secondControllerActive && myRobot.joystick2.getRawButton(2)){
-        	myRobot.drivetrain.setSolenoids(2);
+        	if(myRobot.joystick1.getPOV(1)!=0){
+        		myRobot.drivetrain.setSolenoids(1);
+        	}
+        	if(myRobot.joystick1.getPOV(2)!=0){
+        		myRobot.drivetrain.setSolenoids(1);
+        	}
+        	if(myRobot.joystick1.getPOV(3)!=0){
+        		myRobot.drivetrain.setSolenoids(1);
+        	}
+        	if(myRobot.joystick1.getPOV(4)!=0){
+        		myRobot.drivetrain.setSolenoids(1);
+        	}
         }
         if(secondControllerActive && myRobot.joystick2.getRawButton(3)){
-        	myRobot.drivetrain.setSolenoids(3);
+        	if(myRobot.joystick1.getPOV(1)!=0){
+        		myRobot.drivetrain.setSolenoids(1);
+        	}
+        	if(myRobot.joystick1.getPOV(2)!=0){
+        		myRobot.drivetrain.setSolenoids(1);
+        	}
+        	if(myRobot.joystick1.getPOV(3)!=0){
+        		myRobot.drivetrain.setSolenoids(1);
+        	}
+        	if(myRobot.joystick1.getPOV(4)!=0){
+        		myRobot.drivetrain.setSolenoids(1);
+        	}
         }
         if(secondControllerActive && myRobot.joystick2.getRawButton(4)){
-        	myRobot.drivetrain.setSolenoids(4);
-        }
-        if(secondControllerActive && myRobot.joystick2.getRawButton(9)){
-        	myRobot.drivetrain.setSolenoids(5);
+        	if(myRobot.joystick1.getPOV(1)!=0){
+        		myRobot.drivetrain.setSolenoids(1);
+        	}
+        	if(myRobot.joystick1.getPOV(2)!=0){
+        		myRobot.drivetrain.setSolenoids(1);
+        	}
+        	if(myRobot.joystick1.getPOV(3)!=0){
+        		myRobot.drivetrain.setSolenoids(1);
+        	}
+        	if(myRobot.joystick1.getPOV(4)!=0){
+        		myRobot.drivetrain.setSolenoids(1);
+        	}
         }
         myRobot.drivetrain.setSolenoids(frontLeftSol ? Value.kForward : Value.kReverse, frontRightSol ? Value.kForward : Value.kReverse,backLeftSol ? Value.kForward : Value.kReverse,backRightSol ? Value.kForward : Value.kReverse);
         //Control shooter
