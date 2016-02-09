@@ -46,16 +46,16 @@ public class TeleopController extends RobotController {
         	secondControllerActive=true;
         }
         if(secondControllerActive && myRobot.joystick2.getRawButton(1)){//Figure out actual Solenoid configs.
-        	if(myRobot.joystick1.getPOV(1)!=0){
+        	if(myRobot.joystick1.getPOV(0)==0){
         		myRobot.drivetrain.setSolenoids(1);
         	}
-        	if(myRobot.joystick1.getPOV(2)!=0){
+        	if(myRobot.joystick1.getPOV(0)==90){
         		myRobot.drivetrain.setSolenoids(1);
         	}
-        	if(myRobot.joystick1.getPOV(3)!=0){
+        	if(myRobot.joystick1.getPOV(0)==180){
         		myRobot.drivetrain.setSolenoids(1);
         	}
-        	if(myRobot.joystick1.getPOV(4)!=0){
+        	if(myRobot.joystick1.getPOV(0)==270){
         		myRobot.drivetrain.setSolenoids(1);
         	}
         }
