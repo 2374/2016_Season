@@ -60,44 +60,44 @@ public class TeleopController extends RobotController {
         	}
         }
         if(secondControllerActive && myRobot.joystick2.getRawButton(2)){
-        	if(myRobot.joystick1.getPOV(1)!=0){
+        	if(myRobot.joystick1.getPOV(0)==0){
         		myRobot.drivetrain.setSolenoids(1);
         	}
-        	if(myRobot.joystick1.getPOV(2)!=0){
+        	if(myRobot.joystick1.getPOV(0)==90){
         		myRobot.drivetrain.setSolenoids(1);
         	}
-        	if(myRobot.joystick1.getPOV(3)!=0){
+        	if(myRobot.joystick1.getPOV(0)!=180){
         		myRobot.drivetrain.setSolenoids(1);
         	}
-        	if(myRobot.joystick1.getPOV(4)!=0){
+        	if(myRobot.joystick1.getPOV(0)!=270){
         		myRobot.drivetrain.setSolenoids(1);
         	}
         }
         if(secondControllerActive && myRobot.joystick2.getRawButton(3)){
-        	if(myRobot.joystick1.getPOV(1)!=0){
+        	if(myRobot.joystick1.getPOV(0)==0){
         		myRobot.drivetrain.setSolenoids(1);
         	}
-        	if(myRobot.joystick1.getPOV(2)!=0){
+        	if(myRobot.joystick1.getPOV(0)==90){
         		myRobot.drivetrain.setSolenoids(1);
         	}
-        	if(myRobot.joystick1.getPOV(3)!=0){
+        	if(myRobot.joystick1.getPOV(0)==180){
         		myRobot.drivetrain.setSolenoids(1);
         	}
-        	if(myRobot.joystick1.getPOV(4)!=0){
+        	if(myRobot.joystick1.getPOV(0)==270){
         		myRobot.drivetrain.setSolenoids(1);
         	}
         }
         if(secondControllerActive && myRobot.joystick2.getRawButton(4)){
-        	if(myRobot.joystick1.getPOV(1)!=0){
+        	if(myRobot.joystick1.getPOV(0)==0){
         		myRobot.drivetrain.setSolenoids(1);
         	}
-        	if(myRobot.joystick1.getPOV(2)!=0){
+        	if(myRobot.joystick1.getPOV(0)==90){
         		myRobot.drivetrain.setSolenoids(1);
         	}
-        	if(myRobot.joystick1.getPOV(3)!=0){
+        	if(myRobot.joystick1.getPOV(0)==180){
         		myRobot.drivetrain.setSolenoids(1);
         	}
-        	if(myRobot.joystick1.getPOV(4)!=0){
+        	if(myRobot.joystick1.getPOV(0)==270){
         		myRobot.drivetrain.setSolenoids(1);
         	}
         }
