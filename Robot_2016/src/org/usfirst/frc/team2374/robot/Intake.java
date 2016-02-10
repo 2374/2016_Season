@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2374.robot;
 
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Timer;
 
 public class Intake {
 

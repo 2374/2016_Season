@@ -15,6 +15,8 @@ public class AutonomousController extends RobotController {
 	protected int turnDirection;
 	private double xV, yV, zV, xP, yP, zP;
 	private double turnSpeed, turnScale, turnMax, angleDifference;
+	
+	private double goal_x, goal_y;
 
 	public AutonomousController(Robot robot) {
 		super(robot);
@@ -41,7 +43,27 @@ public class AutonomousController extends RobotController {
 		turnSpeed = 0;
 		turnScale = 0.015;
 		turnMax = 0.4;
+		
+		goal_x = 10;
+		goal_y = 0;
 		}
+	private boolean atGoal(){
+		if(xP==goal_x && yP==goal_y){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	private boolean needsTurn(){
+		if(yP!=goal_y){
+		return true;
+		}
+		else{
+			return false;
+		}
+	}
+	//ADD THE TURN METHOD AND MOVE FORWARD METHOD ETC.
 
 	@Override
 	protected void onUpdate() {
@@ -98,16 +120,8 @@ public class AutonomousController extends RobotController {
 			break;
 		case 3: //Re-orient robot after crossing obstacle
 			myRobot.drivetrain.setSolenoids(0);
-			if(myRobot.gyro.getAngle()<-1){
-				myRobot.drivetrain.setSpeed(1, 0);
-			}
-			if(myRobot.gyro.getAngle()>1){
-				myRobot.drivetrain.setSpeed(0, 1);
-			}
-			if(myRobot.gyro.getAngle()<1 && myRobot.gyro.getAngle()>-1){
-				myRobot.drivetrain.setSpeed(0, 0);
-				autoCase=4;
-			}
+			turn(0);
+			autoCase=4;
 		case 4: //Move to shooter based on turn direction
 			if (turnDirection == 1) { //GOAL IS STRAIGHT AHEAD
 				 //FIND DISTANCES TO GOAL FROM STARTING POINTS
@@ -125,8 +139,8 @@ public class AutonomousController extends RobotController {
 				
 				if(xP<25){//fix this!
 					myRobot.drivetrain.setSpeed(1, 1);
-					myRobot.angledShooter.update(1,true,false);
 				}
+				myRobot.angledShooter.update(1,true,false);
 			}
 			if (turnDirection == 2) { //GOAL IS TO THE LEFT, find actual yP and xP values and make sure angles are correct
 				
@@ -138,8 +152,8 @@ public class AutonomousController extends RobotController {
 				}
 				if(xP<25){//fix this!
 					myRobot.drivetrain.setSpeed(1, 1);
-					myRobot.angledShooter.update(1,true,false);
 				}
+				myRobot.angledShooter.update(1,true,false);
 			}
 			
 			if (turnDirection == 3) { //GOAL IS TO THE RIGHT, find actual yP and xP values and make sure angles are correct
@@ -152,8 +166,8 @@ public class AutonomousController extends RobotController {
 				turn(0);
 				if(xP<25){//fix this!
 					myRobot.drivetrain.setSpeed(1, 1);
-					myRobot.angledShooter.update(1,true,false);
 				}
+				myRobot.angledShooter.update(1,true,false);
 			}
 		}
 	

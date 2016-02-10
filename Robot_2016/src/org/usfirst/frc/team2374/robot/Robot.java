@@ -29,7 +29,7 @@ public class Robot extends SampleRobot {
     public Robot() {
         joystick1 = new Joystick(0);
         joystick2 = new Joystick(1); //Check Ports!!!!!!!!!!!
-        angledShooter = new Shooter(4, 5, 5, 6); //PLEASE CHANGE THIS PORT IN THE FUTURE! DO IT!
+        angledShooter = new Shooter(4, 5, 5, 6, this); //PLEASE CHANGE THIS PORT IN THE FUTURE! DO IT!
         drivetrain = new Drivetrain();
         manipulator = new Manipulator(7);
         intake = new Intake(6);

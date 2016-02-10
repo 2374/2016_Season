@@ -3,14 +3,16 @@ package org.usfirst.frc.team2374.robot;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Timer;
 
 public class Shooter {
 
     Talon wheel1;
     Talon wheel2;
     Encoder wheelEncoder;
+    Robot myRobot;
 
-    public Shooter(int wheelPort1, int wheelPort2, int encoderPort1, int encoderPort2) { // Remember
+    public Shooter(int wheelPort1, int wheelPort2, int encoderPort1, int encoderPort2, Robot robot) { // Remember
         // to
         // add
         // up-down
@@ -28,6 +30,7 @@ public class Shooter {
         // also look into the constructor for the
         // encoder and encoding
         // types and all that jazz
+        myRobot = robot;
 
     }
     /*boolean wheelForwardEngaged = false;
@@ -66,8 +69,13 @@ public class Shooter {
             wheelForwardEngaged = false;
         }*/
     	if(forwardWheelButtonPressed){
+    		//myRobot.intake.update(false,true);//THIS WILL NOT WORK. TRY AND SEE IF LAMBDA WILL WORK
+    		//Timer.delay(0.1);//change this delay as needed to make sure the ball doesn't fall out of the intake
     		wheel1.set(wheelSpeed);
-    		wheel2.set(wheelSpeed);
+    		wheel2.set(wheelSpeed);//FIND MAX RATE AND USE PID
+    		//Timer.delay(1);//delete this when the PID works
+    		//myRobot.intake.update(true,false);
+    		
     	}
     	if(reverseWheelButtonPressed){
     		wheel1.set(-wheelSpeed);
