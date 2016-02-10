@@ -11,6 +11,9 @@ public class Shooter {
     Talon wheel2;
     Encoder wheelEncoder;
     Robot myRobot;
+    int totalTime = 100000000; // in nanoseconds
+    long startTime = System.nanoTime();
+    boolean toFinish = false;
 
     public Shooter(int wheelPort1, int wheelPort2, int encoderPort1, int encoderPort2, Robot robot) { // Remember
         // to
@@ -69,11 +72,14 @@ public class Shooter {
             wheelForwardEngaged = false;
         }*/
     	if(forwardWheelButtonPressed){
-    		//myRobot.intake.update(false,true);//THIS WILL NOT WORK. TRY AND SEE IF LAMBDA WILL WORK
-    		//Timer.delay(0.1);//change this delay as needed to make sure the ball doesn't fall out of the intake
+    		while (!toFinish) 
+    		{
+        		myRobot.intake.update(false,true);
+    		    toFinish = (System.nanoTime() - startTime >= totalTime);
+    		}
     		wheel1.set(wheelSpeed);
     		wheel2.set(wheelSpeed);//FIND MAX RATE AND USE PID
-    		//myRobot.intake.update(true,false);
+    		myRobot.intake.update(true,false);
     		
     	}
     	if(reverseWheelButtonPressed){
