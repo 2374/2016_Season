@@ -49,7 +49,7 @@ public class AutonomousController extends RobotController {
 		}
 	private boolean atGoal(){
 		if(xP==goal_x && yP==goal_y){
-			return true;
+			return true;//when this is true update goal and desired angle values
 		}
 		else{
 			return false;
