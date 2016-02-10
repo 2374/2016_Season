@@ -1,6 +1,9 @@
 package org.usfirst.frc.team2374.robot.controllers;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Joystick.RumbleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team2374.robot.Robot;
 
 public class TeleopController extends RobotController {
@@ -108,9 +111,18 @@ public class TeleopController extends RobotController {
         myRobot.intake.update(myRobot.joystick1.getRawButton(6), myRobot.joystick1.getRawButton(8));
         //Control manipulator
         myRobot.manipulator.update(myRobot.joystick1.getRawButton(2), myRobot.joystick1.getRawButton(4));
-   
-        
-        	
+        if(myRobot.accelerometer.getZ()>.5){
+        	myRobot.joystick1.setRumble(RumbleType.kLeftRumble,1);
+        }  
+        else{
+        	myRobot.joystick1.setRumble(RumbleType.kLeftRumble,0);
+        }
+        SmartDashboard.putNumber("Left Encoder Speed",myRobot.drivetrain.getLeftRate());
+        SmartDashboard.putNumber("Right Encoder Speed", myRobot.drivetrain.getRightRate());
+        SmartDashboard.putNumber("Wheel Encoder Speed",myRobot.angledShooter.getRate());
+        SmartDashboard.putNumber("X Acceleration", myRobot.accelerometer.getX());
+        SmartDashboard.putNumber("Y Acceleration", myRobot.accelerometer.getY());
+        SmartDashboard.putNumber("Z Acceleration", myRobot.accelerometer.getZ());
     }
 
     @Override

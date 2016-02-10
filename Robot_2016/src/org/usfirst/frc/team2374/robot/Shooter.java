@@ -73,7 +73,6 @@ public class Shooter {
     		//Timer.delay(0.1);//change this delay as needed to make sure the ball doesn't fall out of the intake
     		wheel1.set(wheelSpeed);
     		wheel2.set(wheelSpeed);//FIND MAX RATE AND USE PID
-    		//Timer.delay(1);//delete this when the PID works
     		//myRobot.intake.update(true,false);
     		
     	}
