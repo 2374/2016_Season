@@ -11,8 +11,8 @@ public class Shooter {
     Talon wheel2;
     Encoder wheelEncoder;
     Robot myRobot;
-    int totalTime = 100000000; // in nanoseconds
-    long startTime = System.nanoTime();
+    //int totalTime = 100000000; // in nanoseconds
+    //long startTime = System.nanoTime();
     boolean toFinish = false;
 
     public Shooter(int wheelPort1, int wheelPort2, int encoderPort1, int encoderPort2, Robot robot) { // Remember
@@ -72,6 +72,8 @@ public class Shooter {
             wheelForwardEngaged = false;
         }*/
     	if(forwardWheelButtonPressed){
+    		long startTime = System.nanoTime();
+    		long totalTime = startTime+200000000; //in nanoseconds
     		while (!toFinish) 
     		{
         		myRobot.intake.update(false,true);
