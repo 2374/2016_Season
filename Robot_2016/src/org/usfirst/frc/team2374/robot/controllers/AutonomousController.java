@@ -56,7 +56,7 @@ public class AutonomousController extends RobotController {
 		}
 	}
 	private boolean needsTurn(){
-		if(yP!=goal_y){
+		if(yP!=goal_y && xP == goal_x){
 		return true;
 		}
 		else{
@@ -124,92 +124,101 @@ public class AutonomousController extends RobotController {
 			autoCase=4;
 		case 4: //VERIFY X AND Y COORDINATES AS WELL AS TURN DIRECTIONS
 			if (turnDirection == 1) { //GOAL IS STRAIGHT AHEAD
-					{
-					goal_x=0;
+					goal_x=0;//CHANGE ALL GOAL POSITIONS!!
 					goal_y=0;
-					}
 					if (atGoal()){
 						goal_x=0;
 						goal_y=0;
 					}
-					else myRobot.drivetrain.setSpeed(1,1);
+					else {myRobot.drivetrain.setSpeed(1,1);}
 					
-					if (needsTurn()){
+					if (needsTurn() && yP < goal_y){
 						turn(90);
-						goal_y=0;
 					}
-					else myRobot.drivetrain.setSpeed(1,1);
-					
-					if (needsTurn()){
+					else if (needsTurn() && yP > goal_y){
 						turn(-90);
+					}
+					else {myRobot.drivetrain.setSpeed(1,1);}
+					
+					if (atGoal()){
+						turn(0);
 						goal_x=0;
 						goal_y=0;
 					}
-					else myRobot.drivetrain.setSpeed(1,1);		
+					else {myRobot.drivetrain.setSpeed(1,1);		
 					}
 					if (atGoal()){
+						myRobot.drivetrain.setSpeed(0,0);
 						myRobot.angledShooter.update(1,true,false);
 					}
-					else myRobot.drivetrain.setSpeed(1,1);
+					else {myRobot.drivetrain.setSpeed(1,1);
 					}
+		}
 			if (turnDirection == 2) { //GOAL IS TO THE LEFT, find actual yP and xP values and make sure angles are correct
-					{
-					goal_x=0;
-					goal_y=0;
-					}
-					if (atGoal()){
-						goal_x=0;
-						goal_y=0;
-					}
-					else myRobot.drivetrain.setSpeed(1,1);
-					
-					if (needsTurn()){
-						turn(-90);
-						goal_y=0;
-					}
-					else myRobot.drivetrain.setSpeed(1,1);
-					
-					if (needsTurn()){
-						turn(90);
-						goal_x=0;
-						goal_y=0;
-					}
-					else myRobot.drivetrain.setSpeed(1,1);		
-					}
-					if (atGoal()){
-						myRobot.angledShooter.update(1,true,false);
-					}
-					else myRobot.drivetrain.setSpeed(1,1);
-			
-			if (turnDirection == 3) { //GOAL IS TO THE RIGHT, find actual yP and xP values and make sure angles are correct
-				{
 				goal_x=0;
 				goal_y=0;
-				}
 				if (atGoal()){
 					goal_x=0;
 					goal_y=0;
 				}
-				else myRobot.drivetrain.setSpeed(1,1);
+				else {myRobot.drivetrain.setSpeed(1,1);}
 				
-				if (needsTurn()){
+				if (needsTurn() && yP < goal_y){
 					turn(90);
-					goal_y=0;
 				}
-				else myRobot.drivetrain.setSpeed(1,1);
-				
-				if (needsTurn()){
+				else if (needsTurn() && yP > goal_y){
 					turn(-90);
+				}
+				else {myRobot.drivetrain.setSpeed(1,1);}
+				
+				if (atGoal()){
+					turn(0);
 					goal_x=0;
 					goal_y=0;
 				}
-				else myRobot.drivetrain.setSpeed(1,1);		
+				else {myRobot.drivetrain.setSpeed(1,1);		
 				}
 				if (atGoal()){
+					myRobot.drivetrain.setSpeed(0,0);
 					myRobot.angledShooter.update(1,true,false);
 				}
-				else myRobot.drivetrain.setSpeed(1,1);
+				else {myRobot.drivetrain.setSpeed(1,1);
 				}
+			}
+			
+			if (turnDirection == 3) { //GOAL IS TO THE RIGHT, find actual yP and xP values and make sure angles are correct
+				goal_x=0;
+				goal_y=0;
+				if (atGoal()){
+					goal_x=0;
+					goal_y=0;
+				}
+				else {myRobot.drivetrain.setSpeed(1,1);}
+				
+				if (needsTurn() && yP < goal_y){
+					turn(90);
+				}
+				else if (needsTurn() && yP > goal_y){
+					turn(-90);
+				}
+				else {myRobot.drivetrain.setSpeed(1,1);}
+				
+				if (atGoal()){
+					turn(0);
+					goal_x=0;
+					goal_y=0;
+				}
+				else {myRobot.drivetrain.setSpeed(1,1);		
+				}
+				if (atGoal()){
+					myRobot.drivetrain.setSpeed(0,0);
+					myRobot.angledShooter.update(1,true,false);
+				}
+				else {myRobot.drivetrain.setSpeed(1,1);
+				}
+			}
+		}
+	}
 	
 	public void turn(double desiredAngle){
     	angleDifference = desiredAngle-myRobot.gyro.getAngle();
