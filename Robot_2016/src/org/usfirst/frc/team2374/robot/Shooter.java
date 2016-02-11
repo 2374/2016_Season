@@ -74,7 +74,7 @@ public class Shooter {
     	if(forwardWheelButtonPressed){
     		long startTime = System.nanoTime();
     		long totalTime = startTime+200000000; //in nanoseconds
-    		while (!toFinish) 
+    		if (!toFinish) 
     		{
         		myRobot.intake.update(false,true);
     		    toFinish = (System.nanoTime() - startTime >= totalTime);

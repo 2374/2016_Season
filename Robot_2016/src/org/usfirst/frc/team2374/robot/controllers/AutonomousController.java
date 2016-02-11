@@ -122,7 +122,7 @@ public class AutonomousController extends RobotController {
 			myRobot.drivetrain.setSolenoids(0);
 			turn(0);
 			autoCase=4;
-		case 4: //Move to shooter based on turn direction
+		case 4: //VERIFY X AND Y COORDINATES AS WELL AS TURN DIRECTIONS
 			if (turnDirection == 1) { //GOAL IS STRAIGHT AHEAD
 					{
 					goal_x=0;
@@ -164,13 +164,13 @@ public class AutonomousController extends RobotController {
 					else myRobot.drivetrain.setSpeed(1,1);
 					
 					if (needsTurn()){
-						turn(90);
+						turn(-90);
 						goal_y=0;
 					}
 					else myRobot.drivetrain.setSpeed(1,1);
 					
 					if (needsTurn()){
-						turn(-90);
+						turn(90);
 						goal_x=0;
 						goal_y=0;
 					}
