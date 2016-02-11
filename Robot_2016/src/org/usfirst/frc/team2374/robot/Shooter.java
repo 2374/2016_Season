@@ -91,6 +91,7 @@ public class Shooter {
     	else{
     		wheel1.set(0);
     		wheel2.set(0);
+    		myRobot.intake.update(false,false);
     	}
     }
 
