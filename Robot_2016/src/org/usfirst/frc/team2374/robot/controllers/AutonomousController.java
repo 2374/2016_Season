@@ -67,10 +67,10 @@ public class AutonomousController extends RobotController {
 
 	@Override
 	protected void onUpdate() {
-		double xA = myRobot.accelerometer.getX() * 9.81 * Math.cos(myRobot.gyro.getAngle());// Make sure the
+		double xA = myRobot.accelerometer.getX() * 9.81 * Math.cos(myRobot.gyro.getAngle()*Math.PI/180);// Make sure the
 														// accelerometer does
 														// measure in g's
-		double yA = myRobot.accelerometer.getY() * 9.81 * Math.sin(myRobot.gyro.getAngle());//if axes change with robot, make sure to multiply by cos and sin.
+		double yA = myRobot.accelerometer.getY() * 9.81 * Math.sin(myRobot.gyro.getAngle()*Math.PI/180);//if axes change with robot, make sure to multiply by cos and sin.
 		double zA = myRobot.accelerometer.getZ() * 9.81;
 		xV += xA * deltaTime();
 		yV += yA * deltaTime(); // Just in case you're wondering, you multiply by deltaTime()
@@ -120,106 +120,52 @@ public class AutonomousController extends RobotController {
 			break;
 		case 3: //Re-orient robot after crossing obstacle
 			myRobot.drivetrain.setSolenoids(0);
+			if(myRobot.gyro.getAngle()!=0){
 			turn(0);
+			}
+			else{
 			autoCase=4;
+			}
+			break;
 		case 4: //VERIFY X AND Y COORDINATES AS WELL AS TURN DIRECTIONS
-			if (turnDirection == 1) { //GOAL IS STRAIGHT AHEAD
-					goal_x=0;//CHANGE ALL GOAL POSITIONS!!
-					goal_y=0;
-					if (atGoal()){
-						goal_x=0;
-						goal_y=0;
-					}
-					else {myRobot.drivetrain.setSpeed(1,1);}
-					
-					if (needsTurn() && yP < goal_y){
-						turn(90);
-					}
-					else if (needsTurn() && yP > goal_y){
-						turn(-90);
-					}
-					else {myRobot.drivetrain.setSpeed(1,1);}
-					
-					if (atGoal()){
-						turn(0);
-						goal_x=0;
-						goal_y=0;
-					}
-					else {myRobot.drivetrain.setSpeed(1,1);		
-					}
-					if (atGoal()){
-						myRobot.drivetrain.setSpeed(0,0);
-						myRobot.angledShooter.update(1,true,false);
-					}
-					else {myRobot.drivetrain.setSpeed(1,1);
-					}
+			if (turnDirection == 1) { //When goal is straight ahead
+				ShooterAutonomous(0,0,0);//Measure the field and insert proper positions! (goal_x1, goal_x2, goal_y1)
 		}
-			if (turnDirection == 2) { //GOAL IS TO THE LEFT, find actual yP and xP values and make sure angles are correct
-				goal_x=0;
-				goal_y=0;
-				if (atGoal()){
-					goal_x=0;
-					goal_y=0;
-				}
-				else {myRobot.drivetrain.setSpeed(1,1);}
-				
-				if (needsTurn() && yP < goal_y){
-					turn(90);
-				}
-				else if (needsTurn() && yP > goal_y){
-					turn(-90);
-				}
-				else {myRobot.drivetrain.setSpeed(1,1);}
-				
-				if (atGoal()){
-					turn(0);
-					goal_x=0;
-					goal_y=0;
-				}
-				else {myRobot.drivetrain.setSpeed(1,1);		
-				}
-				if (atGoal()){
-					myRobot.drivetrain.setSpeed(0,0);
-					myRobot.angledShooter.update(1,true,false);
-				}
-				else {myRobot.drivetrain.setSpeed(1,1);
-				}
+			if (turnDirection == 2) { //When goal is to the left
+				ShooterAutonomous(0,0,0);
 			}
 			
-			if (turnDirection == 3) { //GOAL IS TO THE RIGHT, find actual yP and xP values and make sure angles are correct
-				goal_x=0;
-				goal_y=0;
-				if (atGoal()){
-					goal_x=0;
-					goal_y=0;
-				}
-				else {myRobot.drivetrain.setSpeed(1,1);}
-				
-				if (needsTurn() && yP < goal_y){
-					turn(90);
-				}
-				else if (needsTurn() && yP > goal_y){
-					turn(-90);
-				}
-				else {myRobot.drivetrain.setSpeed(1,1);}
-				
-				if (atGoal()){
-					turn(0);
-					goal_x=0;
-					goal_y=0;
-				}
-				else {myRobot.drivetrain.setSpeed(1,1);		
-				}
-				if (atGoal()){
-					myRobot.drivetrain.setSpeed(0,0);
-					myRobot.angledShooter.update(1,true,false);
-				}
-				else {myRobot.drivetrain.setSpeed(1,1);
-				}
+			if (turnDirection == 3) { //When goal is to the right
+				ShooterAutonomous(0,0,0);
 			}
 		}
 	}
-	
+	public void ShooterAutonomous(double goal_x1, double goal_x2, double goal_y1){//We should be at the correct y position after one goal.
+		goal_x=goal_x1;
+		goal_y=goal_y1;
+		if (atGoal()){
+			if(myRobot.gyro.getAngle() != 0){
+			turn(0);
+			}
+			goal_x=goal_x2;
+			goal_y=goal_y1;
+		}
+		else {myRobot.drivetrain.setSpeed(1,1);}
+		
+		if (needsTurn() && yP < goal_y && myRobot.gyro.getAngle() != 90){
+			turn(90);
+		}
+		else if (needsTurn() && yP > goal_y && myRobot.gyro.getAngle() != -90){
+			turn(-90);
+		}
+		else {myRobot.drivetrain.setSpeed(1,1);}
+		if (atGoal()){
+			myRobot.drivetrain.setSpeed(0,0);
+			myRobot.angledShooter.update(1,true,false);
+		}
+		else {myRobot.drivetrain.setSpeed(1,1);
+		}
+	}
 	public void turn(double desiredAngle){
     	angleDifference = desiredAngle-myRobot.gyro.getAngle();
     	if (Math.abs(angleDifference)>2){
@@ -228,9 +174,7 @@ public class AutonomousController extends RobotController {
     	if(Math.abs(turnSpeed)>turnMax){
     		turnSpeed=turnMax*Math.signum(turnSpeed);
     	}
-    	while(angleDifference!=0){
     		myRobot.drivetrain.setSpeed(turnSpeed, -turnSpeed);
-    	}
     }
 
 	@Override

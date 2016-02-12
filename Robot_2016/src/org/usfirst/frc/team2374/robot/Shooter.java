@@ -71,9 +71,9 @@ public class Shooter {
             wheel2.set(-wheelSpeed);
             wheelForwardEngaged = false;
         }*/
+    	long startTime = System.nanoTime();
+    	long totalTime = startTime+200000000; //in nanoseconds
     	if(forwardWheelButtonPressed){
-    		long startTime = System.nanoTime();
-    		long totalTime = startTime+200000000; //in nanoseconds
     		if (!toFinish) 
     		{
         		myRobot.intake.update(false,true);
