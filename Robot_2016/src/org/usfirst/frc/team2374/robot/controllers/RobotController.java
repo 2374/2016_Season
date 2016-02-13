@@ -16,13 +16,14 @@ public abstract class RobotController {
 
     public RobotController(Robot robot) {
         myRobot = robot;
+        myRobot.robotController = this;
     }
 
-    protected void delay(double time, Runnable r) {
+    public void delay(double time, Runnable r) {
         toRun.put(r, Timer.getFPGATimestamp() + time);
     }
     
-    protected double deltaTime() {
+    public double deltaTime() {
     	return currentTime - prevTime;
     }
 

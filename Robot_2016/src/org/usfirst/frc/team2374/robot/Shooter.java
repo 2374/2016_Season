@@ -13,7 +13,6 @@ public class Shooter {
     Robot myRobot;
     //int totalTime = 100000000; // in nanoseconds
     //long startTime = System.nanoTime();
-    boolean toFinish = false;
 
     public Shooter(int wheelPort1, int wheelPort2, int encoderPort1, int encoderPort2, Robot robot) { // Remember
         // to
@@ -38,6 +37,8 @@ public class Shooter {
     }
     /*boolean wheelForwardEngaged = false;
     boolean wheelReverseEngaged = false;*/
+    
+    private boolean prevForwardWheelButtonPressed;
 
     public void update(double wheelSpeed, boolean forwardWheelButtonPressed,
             boolean reverseWheelButtonPressed) { // Comment through this method
@@ -65,24 +66,23 @@ public class Shooter {
             wheel2.set(0);
             wheelEncoder.reset();
             resetPid();
-        }
+        }+
         if (wheelForwardEngaged && wheelReverseEngaged) {
             wheel1.set(-wheelSpeed);
             wheel2.set(-wheelSpeed);
             wheelForwardEngaged = false;
         }*/
-    	long startTime = System.nanoTime();
-    	long totalTime = startTime+200000000; //in nanoseconds
-    	if(forwardWheelButtonPressed){
-    		if (!toFinish) 
-    		{
-        		myRobot.intake.update(false,true);
-    		    toFinish = (System.nanoTime() - startTime >= totalTime);
-    		}
+    	//if(forwardWheelButtonPressed && !prevForwardWheelButtonPressed){
+    		//myRobot.intake.forcedDown = true;
+    		
+    		//myRobot.robotController.delay(2, () -> {
+    			//myRobot.intake.forcedDown = false;
+    		//});
+    	//}
+    	
+    	if (forwardWheelButtonPressed) {
     		wheel1.set(wheelSpeed);
     		wheel2.set(wheelSpeed);//FIND MAX RATE AND USE PID
-    		myRobot.intake.update(true,false);
-    		
     	}
     	if(reverseWheelButtonPressed){
     		wheel1.set(-wheelSpeed);
@@ -91,8 +91,9 @@ public class Shooter {
     	else{
     		wheel1.set(0);
     		wheel2.set(0);
-    		myRobot.intake.update(false,false);
     	}
+    	
+    	prevForwardWheelButtonPressed = forwardWheelButtonPressed;
     }
 
     public double getRate() {

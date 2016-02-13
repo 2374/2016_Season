@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 
 import org.usfirst.frc.team2374.robot.controllers.AutonomousController;
 import org.usfirst.frc.team2374.robot.controllers.DisabledController;
+import org.usfirst.frc.team2374.robot.controllers.RobotController;
 import org.usfirst.frc.team2374.robot.controllers.TeleopController;
 import org.usfirst.frc.team2374.robot.controllers.TestController;
 
@@ -25,6 +26,7 @@ public class Robot extends SampleRobot {
     public final AnalogGyro gyro;
     public final BuiltInAccelerometer accelerometer;
     public final AnalogInput analogInputGyro;
+    public RobotController robotController;
 
     public Robot() {
         joystick1 = new Joystick(0);
