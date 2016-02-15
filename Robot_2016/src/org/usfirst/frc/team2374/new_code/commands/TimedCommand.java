@@ -8,7 +8,7 @@ public abstract class TimedCommand extends Command {
     /**
      * What time the command should end at.
      */
-    private final double endTime;
+    private double endTime;
 
     /**
      * Creates a new command that ends after a given amount of time.
@@ -17,7 +17,7 @@ public abstract class TimedCommand extends Command {
      * seconds).
      */
     public TimedCommand(double time) {
-        endTime = time + Timer.getFPGATimestamp();
+        onStart.add(() -> endTime = time + Timer.getFPGATimestamp());
     }
 
     @Override

@@ -1,12 +1,12 @@
 package org.usfirst.frc.team2374.new_code;
 
-import org.usfirst.frc.team2374.new_code.events.Input;
 import edu.wpi.first.wpilibj.SampleRobot;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import org.usfirst.frc.team2374.new_code.Controller.ControllerType;
 import org.usfirst.frc.team2374.new_code.components.*;
+import org.usfirst.frc.team2374.new_code.events.Input;
 
 public class Robot extends SampleRobot {
 
@@ -37,10 +37,10 @@ public class Robot extends SampleRobot {
 
         //Create all the robot's components
         drivetrain = new Drivetrain(0, 1, 2, 3);
-        intake = new Intake();
-        manipulator = new Manipulator();
-        pistons = new Pistons();
-        shooter = new Shooter();
+        intake = new Intake(6);
+        manipulator = new Manipulator(7);
+        pistons = new Pistons(6, 7, 0, 1, 4, 5, 2, 3);
+        shooter = new Shooter(4, 5);
     }
 
     /**

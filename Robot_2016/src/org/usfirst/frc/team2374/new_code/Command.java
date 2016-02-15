@@ -1,19 +1,46 @@
 package org.usfirst.frc.team2374.new_code;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public abstract class Command {
 
     /**
-     * A list of Runnables to execute when this command ends.
+     * Lists of Runnables to execute when this command starts or ends.
      */
-    private final List<Runnable> onFinish = new LinkedList<>();
+    protected final List<Runnable> onFinish = new LinkedList<>(), onStart = new LinkedList<>();
 
     /**
      * Whether the command is currently running.
      */
     private boolean isRunning;
+
+    /**
+     * This function creates a command that runs continuously and that requires
+     * no components.
+     *
+     * @param r A runnable that the command calls each update.
+     * @return The continuous command.
+     */
+    public static Command continuousCommand(Runnable r) {
+        return new Command() {
+            @Override
+            public boolean isFinished() {
+                return false;
+            }
+
+            @Override
+            public List<Component> requires() {
+                return Arrays.asList();
+            }
+
+            @Override
+            public void update() {
+                r.run();
+            }
+        };
+    }
 
     /**
      * Calling this function ends the command.
@@ -30,7 +57,9 @@ public abstract class Command {
             }
         }
         Robot.COMMANDS.remove(this);
-        onFinish.forEach(Runnable::run);
+        for (Runnable r : onFinish) {
+            r.run();
+        }
     }
 
     /**
@@ -79,6 +108,9 @@ public abstract class Command {
             component.command = this;
         }
         Robot.COMMANDS.add(this);
+        for (Runnable r : onStart) {
+            r.run();
+        }
     }
 
     /**
