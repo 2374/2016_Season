@@ -10,7 +10,7 @@ import org.usfirst.frc.team2374.robot.events.Input;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
-public class PistonsCommand extends Command {
+public class PistonsTeleopCommand extends Command {
     @Override
     public boolean isFinished() {
         return false;
