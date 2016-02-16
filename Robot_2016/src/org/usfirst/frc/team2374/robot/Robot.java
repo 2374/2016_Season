@@ -1,80 +1,123 @@
 package org.usfirst.frc.team2374.robot;
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.SampleRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 
-import org.usfirst.frc.team2374.robot.controllers.AutonomousController;
-import org.usfirst.frc.team2374.robot.controllers.DisabledController;
-import org.usfirst.frc.team2374.robot.controllers.RobotController;
-import org.usfirst.frc.team2374.robot.controllers.TeleopController;
-import org.usfirst.frc.team2374.robot.controllers.TestController;
+import edu.wpi.first.wpilibj.SampleRobot;
+import edu.wpi.first.wpilibj.Timer;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import org.usfirst.frc.team2374.robot.Controller.ControllerType;
+import org.usfirst.frc.team2374.robot.components.*;
+import org.usfirst.frc.team2374.robot.events.Input;
+import org.usfirst.frc.team2374.robot.sensors.PositionTracker;
 
 public class Robot extends SampleRobot {
 
-    public final Joystick joystick1;
-    public final Joystick joystick2;
-    public final Shooter angledShooter;
-    public final Manipulator manipulator;
-    public final Intake intake;
-    public final Drivetrain drivetrain;
-    public final SendableChooser autoChooser;
-    public final SendableChooser autoTurn;
-    public final AnalogGyro gyro;
-    public final BuiltInAccelerometer accelerometer;
-    public final AnalogInput analogInputGyro;
-    public RobotController robotController;
+    /**
+     * This is the instance of Robot, which is sometimes needed.
+     */
+    public static Robot robot;
 
+    /*
+       All of the following variables are components.
+     */
+    public static Drivetrain drivetrain;
+    public static Intake intake;
+    public static Manipulator manipulator;
+    public static Pistons pistons;
+    public static Shooter shooter;
+
+    /*
+       All of the following variables are sensors.
+     */
+    public static PositionTracker positionTracker;
+
+    /**
+     * Creates the robot and initializes all of its variables and components.
+     */
     public Robot() {
-        joystick1 = new Joystick(0);
-        joystick2 = new Joystick(1); //Check Ports!!!!!!!!!!!
-        angledShooter = new Shooter(4, 5, 5, 6, this); //PLEASE CHANGE THIS PORT IN THE FUTURE! DO IT!
-        drivetrain = new Drivetrain();
-        manipulator = new Manipulator(7);
+        robot = this;
+
+        //Create all the robot's components
+        drivetrain = new Drivetrain(0, 1, 2, 3);
         intake = new Intake(6);
-        analogInputGyro=new AnalogInput(0);
-        gyro = new AnalogGyro(analogInputGyro);
-        accelerometer = new BuiltInAccelerometer();
-        autoChooser = new SendableChooser(); //Add defaults and options for rough terrain and various other obstacles
-        autoTurn = new SendableChooser();
-        autoChooser.addDefault("Rough Terrain", 1);
-        autoChooser.addObject("Moat", 2);
-        autoChooser.addObject("Shooter", 3);
-        autoTurn.addDefault("Goal is straight ahead", 1);
-        autoTurn.addObject("Goal is to the Left", 2);
-        autoTurn.addObject("Goal is to the Right", 3);
-        SmartDashboard.putNumber("Left Encoder Speed",drivetrain.getLeftRate());
-        SmartDashboard.putNumber("Right Encoder Speed", drivetrain.getRightRate());
-        SmartDashboard.putNumber("Wheel Encoder Speed",angledShooter.getRate());
-        SmartDashboard.putNumber("X Acceleration", accelerometer.getX());
-        SmartDashboard.putNumber("Y Acceleration", accelerometer.getY());
-        SmartDashboard.putNumber("Z Acceleration", accelerometer.getZ());
-        SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
-        SmartDashboard.putData("Turn to find goal", autoTurn);
-        
-        
-    }
-    
-    @Override
-    public void autonomous() {
-        new AutonomousController(this).run();
+        manipulator = new Manipulator(7);
+        pistons = new Pistons(6, 7, 0, 1, 4, 5, 2, 3);
+        shooter = new Shooter(4, 5);
+
+        //Create all the robot's sensors
+        positionTracker = new PositionTracker(0);
     }
 
+    /**
+     * The list of all current running commands.
+     */
+    static final List<Command> COMMANDS = new LinkedList<>();
+
+    /**
+     * The time (in seconds) since the last update.
+     */
+    public static double deltaTime;
+
+    /**
+     * This function is called when the robot starts. It contains all of the
+     * code for switching between different controllers.
+     */
     @Override
-    public void disabled() {
-        new DisabledController(this).run();
+    public void robotMain() {
+        ControllerType oldType = null;
+        double prevTime = Timer.getFPGATimestamp();
+        //Run all the following code continuously
+        while (true) {
+            //Update the input
+            Input.update();
+            //Switch between different controllers if needed
+            ControllerType currentType = ControllerType.getType();
+            if (currentType != oldType) {
+                COMMANDS.clear();
+                currentType.create().start();
+                oldType = currentType;
+            }
+            //Update the time
+            deltaTime = Timer.getFPGATimestamp() - prevTime;
+            prevTime = Timer.getFPGATimestamp();
+            //Update all the robot systems
+            for (RobotSystem robotSystem : ROBOT_SYSTEMS) {
+                robotSystem.update();
+            }
+            //Update all the commands
+            for (Command command : new ArrayList<>(COMMANDS)) {
+                command.update();
+                if (command.isFinished()) {
+                    command.finish();
+                }
+            }
+            //Delay a small amount of time
+            Timer.delay(.01);
+        }
     }
 
-    @Override
-    public void operatorControl() {
-        new TeleopController(this).run();
-    }
+    /**
+     * The list of all of the robot systems.
+     */
+    private static final List<RobotSystem> ROBOT_SYSTEMS = new LinkedList<>();
 
-    @Override
-    public void test() {
-        new TestController(this).run();
+    /**
+     * Robot systems represent parts of the robot that act continuously and are
+     * not enabled or disabled. Most robot systems are components or sensors.
+     */
+    public static abstract class RobotSystem {
+
+        /**
+         * This creates a robot system and adds it to the list of all robot
+         * systems.
+         */
+        public RobotSystem() {
+            ROBOT_SYSTEMS.add(this);
+        }
+
+        /**
+         * This function is called continuously.
+         */
+        public abstract void update();
     }
 }

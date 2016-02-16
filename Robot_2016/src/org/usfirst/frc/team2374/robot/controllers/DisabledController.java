@@ -1,27 +1,10 @@
 package org.usfirst.frc.team2374.robot.controllers;
 
-import org.usfirst.frc.team2374.robot.Robot;
+import org.usfirst.frc.team2374.robot.Controller;
 
-public class DisabledController extends RobotController {
-
-    public DisabledController(Robot robot) {
-        super(robot);
-    }
+public class DisabledController extends Controller {
 
     @Override
-    protected void onStart() {
-    }
-
-    @Override
-    protected void onUpdate() {
-    }
-
-    @Override
-    protected void onFinish() {
-    }
-
-    @Override
-    protected boolean shouldFinish() {
-        return myRobot.isEnabled();
+    public void start() {
     }
 }
