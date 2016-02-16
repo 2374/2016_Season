@@ -68,6 +68,7 @@ public class Input {
     public static EventStream whenPressed(int button) {
         BUTTON_VALS.putIfAbsent(button, JOYSTICK1.getRawButton(button));
         BUTTON_PRESSED_EVENTSTREAMS.putIfAbsent(button, new EventStream());
+        BUTTON_RELEASED_EVENTSTREAMS.putIfAbsent(button, new EventStream());
 
         return BUTTON_PRESSED_EVENTSTREAMS.get(button);
     }
@@ -82,6 +83,7 @@ public class Input {
      */
     public static EventStream whenReleased(int button) {
         BUTTON_VALS.putIfAbsent(button, JOYSTICK1.getRawButton(button));
+        BUTTON_PRESSED_EVENTSTREAMS.putIfAbsent(button, new EventStream());
         BUTTON_RELEASED_EVENTSTREAMS.putIfAbsent(button, new EventStream());
 
         return BUTTON_RELEASED_EVENTSTREAMS.get(button);
