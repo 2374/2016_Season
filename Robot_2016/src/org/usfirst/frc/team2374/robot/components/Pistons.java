@@ -45,7 +45,8 @@ public class Pistons extends Component {
         this.backLeft.set(backLeft);
         this.backRight.set(backRight);
     }
-	public Value[][] myArray = new Value[][] {
+    
+	public Value[][] pistonModes = new Value[][] {
 			{kReverse,kReverse,kReverse,kReverse},//all off
 			{kForward,kForward,kForward,kForward},//all on
 			{kForward,kForward,kReverse,kReverse},//front on
@@ -59,6 +60,9 @@ public class Pistons extends Component {
 			{kForward,kReverse,kForward,kForward},//front right off
 			{kReverse,kForward,kForward,kForward}//front left off
 	};
+    public void setPistonMode(int pistonMode) {
+    	setPistons(pistonModes[pistonMode][0], pistonModes[pistonMode][1], pistonModes[pistonMode][2], pistonModes[pistonMode][3]);
+    }
 
     @Override
     public void update() {

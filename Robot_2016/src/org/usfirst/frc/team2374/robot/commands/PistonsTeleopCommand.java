@@ -20,6 +20,7 @@ public class PistonsTeleopCommand extends Command {
 			{9,10,11,12},
 			{9,10,11,12}
 	};
+	public int mostRecentPushedButton;
 	
 	
     @Override
@@ -49,9 +50,34 @@ public class PistonsTeleopCommand extends Command {
     	if (Input.getButton(3)) {
     		backRight = Value.kForward;
     	}
+    	
+    	if (Input.JOYSTICK2.getRawButton(1)) {
+    		mostRecentPushedButton = 1;
+    	}
+    	if (Input.JOYSTICK2.getRawButton(2)) {
+    		mostRecentPushedButton = 2;
+    	}
+    	if (Input.JOYSTICK2.getRawButton(3)) {
+    		mostRecentPushedButton = 3;
+    	}
+    	if (Input.JOYSTICK2.getRawButton(4)) {
+    		mostRecentPushedButton = 4;
+    	}
+    	if (Input.JOYSTICK2.getRawButton(5)) {//this is the reset button, change it later
+    		mostRecentPushedButton = 0;
+    	}
+    	
     	if (frontLeft == kReverse && frontRight == kReverse && backLeft == kReverse && backRight == kReverse){
     		
-    	}
+    		if (Input.JOYSTICK1.getPOV() == -1) {
+    			Robot.pistons.setPistons(kReverse, kReverse, kReverse, kReverse);
+    		} else {
+    			int mode = myArray[mostRecentPushedButton][Input.JOYSTICK1.getPOV()/90];
+    			Robot.pistons.setPistonMode(mode);
+    			
+    		}
+    		
+    	} else
     	Robot.pistons.setPistons(frontLeft, frontRight, backLeft, backRight);
     }
 
