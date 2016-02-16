@@ -18,5 +18,6 @@ public class TeleopController extends Controller {
 
         //Make the robot go forward for 1 second on the A button
         Input.whenPressed(1).runCommand(new ForwardsCommand(1));
+        
     }
 }

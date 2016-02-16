@@ -40,6 +40,7 @@ public class PistonsCommand extends Command {
     	}
     	
     	Robot.pistons.setPistons(frontLeft, frontRight, backLeft, backRight);
+    	
     }
 
 }
