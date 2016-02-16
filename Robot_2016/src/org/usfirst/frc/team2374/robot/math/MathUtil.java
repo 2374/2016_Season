@@ -30,4 +30,14 @@ public abstract class MathUtil {
     public static boolean valueNear(double value1, double value2, double maxError) {
         return Math.abs(value1 - value2) < maxError;
     }
+    public static double mod(double value, double base){
+    	if (value>=0)
+    			return value%base;
+    	else return mod(value+base,base);
+    }
+    //True means turn right
+    public static boolean turnDirection(double currentAngle, double desiredAngle) {
+    	double relAngle = mod(currentAngle-desiredAngle,2*Math.PI);
+    	return relAngle>Math.PI;
+    }
 }
