@@ -1,6 +1,8 @@
 package org.usfirst.frc.team2374.new_code;
 
-public class Component {
+import org.usfirst.frc.team2374.new_code.Robot.RobotSystem;
+
+public abstract class Component extends RobotSystem {
 
     /**
      * Which command is current controlling this component.

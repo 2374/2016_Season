@@ -37,4 +37,9 @@ public class Drivetrain extends Component {
         right1.set(rightSpeed);
         right2.set(rightSpeed);
     }
+
+    @Override
+    public void update() {
+        setSpeed(0, 0);
+    }
 }

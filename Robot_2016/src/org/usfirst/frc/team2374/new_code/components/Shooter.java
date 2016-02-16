@@ -30,4 +30,9 @@ public class Shooter extends Component {
         wheel1.set(speed);
         wheel2.set(speed);
     }
+
+    @Override
+    public void update() {
+        setSpeed(0);
+    }
 }

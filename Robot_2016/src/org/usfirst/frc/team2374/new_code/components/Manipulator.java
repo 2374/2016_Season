@@ -27,4 +27,9 @@ public class Manipulator extends Component {
     public void setSpeed(double speed) {
         motor.set(speed);
     }
+
+    @Override
+    public void update() {
+        setSpeed(0);
+    }
 }

@@ -2,6 +2,7 @@ package org.usfirst.frc.team2374.new_code.components;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.kOff;
 import org.usfirst.frc.team2374.new_code.Component;
 
 public class Pistons extends Component {
@@ -43,5 +44,10 @@ public class Pistons extends Component {
         this.frontRight.set(frontRight);
         this.backLeft.set(backLeft);
         this.backRight.set(backRight);
+    }
+
+    @Override
+    public void update() {
+        setPistons(kOff, kOff, kOff, kOff);
     }
 }
