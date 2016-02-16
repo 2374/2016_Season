@@ -1,10 +1,13 @@
 package org.usfirst.frc.team2374.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Timer;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
 import org.usfirst.frc.team2374.robot.Controller.ControllerType;
 import org.usfirst.frc.team2374.robot.components.*;
 import org.usfirst.frc.team2374.robot.events.Input;
@@ -16,6 +19,8 @@ public class Robot extends SampleRobot {
      * This is the instance of Robot, which is sometimes needed.
      */
     public static Robot robot;
+    
+
 
     /*
        All of the following variables are components.
@@ -36,6 +41,7 @@ public class Robot extends SampleRobot {
      */
     public Robot() {
         robot = this;
+
 
         //Create all the robot's components
         drivetrain = new Drivetrain(0, 1, 2, 3);

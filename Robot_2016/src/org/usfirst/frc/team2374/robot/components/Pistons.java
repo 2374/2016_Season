@@ -2,7 +2,7 @@ package org.usfirst.frc.team2374.robot.components;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.kOff;
+import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
 import org.usfirst.frc.team2374.robot.Component;
 
 public class Pistons extends Component {
@@ -45,6 +45,20 @@ public class Pistons extends Component {
         this.backLeft.set(backLeft);
         this.backRight.set(backRight);
     }
+	public Value[][] myArray = new Value[][] {
+			{kReverse,kReverse,kReverse,kReverse},//all off
+			{kForward,kForward,kForward,kForward},//all on
+			{kForward,kForward,kReverse,kReverse},//front on
+			{kReverse,kReverse,kForward,kForward},//back on
+			{kForward,kReverse,kForward,kReverse},//left on
+			{kReverse,kForward,kReverse,kForward},//right on
+			{kReverse,kForward,kForward,kReverse},//front right back left
+			{kForward,kReverse,kReverse,kForward},//front left back right
+			{kForward,kForward,kForward,kReverse},//back right off
+			{kForward,kForward,kReverse,kForward},//back left off
+			{kForward,kReverse,kForward,kForward},//front right off
+			{kReverse,kForward,kForward,kForward}//front left off
+	};
 
     @Override
     public void update() {

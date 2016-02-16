@@ -9,8 +9,19 @@ import org.usfirst.frc.team2374.robot.Robot;
 import org.usfirst.frc.team2374.robot.events.Input;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
 
 public class PistonsTeleopCommand extends Command {
+	
+	public int[][] myArray = new int[][] {
+			{0,0,0,0},
+			{1,2,3,4},
+			{5,6,7,8},
+			{9,10,11,12},
+			{9,10,11,12}
+	};
+	
+	
     @Override
     public boolean isFinished() {
         return false;
@@ -38,9 +49,10 @@ public class PistonsTeleopCommand extends Command {
     	if (Input.getButton(3)) {
     		backRight = Value.kForward;
     	}
-    	
+    	if (frontLeft == kReverse && frontRight == kReverse && backLeft == kReverse && backRight == kReverse){
+    		
+    	}
     	Robot.pistons.setPistons(frontLeft, frontRight, backLeft, backRight);
-    	
     }
 
 }
