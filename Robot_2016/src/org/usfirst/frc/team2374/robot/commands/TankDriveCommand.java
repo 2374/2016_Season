@@ -20,6 +20,7 @@ public class TankDriveCommand extends Command {
     }
 
     public double quadraticScale(double value) {
+    	if(Math.abs(value) < 0.5) return 0;//deadzone
         return value * Math.abs(value);
     }
 
