@@ -4,6 +4,7 @@ import org.usfirst.frc.team2374.robot.Controller;
 import org.usfirst.frc.team2374.robot.commands.IntakeTeleopCommand;
 import org.usfirst.frc.team2374.robot.commands.ManipulatorTeleopCommand;
 import org.usfirst.frc.team2374.robot.commands.PistonsTeleopCommand;
+import org.usfirst.frc.team2374.robot.commands.ShooterTeleopCommand;
 import org.usfirst.frc.team2374.robot.commands.TankDriveCommand;
 
 public class TeleopController extends Controller {
@@ -21,6 +22,9 @@ public class TeleopController extends Controller {
 
         //controls the manipulator
         new ManipulatorTeleopCommand().startAsDefaultCommand();
+        
+        //controls the shooter (no PID though)
+        new ShooterTeleopCommand().startAsDefaultCommand();
 
         //Make the robot go forward for 1 second on the A button
         //Input.whenPressed(1).runCommand(new ForwardsCommand(1));
