@@ -1,36 +1,54 @@
 package org.usfirst.frc.team2374.robot.components;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
 import org.usfirst.frc.team2374.robot.Component;
+import org.usfirst.frc.team2374.robot.Robot;
 
 public class Pistons extends Component {
 
     /**
-     * The robot's four piston solenoids.
+     * The robot's four pistons.
      */
-    private final DoubleSolenoid frontLeft, frontRight, backLeft, backRight;
+    private final Piston[] pistons = new Piston[4];
 
-    /**
-     * Creates a set of pistons with solenoids set to the given ports.
-     *
-     * @param frontLeft1 The forward port for the front-left solenoid.
-     * @param frontLeft2 The reverse port for the front-left solenoid.
-     * @param frontRight1 The forward port for the front-right solenoid.
-     * @param frontRight2 The reverse port for the front-right solenoid.
-     * @param backLeft1 The forward port for the back-left solenoid.
-     * @param backLeft2 The reverse port for the back-left solenoid.
-     * @param backRight1 The forward port for the back-right solenoid.
-     * @param backRight2 The reverse port for the back-right solenoid.
-     */
-    public Pistons(int frontLeft1, int frontLeft2, int frontRight1, int frontRight2, int backLeft1, int backLeft2, int backRight1, int backRight2) {
-        frontLeft = new DoubleSolenoid(frontLeft1, frontLeft2);
-        frontRight = new DoubleSolenoid(frontRight1, frontRight2);
-        backLeft = new DoubleSolenoid(backLeft1, backLeft2);
-        backRight = new DoubleSolenoid(backRight1, backRight2);
+    public Pistons(int... ports) {
+
     }
 
+//    /**
+//     * The robot's four piston solenoids.
+//     */
+//    private final DoubleSolenoid frontLeft, frontRight, backLeft, backRight;
+//
+//    /**
+//     * The values the pistons should be set at.
+//     */
+//    private boolean frontLeftValue, frontRightValue, backLeftValue, backRightValue;
+//
+//    /**
+//     * How long ago each piston was set at its current value.
+//     */
+//    private double frontLeftTimer, frontRightTimer, backLeftTimer, backRightTimer;
+//
+//    /**
+//     * Creates a set of pistons with solenoids set to the given ports.
+//     *
+//     * @param frontLeft1 The forward port for the front-left solenoid.
+//     * @param frontLeft2 The reverse port for the front-left solenoid.
+//     * @param frontRight1 The forward port for the front-right solenoid.
+//     * @param frontRight2 The reverse port for the front-right solenoid.
+//     * @param backLeft1 The forward port for the back-left solenoid.
+//     * @param backLeft2 The reverse port for the back-left solenoid.
+//     * @param backRight1 The forward port for the back-right solenoid.
+//     * @param backRight2 The reverse port for the back-right solenoid.
+//     */
+//    public Pistons(int frontLeft1, int frontLeft2, int frontRight1, int frontRight2, int backLeft1, int backLeft2, int backRight1, int backRight2) {
+//        frontLeft = new DoubleSolenoid(frontLeft1, frontLeft2);
+//        frontRight = new DoubleSolenoid(frontRight1, frontRight2);
+//        backLeft = new DoubleSolenoid(backLeft1, backLeft2);
+//        backRight = new DoubleSolenoid(backRight1, backRight2);
+//    }
     /**
      * This function sets the pistons to move according to given values.
      *
@@ -39,33 +57,62 @@ public class Pistons extends Component {
      * @param backLeft The value of the back-left piston.
      * @param backRight The value of the back-right piston.
      */
-    public void setPistons(Value frontLeft, Value frontRight, Value backLeft, Value backRight) {
-        this.frontLeft.set(frontLeft);
-        this.frontRight.set(frontRight);
-        this.backLeft.set(backLeft);
-        this.backRight.set(backRight);
+    public void setPistons(boolean frontLeft, boolean frontRight, boolean backLeft, boolean backRight) {
+        if (frontLeftValue != frontLeft) {
+            frontLeftTimer = 0;
+        }
+        if (frontRightValue != frontRight) {
+            frontRightTimer = 0;
+        }
+        if (backLeftValue != backLeft) {
+            backLeftTimer = 0;
+        }
+        if (backRightValue != backRight) {
+            backRightTimer = 0;
+        }
+        frontLeftValue = frontLeft;
+        frontRightValue = frontRight;
+        backLeftValue = backLeft;
+        backRightValue = backRight;
     }
-    
-	public Value[][] pistonModes = new Value[][] {
-			{kReverse,kReverse,kReverse,kReverse},//all off
-			{kForward,kForward,kForward,kForward},//all on
-			{kForward,kForward,kReverse,kReverse},//front on
-			{kReverse,kReverse,kForward,kForward},//back on
-			{kForward,kReverse,kForward,kReverse},//left on
-			{kReverse,kForward,kReverse,kForward},//right on
-			{kReverse,kForward,kForward,kReverse},//front right back left
-			{kForward,kReverse,kReverse,kForward},//front left back right
-			{kForward,kForward,kForward,kReverse},//back right off
-			{kForward,kForward,kReverse,kForward},//back left off
-			{kForward,kReverse,kForward,kForward},//front right off
-			{kReverse,kForward,kForward,kForward}//front left off
-	};
+
+    private static final boolean[][] PISTON_MODES = new boolean[][]{
+        {false, false, false, false},//all off
+        {true, true, true, true},//all on
+        {true, true, false, false},//front on
+        {false, false, true, true},//back on
+        {true, false, true, false},//left on
+        {false, true, false, true},//right on
+        {false, true, true, false},//front right back left
+        {true, false, false, true},//front left back right
+        {true, true, true, false},//back right off
+        {true, true, false, true},//back left off
+        {true, false, true, true},//front right off
+        {false, true, true, true}//front left off
+    };
+
     public void setPistonMode(int pistonMode) {
-    	setPistons(pistonModes[pistonMode][0], pistonModes[pistonMode][1], pistonModes[pistonMode][2], pistonModes[pistonMode][3]);
+        setPistons(PISTON_MODES[pistonMode][0], PISTON_MODES[pistonMode][1], PISTON_MODES[pistonMode][2], PISTON_MODES[pistonMode][3]);
     }
 
     @Override
     public void update() {
-        setPistons(kOff, kOff, kOff, kOff);
+        frontLeftTimer += Robot.deltaTime;
+        frontRightTimer += Robot.deltaTime;
+        backLeftTimer += Robot.deltaTime;
+        backRightTimer += Robot.deltaTime;
+
+        frontLeft.set(kOff);
+
+        if (frontLeftTimer < 1) {
+            frontLeft.set(frontLeftValue ? kForward : kReverse);
+        }
+    }
+
+    private static class Piston {
+
+        private DoubleSolenoid solenoid;
+        private boolean value;
+        private double timer;
     }
 }
