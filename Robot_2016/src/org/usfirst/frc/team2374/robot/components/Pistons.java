@@ -82,7 +82,7 @@ public class Pistons extends Component {
     public void update() {
         for (Piston piston : pistons) {
             piston.timer += Robot.deltaTime;
-            if (piston.timer > 1) {
+            if (piston.timer < 1) {
                 piston.solenoid.set(piston.value ? kForward : kReverse);
             } else {
                 piston.solenoid.set(kOff);
