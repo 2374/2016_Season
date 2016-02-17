@@ -8,74 +8,9 @@ import org.usfirst.frc.team2374.robot.Robot;
 public class Pistons extends Component {
 
     /**
-     * The robot's four pistons.
+     * The list of all piston modes. A value of true represents kForwards, while
+     * a value of false represents kReverse.
      */
-    private final Piston[] pistons = new Piston[4];
-
-    public Pistons(int... ports) {
-
-    }
-
-//    /**
-//     * The robot's four piston solenoids.
-//     */
-//    private final DoubleSolenoid frontLeft, frontRight, backLeft, backRight;
-//
-//    /**
-//     * The values the pistons should be set at.
-//     */
-//    private boolean frontLeftValue, frontRightValue, backLeftValue, backRightValue;
-//
-//    /**
-//     * How long ago each piston was set at its current value.
-//     */
-//    private double frontLeftTimer, frontRightTimer, backLeftTimer, backRightTimer;
-//
-//    /**
-//     * Creates a set of pistons with solenoids set to the given ports.
-//     *
-//     * @param frontLeft1 The forward port for the front-left solenoid.
-//     * @param frontLeft2 The reverse port for the front-left solenoid.
-//     * @param frontRight1 The forward port for the front-right solenoid.
-//     * @param frontRight2 The reverse port for the front-right solenoid.
-//     * @param backLeft1 The forward port for the back-left solenoid.
-//     * @param backLeft2 The reverse port for the back-left solenoid.
-//     * @param backRight1 The forward port for the back-right solenoid.
-//     * @param backRight2 The reverse port for the back-right solenoid.
-//     */
-//    public Pistons(int frontLeft1, int frontLeft2, int frontRight1, int frontRight2, int backLeft1, int backLeft2, int backRight1, int backRight2) {
-//        frontLeft = new DoubleSolenoid(frontLeft1, frontLeft2);
-//        frontRight = new DoubleSolenoid(frontRight1, frontRight2);
-//        backLeft = new DoubleSolenoid(backLeft1, backLeft2);
-//        backRight = new DoubleSolenoid(backRight1, backRight2);
-//    }
-    /**
-     * This function sets the pistons to move according to given values.
-     *
-     * @param frontLeft The value of the front-left piston.
-     * @param frontRight The value of the front-right piston.
-     * @param backLeft The value of the back-left piston.
-     * @param backRight The value of the back-right piston.
-     */
-    public void setPistons(boolean frontLeft, boolean frontRight, boolean backLeft, boolean backRight) {
-        if (frontLeftValue != frontLeft) {
-            frontLeftTimer = 0;
-        }
-        if (frontRightValue != frontRight) {
-            frontRightTimer = 0;
-        }
-        if (backLeftValue != backLeft) {
-            backLeftTimer = 0;
-        }
-        if (backRightValue != backRight) {
-            backRightTimer = 0;
-        }
-        frontLeftValue = frontLeft;
-        frontRightValue = frontRight;
-        backLeftValue = backLeft;
-        backRightValue = backRight;
-    }
-
     private static final boolean[][] PISTON_MODES = new boolean[][]{
         {false, false, false, false},//all off
         {true, true, true, true},//all on
@@ -91,28 +26,81 @@ public class Pistons extends Component {
         {false, true, true, true}//front left off
     };
 
+    /**
+     * How many pistons the robot has. For all practical purposes, this number
+     * is 4.
+     */
+    private final int num;
+
+    /**
+     * The robot's pistons.
+     */
+    private final Piston[] pistons;
+
+    /**
+     * Creates a set of pistons with solenoids set to the given ports. The given
+     * number of ports should be an even number.
+     *
+     * @param ports The array of ports the solenoids are connected to.
+     */
+    public Pistons(int... ports) {
+        num = ports.length / 2;
+        pistons = new Piston[num];
+        for (int i = 0; i < num; i++) {
+            pistons[i] = new Piston(ports[i * 2], ports[i * 2 + 1]);
+        }
+    }
+
+    /**
+     * Sets the pistons to move to the given values. The given number of values
+     * should be equal to the number of pistons.
+     *
+     * @param values The array of values for the pistons to move to.
+     */
+    public void setPistons(boolean... values) {
+        if (values.length != num) {
+            throw new RuntimeException("Bad number of values: received " + values.length + ", needed " + num);
+        }
+        for (int i = 0; i < num; i++) {
+            if (values[i] != pistons[i].value) {
+                pistons[i].timer = 0;
+                pistons[i].value = values[i];
+            }
+        }
+    }
+
+    /**
+     * Sets the pistons to move according to a given piston mode.
+     *
+     * @param pistonMode The piston mode to follow.
+     */
     public void setPistonMode(int pistonMode) {
-        setPistons(PISTON_MODES[pistonMode][0], PISTON_MODES[pistonMode][1], PISTON_MODES[pistonMode][2], PISTON_MODES[pistonMode][3]);
+        setPistons(PISTON_MODES[pistonMode]);
     }
 
     @Override
     public void update() {
-        frontLeftTimer += Robot.deltaTime;
-        frontRightTimer += Robot.deltaTime;
-        backLeftTimer += Robot.deltaTime;
-        backRightTimer += Robot.deltaTime;
-
-        frontLeft.set(kOff);
-
-        if (frontLeftTimer < 1) {
-            frontLeft.set(frontLeftValue ? kForward : kReverse);
+        for (Piston piston : pistons) {
+            piston.timer += Robot.deltaTime;
+            if (piston.timer > 1) {
+                piston.solenoid.set(piston.value ? kForward : kReverse);
+            } else {
+                piston.solenoid.set(kOff);
+            }
         }
     }
 
+    /**
+     * An internal class that represents all the data associated with a piston.
+     */
     private static class Piston {
 
-        private DoubleSolenoid solenoid;
+        private final DoubleSolenoid solenoid;
         private boolean value;
         private double timer;
+
+        public Piston(int port1, int port2) {
+            solenoid = new DoubleSolenoid(port1, port2);
+        }
     }
 }

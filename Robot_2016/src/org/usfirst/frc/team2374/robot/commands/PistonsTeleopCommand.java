@@ -1,7 +1,5 @@
 package org.usfirst.frc.team2374.robot.commands;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.kReverse;
 import java.util.Arrays;
 import java.util.List;
 import org.usfirst.frc.team2374.robot.Command;
@@ -34,22 +32,10 @@ public class PistonsTeleopCommand extends Command {
     @Override
     public void update() {
 
-        Value frontLeft = Value.kReverse;
-        if (Input.getAxis(2) != 0) {
-            frontLeft = Value.kForward;
-        }
-        Value frontRight = Value.kReverse;
-        if (Input.getAxis(3) != 0) {
-            frontRight = Value.kForward;
-        }
-        Value backLeft = Value.kReverse;
-        if (Input.getButton(1)) {
-            backLeft = Value.kForward;
-        }
-        Value backRight = Value.kReverse;
-        if (Input.getButton(3)) {
-            backRight = Value.kForward;
-        }
+        boolean frontLeft = Input.getAxis(2) != 0;
+        boolean frontRight = Input.getAxis(3) != 0;
+        boolean backLeft = Input.getButton(1);
+        boolean backRight = Input.getButton(3);
 
         if (Input.JOYSTICK2.getRawButton(1)) {
             mostRecentPushedButton = 1;
@@ -67,16 +53,13 @@ public class PistonsTeleopCommand extends Command {
             mostRecentPushedButton = 0;
         }
 
-        if (frontLeft == kReverse && frontRight == kReverse && backLeft == kReverse && backRight == kReverse) {
-
+        if (!frontLeft && !frontRight && !backLeft && !backRight) {
             if (Input.JOYSTICK1.getPOV() == -1) {
-                Robot.pistons.setPistons(kReverse, kReverse, kReverse, kReverse);
+                Robot.pistons.setPistons(false, false, false, false);
             } else {
                 int mode = PISTON_MODES[mostRecentPushedButton][Input.JOYSTICK1.getPOV() / 90];
                 Robot.pistons.setPistonMode(mode);
-
             }
-
         } else {
             Robot.pistons.setPistons(frontLeft, frontRight, backLeft, backRight);
         }
