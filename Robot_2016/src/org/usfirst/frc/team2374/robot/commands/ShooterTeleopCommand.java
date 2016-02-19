@@ -12,6 +12,9 @@ public class ShooterTeleopCommand extends Command{
 	@Override
     public boolean isFinished() {
         return false;
+	}
+   public boolean FirstControllerActive(){
+		 return (Input.JOYSTICK1.getRawButton(5)) || (Input.JOYSTICK1.getRawButton(6));
     }
 
 	@Override
@@ -21,10 +24,16 @@ public class ShooterTeleopCommand extends Command{
   
 	@Override
  	public void update () {
-	 if (Input.getButton(5)){
+	 if (!FirstControllerActive() && Input.JOYSTICK1.getRawButton(5)){
 		 Robot.shooter.setSpeed(1);//implement PID
 	 }
-	 if (Input.getButton(6)){
+	 if (!FirstControllerActive() && Input.JOYSTICK1.getRawButton(6)){
+		 Robot.shooter.setSpeed(-1);//implement PID
+	 }
+	 if (!FirstControllerActive() && Input.JOYSTICK2.getRawAxis(2)!=0){
+		 Robot.shooter.setSpeed(1);//implement PID
+	 }
+	 if (!FirstControllerActive() && Input.JOYSTICK2.getRawAxis(3)!=0){
 		 Robot.shooter.setSpeed(-1);//implement PID
 	 }
 	}
