@@ -1,6 +1,9 @@
 package org.usfirst.frc.team2374.robot.components;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team2374.robot.Component;
 
 public class Drivetrain extends Component {
@@ -9,6 +12,7 @@ public class Drivetrain extends Component {
      * The robot's four drivetrain motors.
      */
     private final Talon left1, left2, right1, right2;
+    private final Encoder encoderLeft, encoderRight;
 
     /**
      * Creates a drivetrain with motors set to the given ports.
@@ -18,11 +22,14 @@ public class Drivetrain extends Component {
      * @param right1 The port for the front-right motor.
      * @param right2 The port for the back-right motor.
      */
-    public Drivetrain(int left1, int left2, int right1, int right2) {
+    public Drivetrain(int left1, int left2, int right1, int right2,
+    		int encoderLeftPort1, int encoderLeftPort2, int encoderRightPort1, int encoderRightPort2) {
         this.left1 = new Talon(left1);
         this.left2 = new Talon(left2);
         this.right1 = new Talon(right1);
         this.right2 = new Talon(right2);
+        encoderLeft = new Encoder(encoderLeftPort1,encoderLeftPort2);
+        encoderRight = new Encoder(encoderRightPort1,encoderRightPort2);
     }
 
     /**
@@ -41,5 +48,7 @@ public class Drivetrain extends Component {
     @Override
     public void update() {
         setSpeed(0, 0);
+        SmartDashboard.putNumber("Left Encoder Speed",encoderLeft.getRate());
+        SmartDashboard.putNumber("Right Encoder Speed",encoderRight.getRate());
     }
 }

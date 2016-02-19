@@ -44,11 +44,11 @@ public class Robot extends SampleRobot {
 
 
         //Create all the robot's components
-        drivetrain = new Drivetrain(0, 1, 2, 3);
+        drivetrain = new Drivetrain(0, 1, 2, 3, 2, 3, 0, 1);
         intake = new Intake(6);
         manipulator = new Manipulator(7);
         pistons = new Pistons(6, 7, 0, 1, 4, 5, 2, 3);
-        shooter = new Shooter(4, 5);
+        shooter = new Shooter(4, 5, 5, 6);
 
         //Create all the robot's sensors
         positionTracker = new PositionTracker(0);

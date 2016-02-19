@@ -3,6 +3,8 @@ package org.usfirst.frc.team2374.robot.sensors;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team2374.robot.Robot;
 import org.usfirst.frc.team2374.robot.Robot.RobotSystem;
 import org.usfirst.frc.team2374.robot.math.Vec3;
@@ -70,5 +72,10 @@ public class PositionTracker extends RobotSystem {
         acceleration = rawA.multiply(9.8).rotateAboutZ(direction());
         velocity = velocity.add(acceleration.multiply(Robot.deltaTime));
         position = position.add(velocity.multiply(Robot.deltaTime));
+
+        SmartDashboard.putNumber("Robot Angle", direction());
+        SmartDashboard.putString("Robot Position", position.toString());
+        SmartDashboard.putString("Robot Velocity", velocity.toString());
+        SmartDashboard.putString("Robot Accleration", acceleration.toString());
     }
 }
