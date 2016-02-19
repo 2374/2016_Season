@@ -24,10 +24,10 @@ public class ShooterTeleopCommand extends Command{
   
 	@Override
  	public void update () {
-	 if (!FirstControllerActive() && Input.JOYSTICK1.getRawButton(5)){
+	 if (Input.JOYSTICK1.getRawButton(5)){
 		 Robot.shooter.setSpeed(1);//implement PID
 	 }
-	 if (!FirstControllerActive() && Input.JOYSTICK1.getRawButton(6)){
+	 if (Input.JOYSTICK1.getRawButton(6)){
 		 Robot.shooter.setSpeed(-1);//implement PID
 	 }
 	 if (!FirstControllerActive() && Input.JOYSTICK2.getRawAxis(2)!=0){
