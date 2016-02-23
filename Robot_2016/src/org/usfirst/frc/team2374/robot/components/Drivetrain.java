@@ -48,6 +48,14 @@ public class Drivetrain extends Component {
         right2.set(rightSpeed);
     }
 
+    public Encoder getRightEncoder(){
+    	return encoderRight;
+    }
+    
+    public Encoder getLeftEncoder(){
+    	return encoderLeft;
+    }
+    
     @Override
     public void update() {
         setSpeed(0, 0);

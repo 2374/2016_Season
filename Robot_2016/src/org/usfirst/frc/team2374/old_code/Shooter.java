@@ -104,7 +104,7 @@ public class Shooter {
 
     double motorVoltage = 0;
     double integral;
-    double maxRate = 9.79;
+    double maxRate = 10000;
 
     public void PIDShooter(double targetSpeed) {
         double error = targetSpeed * maxRate - getRate();
