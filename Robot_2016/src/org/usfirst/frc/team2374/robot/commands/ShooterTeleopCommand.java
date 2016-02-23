@@ -8,9 +8,11 @@ import org.usfirst.frc.team2374.robot.Component;
 import org.usfirst.frc.team2374.robot.Robot;
 import org.usfirst.frc.team2374.robot.events.Input;
 
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ShooterTeleopCommand extends Command {
+
 	@Override
 	public boolean isFinished() {
 		return false;
@@ -25,24 +27,25 @@ public class ShooterTeleopCommand extends Command {
 	public List<Component> requires() {
 		return Arrays.asList(Robot.shooter);
 	}
-
+	
 	@Override
 	public void update() {
+
 		if (Input.JOYSTICK1.getRawButton(5)) {
-			Robot.shooter.setSpeed(1);// implement PID
-		} else if (Input.JOYSTICK1.getRawButton(6)) {
-			Robot.shooter.setSpeed(-1);// implement PID
+			Robot.shooter.PIDShooter(0.6);// implement PID
+		} else if (Input.JOYSTICK1.getRawButton(7)) {
+			Robot.shooter.PIDShooter(-0.6);// implement PID
 		} else if (!FirstControllerActive() && Input.JOYSTICK2.getRawButton(5)) {
-			Robot.shooter.setSpeed(1);// implement PID
-			SmartDashboard.putString("controller 2 Raw Button 5",
-					"Shooter Active-Forwards");
+			Robot.shooter.PIDShooter(0.6);// implement PID
+			/*SmartDashboard.putString("controller 2 Raw Button 5",
+					"Shooter Active-Forwards");*/
 		} else if (!FirstControllerActive() && Input.JOYSTICK2.getRawButton(6)) {
-			Robot.shooter.setSpeed(-1);// implement PID
-			SmartDashboard.putString("controller 2 Raw Button 6",
-					"Shooter Active-Reverse");
+			Robot.shooter.PIDShooter(-0.6);// implement PID
+			/*SmartDashboard.putString("controller 2 Raw Button 6",
+					"Shooter Active-Reverse");*/
 		} else {
-			Robot.shooter.setSpeed(0);
-			SmartDashboard.putString("Should shooter be active?", "NO");
+			Robot.shooter.PIDShooter(0);
+			//SmartDashboard.putString("Should shooter be active?", "NO");
 		}
 	}
 }

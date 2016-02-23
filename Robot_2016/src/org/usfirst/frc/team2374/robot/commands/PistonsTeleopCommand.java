@@ -31,12 +31,13 @@ public class PistonsTeleopCommand extends Command {
 
     @Override
     public void update() {
-
-        boolean frontLeft = Input.getAxis(2) != 0;
-        boolean frontRight = Input.getAxis(3) != 0;
-        boolean backLeft = Input.getButton(1);
-        boolean backRight = Input.getButton(3);
-
+    	
+        boolean frontLeft = Input.getAxis(3) != 0;
+        boolean frontRight = Input.getAxis(2) != 0;
+        boolean backLeft = Input.getButton(3);
+        boolean backRight = Input.getButton(1);
+        
+        
         if (Input.JOYSTICK2.getRawButton(1)) {
             mostRecentPushedButton = 1;
         }
