@@ -12,15 +12,13 @@ import org.usfirst.frc.team2374.robot.events.Input;
 public class PistonAutonomousCommand extends Command{
 	
 public int AutocaseSelected;
-
+	PistonAutonomousCommand(int AutoCase){
+		AutocaseSelected=AutoCase;
+	}
 	@Override
 	public boolean isFinished() {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	public void setCase(int autoCase){
-		AutocaseSelected = autoCase;
 	}
 	
 	@Override
