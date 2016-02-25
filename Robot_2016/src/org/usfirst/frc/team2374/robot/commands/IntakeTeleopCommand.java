@@ -22,10 +22,10 @@ public class IntakeTeleopCommand extends Command {
     @Override
     public void update() {
         if (Input.getButton(6)) {
-            Robot.intake.setSpeed(1);
+            Robot.intake.setSpeed(-1);
         }
         if (Input.getButton(8)) {
-            Robot.intake.setSpeed(-1);
+            Robot.intake.setSpeed(1);
         }
     }
 }

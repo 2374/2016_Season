@@ -44,8 +44,8 @@ public class Drivetrain extends Component {
     public void setSpeed(double leftSpeed, double rightSpeed) {
         left1.set(leftSpeed);
         left2.set(leftSpeed);
-        right1.set(rightSpeed);
-        right2.set(rightSpeed);
+        right1.set(-rightSpeed);
+        right2.set(-rightSpeed);
     }
 
     public Encoder getRightEncoder(){

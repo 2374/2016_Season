@@ -68,7 +68,7 @@ public class Shooter extends Component {
 	public void PIDShooter(double targetSpeed) {
 		double maxRate = 9.79;
         double error = targetSpeed * maxRate - getRate();
-        double P = 0.005;
+        double P = 0.01;
         double I = 0.00005;
         double D = -0.005;
         if (Math.abs(error) >= 0) {

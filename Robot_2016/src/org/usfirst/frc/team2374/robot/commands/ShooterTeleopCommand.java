@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ShooterTeleopCommand extends Command {
 
-	final double SHOOTER_SPEED = 0.6;
+	final double SHOOTER_SPEED = 0.2;
 	
 	@Override
 	public boolean isFinished() {
@@ -34,19 +34,19 @@ public class ShooterTeleopCommand extends Command {
 	public void update() {
 
 		if (Input.JOYSTICK1.getRawButton(5)) {
-			Robot.shooter.PIDShooter(SHOOTER_SPEED);// implement PID
-		} else if (Input.JOYSTICK1.getRawButton(7)) {
 			Robot.shooter.PIDShooter(-SHOOTER_SPEED);// implement PID
-		} else if (!FirstControllerActive() && Input.JOYSTICK2.getRawButton(5)) {
+		} else if (Input.JOYSTICK1.getRawButton(7)) {
 			Robot.shooter.PIDShooter(SHOOTER_SPEED);// implement PID
+		} else if (!FirstControllerActive() && Input.JOYSTICK2.getRawButton(5)) {
+			Robot.shooter.PIDShooter(-SHOOTER_SPEED);// implement PID
 			/*SmartDashboard.putString("controller 2 Raw Button 5",
 					"Shooter Active-Forwards");*/
 		} else if (!FirstControllerActive() && Input.JOYSTICK2.getRawButton(6)) {
-			Robot.shooter.PIDShooter(-SHOOTER_SPEED);// implement PID
+			Robot.shooter.PIDShooter(SHOOTER_SPEED);// implement PID
 			/*SmartDashboard.putString("controller 2 Raw Button 6",
 					"Shooter Active-Reverse");*/
 		} else {
-			Robot.shooter.PIDShooter(0);
+			Robot.shooter.setSpeed(0);
 			//SmartDashboard.putString("Should shooter be active?", "NO");
 		}
 	}
