@@ -16,6 +16,7 @@ import org.usfirst.frc.team2374.robot.sensors.PositionTracker;
 
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 public class Robot extends SampleRobot {
 
@@ -33,6 +34,7 @@ public class Robot extends SampleRobot {
 	public static Pistons pistons;
 	public static Shooter shooter;
 	public static MountedCamera camera;
+	public static SendableChooser autoChooser;
 
 	/*
 	 * All of the following variables are sensors.
@@ -54,6 +56,10 @@ public class Robot extends SampleRobot {
 		camera = new MountedCamera("10.23.74.142"); // Roborio IP Address
 		// Create all the robot's sensors
 		positionTracker = new PositionTracker(0);
+		autoChooser.addDefault("Rough Terrain", 1);
+		autoChooser.addObject("Moat", 2);
+		autoChooser.addObject("Rock Wall", 3);
+		autoChooser.addObject("Fixed Ramp", 4);
 	}
 
 	/**

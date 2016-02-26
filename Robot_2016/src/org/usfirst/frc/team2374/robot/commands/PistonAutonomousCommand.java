@@ -6,21 +6,21 @@ import java.util.List;
 import org.usfirst.frc.team2374.robot.Command;
 import org.usfirst.frc.team2374.robot.Component;
 import org.usfirst.frc.team2374.robot.Robot;
-import org.usfirst.frc.team2374.robot.events.Input;
 
+public class PistonAutonomousCommand extends Command {
 
-public class PistonAutonomousCommand extends Command{
-	
-public int AutocaseSelected;
-	PistonAutonomousCommand(int AutoCase){
-		AutocaseSelected=AutoCase;
+	public int AutocaseSelected;
+
+	public PistonAutonomousCommand(int AutoCase) {
+		AutocaseSelected = AutoCase;
 	}
+
 	@Override
 	public boolean isFinished() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	@Override
 	public List<Component> requires() {
 		// TODO Auto-generated method stub
@@ -30,8 +30,8 @@ public int AutocaseSelected;
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-        Robot.pistons.setPistonMode(AutocaseSelected);
-		
+		Robot.pistons.setPistonMode(AutocaseSelected);
+
 	}
 
 }

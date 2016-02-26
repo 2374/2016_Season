@@ -3,17 +3,16 @@ package org.usfirst.frc.team2374.robot.commands;
 import java.util.Arrays;
 import java.util.List;
 
-import org.usfirst.frc.team2374.robot.components.Shooter;
 import org.usfirst.frc.team2374.robot.Command;
 import org.usfirst.frc.team2374.robot.Component;
 import org.usfirst.frc.team2374.robot.Robot;
 
-public class ShooterAutonomous extends Command{
+public class ShooterAutonomous extends Command {
 
 	@Override
 	public boolean isFinished() {
 		// TODO Auto-generated method stub
-		return Robot.shooter.getRate()>.55;
+		return Robot.shooter.getRate() > .55;
 	}
 
 	@Override
@@ -25,7 +24,7 @@ public class ShooterAutonomous extends Command{
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		Robot.shooter.PIDShooter(0.6);
+		Robot.shooter.PIDShooter(0.2);
 	}
-	
+
 }
