@@ -8,11 +8,30 @@ import org.usfirst.frc.team2374.robot.Component;
 import org.usfirst.frc.team2374.robot.Robot;
 import org.usfirst.frc.team2374.robot.sensors.PositionTracker;
 
-public class MoveToSomewhere extends Command{
-	double goal_x, goal_y;
-	double xP,yP;
-	Command turn(double turnAngle){return new TurnCommand(turnAngle);}
-	Command forward(double time){return new ForwardsCommand(time);}
+public class MoveToSomewhere {
+	
+	
+	public static Command moveTo(double goal_x, double goal_y) {
+		double xP=Robot.positionTracker.position.x;
+		double yP=Robot.positionTracker.position.y;
+		
+		Command turnToCorrectY = turn(yP < goal_y ? 90 : -90);
+		Command moveToCorrectY = new ForwardsPositionCommand(goal_y, false);
+		Command turnToCorrectX = turn(0);
+		Command moveToCorrectX = new ForwardsPositionCommand(goal_x, true);
+		
+		turnToCorrectY.thenRun(moveToCorrectY).thenRun(turnToCorrectX).thenRun(moveToCorrectX);
+		
+		turnToCorrectY.start();
+		
+		return moveToCorrectX;
+	}
+	
+	
+	/*double goal_x, goal_y;
+	double xP,yP;*/
+	static Command turn(double turnAngle){return new TurnCommand(turnAngle);}
+	/*static Command forward(double time){return new ForwardsPositionCommand();}
 	public MoveToSomewhere(double goal_x, double goal_y){
 		this.goal_x=goal_x;
 		this.goal_y=goal_y;
@@ -48,7 +67,7 @@ public class MoveToSomewhere extends Command{
 		{
 			turn(0);
 			}
-		else{forward(.1);}
-		}
+		else{forward());}
+		}*/
 
 }
