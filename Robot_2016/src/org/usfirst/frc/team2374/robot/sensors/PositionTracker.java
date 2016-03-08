@@ -3,6 +3,7 @@ package org.usfirst.frc.team2374.robot.sensors;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team2374.robot.Robot;
@@ -36,6 +37,10 @@ public class PositionTracker extends RobotSystem {
      */
     public Vec3 acceleration;
 
+    public Encoder encoderLeft;
+    
+    public Encoder encoderRight;
+    
     /**
      * Creates a new position tracker with gyroscope set to the given port.
      *
@@ -44,9 +49,11 @@ public class PositionTracker extends RobotSystem {
     public PositionTracker(int gyroPort) {
         accelerometer = new BuiltInAccelerometer();
         gyroscope = new AnalogGyro(new AnalogInput(gyroPort));
+        encoderLeft = Robot.drivetrain.getLeftEncoder();
+        encoderRight = Robot.drivetrain.getRightEncoder();
         reset();
     }
-
+    
     /**
      * This function gets the current direction of the robot (in radians).
      *
@@ -71,8 +78,7 @@ public class PositionTracker extends RobotSystem {
         Vec3 rawA = new Vec3(accelerometer.getX(), accelerometer.getY(), accelerometer.getZ());
         acceleration = rawA.multiply(9.8).rotateAboutZ(direction());
         velocity = velocity.add(acceleration.multiply(Robot.deltaTime));
-        position = position.add(velocity.multiply(Robot.deltaTime));
-
+        position = position.add(velocity.multiply(Robot.deltaTime));    	
         SmartDashboard.putNumber("Robot Angle", direction());
         SmartDashboard.putString("Robot Position", position.toString());
         SmartDashboard.putString("Robot Velocity", velocity.toString());

@@ -134,6 +134,10 @@ public abstract class Command {
         onFinish.add(() -> command.start());
         return command;
     }
+    
+    public String toString() {
+    	return getClass().getSimpleName();
+    }
 
     /**
      * This function is called continuously while the command is running.

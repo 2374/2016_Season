@@ -17,6 +17,7 @@ import org.usfirst.frc.team2374.robot.sensors.PositionTracker;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends SampleRobot {
 
@@ -34,7 +35,8 @@ public class Robot extends SampleRobot {
 	public static Pistons pistons;
 	public static Shooter shooter;
 	public static MountedCamera camera;
-	public static SendableChooser autoChooser;
+	public static SendableChooser autoChooserObstacles;
+	public static SendableChooser autoChooserPositions;
 
 	/*
 	 * All of the following variables are sensors.
@@ -56,10 +58,24 @@ public class Robot extends SampleRobot {
 		camera = new MountedCamera("10.23.74.142"); // Roborio IP Address
 		// Create all the robot's sensors
 		positionTracker = new PositionTracker(0);
-		autoChooser.addDefault("Rough Terrain", 1);
-		autoChooser.addObject("Moat", 2);
-		autoChooser.addObject("Rock Wall", 3);
-		autoChooser.addObject("Fixed Ramp", 4);
+		autoChooserObstacles = new SendableChooser();
+		autoChooserPositions = new SendableChooser();
+		
+		autoChooserObstacles.addDefault("Rough Terrain", 0);//these numbers represent piston configs, change as necessary
+												  //rough terrain: all off
+		autoChooserObstacles.addObject("Moat", 3);// moat: front on
+		autoChooserObstacles.addObject("Rock Wall", 2);//rock wall: all on
+		autoChooserObstacles.addObject("Fixed Ramp", 12);//fixed ramp: front left off
+		autoChooserPositions.addObject("Position 2", 5);//switch these numbers around in Robot and auto controller in case it conflicts with piston configs
+		autoChooserPositions.addObject("Position 3", 6);
+		autoChooserPositions.addObject("Postion 4", 7);
+		autoChooserPositions.addObject("Position 5", 8);
+		
+		//if (Robot.robot.isAutonomous()){
+			SmartDashboard.putData("Auto Obstacle Chooser", autoChooserObstacles); 
+			SmartDashboard.putData("Auto Position Chooser", autoChooserPositions);
+			//}
+		
 	}
 
 	/**
@@ -87,6 +103,7 @@ public class Robot extends SampleRobot {
 			// Switch between different controllers if needed
 			ControllerType currentType = ControllerType.getType();
 			if (currentType != oldType) {
+				System.out.println(currentType.name());
 				COMMANDS.clear();
 				currentType.create().start();
 				oldType = currentType;
@@ -99,6 +116,7 @@ public class Robot extends SampleRobot {
 				robotSystem.update();
 			}
 			// Update all the commands
+			SmartDashboard.putString("Command List", COMMANDS.toString());
 			for (Command command : new ArrayList<>(COMMANDS)) {
 				command.update();
 				if (command.isFinished()) {
