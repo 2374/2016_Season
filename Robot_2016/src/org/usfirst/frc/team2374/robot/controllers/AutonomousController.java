@@ -42,13 +42,13 @@ public class AutonomousController extends Controller {
 		// DISTANCES ARE IN FEET
 		autoCase = (int) Robot.autoChooserPositions.getSelected();
 		if (autoCase == 5)// position 2 (see frc website)
-			return 5.0;
+			return 239.0 / 24.0;
 		else if (autoCase == 6)// position 3
-			return 5.0;
+			return 239.0 / 24.0;
 		else if (autoCase == 7)// position 4
-			return 5.0;
+			return 239.0 / 24.0;
 		else if (autoCase == 8)// position 5
-			return 5.0;
+			return 239.0 / 24.0;
 		else
 			return 0;
 	}
