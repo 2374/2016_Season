@@ -8,7 +8,6 @@ import org.usfirst.frc.team2374.robot.commands.CrossObstaclePart2Command;
 import org.usfirst.frc.team2374.robot.commands.ForwardsCommand;
 import org.usfirst.frc.team2374.robot.commands.ForwardsPositionCommand;
 import org.usfirst.frc.team2374.robot.commands.IntakeAfterShooter;
-import org.usfirst.frc.team2374.robot.commands.MoveToSomewhere;
 import org.usfirst.frc.team2374.robot.commands.PistonAutonomousCommand;
 import org.usfirst.frc.team2374.robot.commands.ShooterAutonomous;
 import org.usfirst.frc.team2374.robot.commands.TurnCommand;
@@ -21,9 +20,9 @@ public class AutonomousController extends Controller {
 		double yP = Robot.positionTracker.position.y;
 
 		Command turnToCorrectY = turn(yP < goal_y ? 90 : -90);
-		Command moveToCorrectY = new ForwardsPositionCommand(goal_y, false);
+		Command moveToCorrectY = new ForwardsPositionCommand(goal_y);
 		Command turnToCorrectX = turn(0);
-		Command moveToCorrectX = new ForwardsPositionCommand(goal_x, true);
+		Command moveToCorrectX = new ForwardsPositionCommand(goal_x);
 
 		turnToCorrectY.thenRun(moveToCorrectY).thenRun(turnToCorrectX)
 				.thenRun(moveToCorrectX);
@@ -40,14 +39,15 @@ public class AutonomousController extends Controller {
 	public double getGoalX() {// these autocases should correspond with vertical
 								// distance between robot and tower, look into
 								// it now because I know you won't do it later
+		// DISTANCES ARE IN FEET
 		autoCase = (int) Robot.autoChooserPositions.getSelected();
-		if (autoCase == 5)//position 2 (see frc website)
+		if (autoCase == 5)// position 2 (see frc website)
 			return 5.0;
-		else if (autoCase == 6)//position 3
+		else if (autoCase == 6)// position 3
 			return 5.0;
-		else if (autoCase == 7)//position 4
+		else if (autoCase == 7)// position 4
 			return 5.0;
-		else if (autoCase == 8)//position 5
+		else if (autoCase == 8)// position 5
 			return 5.0;
 		else
 			return 0;
@@ -56,14 +56,15 @@ public class AutonomousController extends Controller {
 	public double getGoalY() {// these autocases should correspond with
 								// horizontal distance between the obstacles and
 								// the tower
+		// DISTANCES ARE IN FEET
 		autoCase = (int) Robot.autoChooserPositions.getSelected();
-		if (autoCase == 5)//position 2 (see frc website)
+		if (autoCase == 5)// position 2 (see frc website)
 			return 5.0;
-		else if (autoCase == 6)//position 3
+		else if (autoCase == 6)// position 3
 			return 5.0;
-		else if (autoCase == 7)//position 4
+		else if (autoCase == 7)// position 4
 			return 5.0;
-		else if (autoCase == 8)//position 5
+		else if (autoCase == 8)// position 5
 			return 5.0;
 		else
 			return 0;
@@ -105,6 +106,6 @@ public class AutonomousController extends Controller {
 									// because they're important and I know you
 									// won't do it later
 		return (int) Robot.autoChooserObstacles.getSelected();
-		
+
 	}
 }
