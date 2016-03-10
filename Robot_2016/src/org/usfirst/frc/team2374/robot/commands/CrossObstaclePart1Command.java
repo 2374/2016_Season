@@ -10,7 +10,7 @@ public class CrossObstaclePart1Command extends Command {
 
     @Override
     public boolean isFinished() {
-        return Robot.positionTracker.position.z > 1;
+        return Robot.positionTracker.acceleration.y > 11 || !Robot.robot.isAutonomous();
     }
 
     @Override

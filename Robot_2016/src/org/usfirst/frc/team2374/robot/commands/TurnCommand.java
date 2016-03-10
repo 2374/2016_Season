@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2374.robot.commands;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import org.usfirst.frc.team2374.robot.Robot;
 import org.usfirst.frc.team2374.robot.math.MathUtil;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TurnCommand extends Command {
 
@@ -20,7 +23,7 @@ public class TurnCommand extends Command {
 
     @Override
     public boolean isFinished() {
-        return MathUtil.angleNear(turnTo, Robot.positionTracker.direction(), 0.174);
+        return MathUtil.angleNear(turnTo, Robot.positionTracker.direction(), 0.174) || !Robot.robot.isAutonomous();
     }
 
     @Override
@@ -88,4 +91,16 @@ public class TurnCommand extends Command {
             PIDLeft(1);
         }
     }
+    
+    @Override
+    public void start(){
+    	
+    	StringWriter sw = new StringWriter();
+    	PrintWriter pw = new PrintWriter(sw);
+    	new Exception().printStackTrace(pw);
+    	SmartDashboard.putString("Stack Trace-Turn Command", sw.toString());
+
+    	super.start();
+    }
+    
 }

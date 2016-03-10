@@ -27,7 +27,7 @@ public class ForwardsPositionCommand extends Command {
 	@Override
 	public boolean isFinished() {
 		return LeftEncoder.getDistance() >= target
-				&& RightEncoder.getDistance() >= target;
+				&& RightEncoder.getDistance() >= target || !Robot.robot.isAutonomous();
 	}
 
 	@Override

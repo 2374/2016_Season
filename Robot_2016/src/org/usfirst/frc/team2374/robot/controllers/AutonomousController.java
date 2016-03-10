@@ -12,7 +12,10 @@ import org.usfirst.frc.team2374.robot.commands.PistonAutonomousCommand;
 import org.usfirst.frc.team2374.robot.commands.ShooterAutonomous;
 import org.usfirst.frc.team2374.robot.commands.TurnCommand;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class AutonomousController extends Controller {
+	static int log=0;
 	int autoCase;
 
 	public static Command moveTo(double goal_x, double goal_y) {
@@ -59,21 +62,23 @@ public class AutonomousController extends Controller {
 		// DISTANCES ARE IN FEET
 		autoCase = (int) Robot.autoChooserPositions.getSelected();
 		if (autoCase == 5)// position 2 (see frc website)
-			return 5.0;
+			return -4.2;
 		else if (autoCase == 6)// position 3
-			return 5.0;
+			return 0;
 		else if (autoCase == 7)// position 4
-			return 5.0;
+			return 4.2;
 		else if (autoCase == 8)// position 5
-			return 5.0;
+			return 8.4;
 		else
 			return 0;
 	}
 
 	@Override
 	public void start() {
+		log ++;
+		SmartDashboard.putString("Auto", ""+log);
 		Robot.positionTracker.reset();
-		new ForwardsCommand(2).start();
+		//new ForwardsCommand(2).start();
 		// we need to initialize the accelerometer and gyro
 		// Go forwards
 		// Move to somewhere
@@ -95,10 +100,16 @@ public class AutonomousController extends Controller {
 		Command moveToSomewhere = moveTo(getGoalX(), getGoalY());
 
 		// forwards.thenRun(moveToSomewhere).thenRun(shoot);
+		forwards
+		.thenRun(crossObstacle1)
+		.thenRun(crossObstacle2)
+		.thenRun(moveToSomewhere)
+		.thenRun(shoot)
+		.thenRun(intake);
+		
+		crossObstacle2.thenRun(pistonstop);
 		piston.start();
-		piston.thenRun(forwards).thenRun(crossObstacle1)
-				.thenRun(crossObstacle2).thenRun(pistonstop)
-				.thenRun(moveToSomewhere).thenRun(shoot).thenRun(intake);
+		forwards.start();
 	}
 
 	public int autoCaseSelected() {// these correspond to the piston

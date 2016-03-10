@@ -58,7 +58,7 @@ public class Drivetrain extends Component {
     
     @Override
     public void update() {
-        setSpeed(0, 0);
+//        setSpeed(0, 0);
         SmartDashboard.putNumber("Left Encoder Speed",encoderLeft.getRate());
         SmartDashboard.putNumber("Right Encoder Speed",encoderRight.getRate());
     }

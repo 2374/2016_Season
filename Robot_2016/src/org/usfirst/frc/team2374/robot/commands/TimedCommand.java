@@ -1,7 +1,9 @@
 package org.usfirst.frc.team2374.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
+
 import org.usfirst.frc.team2374.robot.Command;
+import org.usfirst.frc.team2374.robot.Robot;
 
 public abstract class TimedCommand extends Command {
 
@@ -22,6 +24,6 @@ public abstract class TimedCommand extends Command {
 
     @Override
     public boolean isFinished() {
-        return Timer.getFPGATimestamp() > endTime;
+        return Timer.getFPGATimestamp() > endTime|| !Robot.robot.isAutonomous();
     }
 }

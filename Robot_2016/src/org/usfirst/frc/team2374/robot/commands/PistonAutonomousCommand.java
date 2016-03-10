@@ -18,6 +18,9 @@ public class PistonAutonomousCommand extends Command {
 	@Override
 	public boolean isFinished() {
 		// TODO Auto-generated method stub
+		if(!Robot.robot.isAutonomous()){
+			return true;
+		}
 		return false;
 	}
 

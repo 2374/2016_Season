@@ -66,10 +66,10 @@ public class Robot extends SampleRobot {
 		autoChooserObstacles.addObject("Moat", 3);// moat: front on
 		autoChooserObstacles.addObject("Rock Wall", 2);//rock wall: all on
 		autoChooserObstacles.addObject("Fixed Ramp", 12);//fixed ramp: front left off
-		autoChooserPositions.addObject("Position 2", 5);//switch these numbers around in Robot and auto controller in case it conflicts with piston configs
-		autoChooserPositions.addObject("Position 3", 6);
-		autoChooserPositions.addObject("Postion 4", 7);
-		autoChooserPositions.addObject("Position 5", 8);
+		autoChooserPositions.addObject("Position 2, Line the robot up with the left edge of the obstacle", 5);//switch these numbers around in Robot and auto controller in case it conflicts with piston configs
+		autoChooserPositions.addObject("Position 3, Line the robot up with the left edge of the obstacle", 6);
+		autoChooserPositions.addObject("Position 4, Line the robot up with the left edge of the obstacle", 7);
+		autoChooserPositions.addObject("Position 5, Line the robot up with the left edge of the obstacle", 8);
 		
 		//if (Robot.robot.isAutonomous()){
 			SmartDashboard.putData("Auto Obstacle Chooser", autoChooserObstacles); 
