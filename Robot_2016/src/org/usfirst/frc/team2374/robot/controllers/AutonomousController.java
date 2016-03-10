@@ -12,10 +12,8 @@ import org.usfirst.frc.team2374.robot.commands.PistonAutonomousCommand;
 import org.usfirst.frc.team2374.robot.commands.ShooterAutonomous;
 import org.usfirst.frc.team2374.robot.commands.TurnCommand;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 public class AutonomousController extends Controller {
-	static int log=0;
+	static int log = 0;
 	int autoCase;
 
 	public static Command moveTo(double goal_x, double goal_y) {
@@ -75,10 +73,10 @@ public class AutonomousController extends Controller {
 
 	@Override
 	public void start() {
-		log ++;
-		SmartDashboard.putString("Auto", ""+log);
+		log++;
+		// SmartDashboard.putString("Auto", ""+log);
 		Robot.positionTracker.reset();
-		//new ForwardsCommand(2).start();
+		// new ForwardsCommand(2).start();
 		// we need to initialize the accelerometer and gyro
 		// Go forwards
 		// Move to somewhere
@@ -100,13 +98,9 @@ public class AutonomousController extends Controller {
 		Command moveToSomewhere = moveTo(getGoalX(), getGoalY());
 
 		// forwards.thenRun(moveToSomewhere).thenRun(shoot);
-		forwards
-		.thenRun(crossObstacle1)
-		.thenRun(crossObstacle2)
-		.thenRun(moveToSomewhere)
-		.thenRun(shoot)
-		.thenRun(intake);
-		
+		forwards.thenRun(crossObstacle1).thenRun(crossObstacle2)
+				.thenRun(moveToSomewhere).thenRun(shoot).thenRun(intake);
+
 		crossObstacle2.thenRun(pistonstop);
 		piston.start();
 		forwards.start();
