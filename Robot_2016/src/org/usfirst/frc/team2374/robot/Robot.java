@@ -52,7 +52,7 @@ public class Robot extends SampleRobot {
 		// Create all the robot's components
 		drivetrain = new Drivetrain(0, 1, 2, 3, 2, 3, 0, 1);
 		intake = new Intake(6);
-		manipulator = new Manipulator(7);
+		manipulator = new Manipulator(6);
 		pistons = new Pistons(6, 7, 0, 1, 4, 5, 2, 3);
 		shooter = new Shooter(4, 5, 4, 5);
 		camera = new MountedCamera("10.23.74.142"); // Roborio IP Address
@@ -70,28 +70,24 @@ public class Robot extends SampleRobot {
 		autoChooserObstacles.addObject("Rock Wall", 2);// rock wall: all on
 		autoChooserObstacles.addObject("Fixed Ramp", 12);// fixed ramp: front
 															// left off
-		autoChooserPositions
-				.addObject(
-						"Position 2, Line the robot up with the left edge of the obstacle",
-						5);// switch these numbers around in Robot and auto
-							// controller in case it conflicts with piston
-							// configs
-		autoChooserPositions
-				.addObject(
-						"Position 3, Line the robot up with the left edge of the obstacle",
-						6);
-		autoChooserPositions
-				.addObject(
-						"Position 4, Line the robot up with the left edge of the obstacle",
-						7);
-		autoChooserPositions
-				.addObject(
-						"Position 5, Line the robot up with the left edge of the obstacle",
-						8);
+		/*
+		 * autoChooserPositions .addObject(
+		 * "Position 2, Line the robot up with the left edge of the obstacle",
+		 * 5);// switch these numbers around in Robot and auto // controller in
+		 * case it conflicts with piston // configs autoChooserPositions
+		 * .addObject(
+		 * "Position 3, Line the robot up with the left edge of the obstacle",
+		 * 6); autoChooserPositions .addObject(
+		 * "Position 4, Line the robot up with the left edge of the obstacle",
+		 * 7); autoChooserPositions .addObject(
+		 * "Position 5, Line the robot up with the left edge of the obstacle",
+		 * 8);
+		 */
 
 		// if (Robot.robot.isAutonomous()){
 		SmartDashboard.putData("Auto Obstacle Chooser", autoChooserObstacles);
-		SmartDashboard.putData("Auto Position Chooser", autoChooserPositions);
+		// SmartDashboard.putData("Auto Position Chooser",
+		// autoChooserPositions);
 		// }
 
 	}

@@ -98,8 +98,8 @@ public class AutonomousController extends Controller {
 		Command moveToSomewhere = moveTo(getGoalX(), getGoalY());
 
 		// forwards.thenRun(moveToSomewhere).thenRun(shoot);
-		forwards.thenRun(crossObstacle1).thenRun(crossObstacle2)
-				.thenRun(moveToSomewhere).thenRun(shoot).thenRun(intake);
+		forwards.thenRun(crossObstacle1).thenRun(crossObstacle2);
+		/* .thenRun(moveToSomewhere).thenRun(shoot).thenRun(intake); */
 
 		crossObstacle2.thenRun(pistonstop);
 		piston.start();
