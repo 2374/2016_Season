@@ -31,7 +31,7 @@ public class TankDriveCommand extends Command {
 	@Override
 	public void update() {
 		// This code was copied almost directly from the old TeleopController
-		if (Robot.positionTracker.acceleration.y > 10) {
+		if (Robot.positionTracker.acceleration.z > 10) {
 			Input.JOYSTICK1.setRumble(RumbleType.kLeftRumble, 1);
 			Input.JOYSTICK1.setRumble(RumbleType.kRightRumble, 1);
 		} else {
