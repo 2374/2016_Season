@@ -10,7 +10,7 @@ import org.usfirst.frc.team2374.robot.events.Input;
 
 public class ShooterTeleopCommand extends Command {
 
-	final double SHOOTER_SPEED = 0.2;
+	final double SHOOTER_SPEED = 0.48;
 
 	@Override
 	public boolean isFinished() {
@@ -31,9 +31,9 @@ public class ShooterTeleopCommand extends Command {
 	public void update() {
 
 		if (Input.JOYSTICK1.getRawButton(5)) {
-			Robot.shooter.PIDShooter(-SHOOTER_SPEED);// implement PID
+			Robot.shooter.setSpeed(-SHOOTER_SPEED);// implement PID
 		} else if (Input.JOYSTICK1.getRawButton(7)) {
-			Robot.shooter.PIDShooter(-SHOOTER_SPEED);// implement PID
+			Robot.shooter.setSpeed(-SHOOTER_SPEED);// implement PID
 		} else if (!FirstControllerActive() && Input.JOYSTICK2.getRawButton(5)) {
 			Robot.shooter.PIDShooter(-SHOOTER_SPEED);// implement PID
 			/*

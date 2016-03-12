@@ -73,7 +73,7 @@ public class Shooter extends Component {
 		if (Math.abs(error) >= 0) {
 			motorVoltage += (error * P) + (error - prevError) * D
 					+ (integral * I);
-			if (motorVoltage > maxRate) {
+		if (motorVoltage > maxRate) {
 				motorVoltage = maxRate;
 			} else if (motorVoltage < -maxRate) {
 				motorVoltage = -maxRate;

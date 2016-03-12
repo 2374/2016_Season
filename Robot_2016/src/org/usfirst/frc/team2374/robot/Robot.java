@@ -59,7 +59,7 @@ public class Robot extends SampleRobot {
 		// Create all the robot's sensors
 		positionTracker = new PositionTracker(0);
 		autoChooserObstacles = new SendableChooser();
-		autoChooserPositions = new SendableChooser();
+		//autoChooserPositions = new SendableChooser();
 
 		autoChooserObstacles.addDefault("Rough Terrain", 0);// these numbers
 															// represent piston
@@ -70,6 +70,7 @@ public class Robot extends SampleRobot {
 		autoChooserObstacles.addObject("Rock Wall", 2);// rock wall: all on
 		autoChooserObstacles.addObject("Fixed Ramp", 12);// fixed ramp: front
 															// left off
+		autoChooserObstacles.addObject("Do Nothing", 13);
 		/*
 		 * autoChooserPositions .addObject(
 		 * "Position 2, Line the robot up with the left edge of the obstacle",
