@@ -72,7 +72,7 @@ public class AutonomousController extends Controller {
 			// We need to implement autocases, solenoid command, and over
 			// obstacle
 			// command
-			Command forwards = new ForwardsCommand(2);
+			Command forwards = new ForwardsCommand(3.5);
 			Command piston = new PistonAutonomousCommand(autoCaseSelected());
 			Command pistonstop = new PistonAutonomousCommand(0);
 			Command crossObstacle1 = new CrossObstaclePart1Command();
@@ -91,10 +91,10 @@ public class AutonomousController extends Controller {
 			// Command moveToSomewhere = moveTo(getGoalX(), getGoalY());
 
 			// forwards.thenRun(moveToSomewhere).thenRun(shoot);
-			forwards.thenRun(crossObstacle1).thenRun(crossObstacle2);
+			// forwards.thenRun(crossObstacle1).thenRun(crossObstacle2);
 			/* .thenRun(moveToSomewhere).thenRun(shoot).thenRun(intake); */
 
-			crossObstacle2.thenRun(pistonstop);
+			// crossObstacle2.thenRun(pistonstop);
 			piston.start();
 			forwards.start();
 		}
