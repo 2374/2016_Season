@@ -8,6 +8,7 @@ import org.usfirst.frc.team2374.robot.commands.CrossObstaclePart2Command;
 import org.usfirst.frc.team2374.robot.commands.ForwardsCommand;
 import org.usfirst.frc.team2374.robot.commands.ForwardsPositionCommand;
 import org.usfirst.frc.team2374.robot.commands.IntakeAfterShooter;
+import org.usfirst.frc.team2374.robot.commands.ManipulatorAutonomousCommand;
 import org.usfirst.frc.team2374.robot.commands.PistonAutonomousCommand;
 import org.usfirst.frc.team2374.robot.commands.ShooterAutonomous;
 import org.usfirst.frc.team2374.robot.commands.TurnCommand;
@@ -59,6 +60,7 @@ public class AutonomousController extends Controller {
 	public void start() {
 		Command piston;
 		Command forwards;
+		Command manipulator;
 		if (autoCaseSelected() == 13) {
 			Command nothing = new ForwardsCommand(0);
 			nothing.finish();
@@ -72,6 +74,11 @@ public class AutonomousController extends Controller {
 			piston = new PistonAutonomousCommand(12);
 			piston.start();
 			forwards.start();
+		} else if (autoCaseSelected()==2){
+			forwards = new ForwardsCommand(1.5);
+			manipulator = new ManipulatorAutonomousCommand(true);
+			forwards.start();
+			forwards.thenRun(manipulator).thenRun(forwards);
 		}
 
 		//piston.start();

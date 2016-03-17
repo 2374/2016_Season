@@ -13,6 +13,11 @@ public class ManipulatorAutonomousCommand extends Command{
 	public double manipulatorSpeed2;
 	public boolean directionIsDown;
 
+	public ManipulatorAutonomousCommand(boolean d){
+		super();
+		directionIsDown = d;
+	}
+	
 	@Override
 	public boolean isFinished() {
 		return !Robot.robot.isAutonomous();
@@ -22,7 +27,7 @@ public class ManipulatorAutonomousCommand extends Command{
 	public List<Component> requires() {
 		return Arrays.asList(Robot.manipulator);
 	}
-
+	
 	/**
 	 * Sets direction based on an input boolean; false is up, true is down.
 	 * @param d the desired direction of the manipulator- again, false is up, true is down.
