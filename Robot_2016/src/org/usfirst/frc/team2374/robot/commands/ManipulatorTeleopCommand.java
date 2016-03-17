@@ -9,6 +9,9 @@ import org.usfirst.frc.team2374.robot.events.Input;
 
 public class ManipulatorTeleopCommand extends Command {
 
+	public double manipulatorSpeed1;
+	public double manipulatorSpeed2;
+	
     @Override
     public boolean isFinished() {
         return false;
@@ -21,11 +24,23 @@ public class ManipulatorTeleopCommand extends Command {
 
     @Override
     public void update() {
+    	if (Robot.manipulator.LimitSwitchFront.get()){
+    	manipulatorSpeed1 = 0;
+    	}
+    	if (!Robot.manipulator.LimitSwitchFront.get()){
+    	manipulatorSpeed1 = 1;
+    	}
+    	if (Robot.manipulator.LimitSwitchBack.get()){
+    	manipulatorSpeed2 = 0;
+    	}
+    	if (!Robot.manipulator.LimitSwitchBack.get()){
+    	manipulatorSpeed2 = 1;
+    	}
         if (Input.getButton(2)) {
-            Robot.manipulator.setSpeed(1);
+            Robot.manipulator.setSpeed(manipulatorSpeed1);
         }
         if (Input.getButton(4)) {
-            Robot.manipulator.setSpeed(-1);
+            Robot.manipulator.setSpeed(-manipulatorSpeed2);
         }
     }
 }
