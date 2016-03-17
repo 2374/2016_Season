@@ -57,53 +57,28 @@ public class AutonomousController extends Controller {
 	 */
 	@Override
 	public void start() {
+		Command piston;
+		Command forwards;
 		if (autoCaseSelected() == 13) {
 			Command nothing = new ForwardsCommand(0);
 			nothing.finish();
-		} else {
-			log++;
-			// SmartDashboard.putString("Auto", ""+log);
-			Robot.positionTracker.reset();
-			// new ForwardsCommand(2).start();
-			// we need to initialize the accelerometer and gyro
-			// Go forwards
-			// Move to somewhere
-			// Shoot
-			// We need to implement autocases, solenoid command, and over
-			// obstacle
-			// command
-			Command forwards = new ForwardsCommand(3.5);
-			Command piston = new PistonAutonomousCommand(autoCaseSelected());
-			Command pistonstop = new PistonAutonomousCommand(0);
-			Command crossObstacle1 = new CrossObstaclePart1Command();
-			Command crossObstacle2 = new CrossObstaclePart2Command();
-			Command intake = new IntakeAfterShooter();
-			Command shoot = new ShooterAutonomous();// see the shooter command;
-													// it's
-													// important and I know it's
-													// the
-													// only way you'll remember
-													// to
-													// check, look into it now
-													// because I know you won't
-													// do
-													// it later
-			// Command moveToSomewhere = moveTo(getGoalX(), getGoalY());
-
-			// forwards.thenRun(moveToSomewhere).thenRun(shoot);
-			// forwards.thenRun(crossObstacle1).thenRun(crossObstacle2);
-			/* .thenRun(moveToSomewhere).thenRun(shoot).thenRun(intake); */
-
-			// crossObstacle2.thenRun(pistonstop);
+		} else if(autoCaseSelected()==0){
+			forwards = new ForwardsCommand(3.5);
+			piston = new PistonAutonomousCommand(0);
+			piston.start();
+			forwards.start();
+		} else if (autoCaseSelected()==12){
+			forwards = new ForwardsCommand(3.5);
+			piston = new PistonAutonomousCommand(12);
 			piston.start();
 			forwards.start();
 		}
+
+		//piston.start();
+		//forwards.start();
 	}
 
-	public int autoCaseSelected() {// these correspond to the piston
-									// configurations, look into them now
-									// because they're important and I know you
-									// won't do it later
+	public int autoCaseSelected() {
 		return (int) Robot.autoChooserObstacles.getSelected();
 
 	}

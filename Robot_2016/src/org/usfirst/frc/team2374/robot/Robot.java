@@ -61,15 +61,8 @@ public class Robot extends SampleRobot {
 		autoChooserObstacles = new SendableChooser();
 		//autoChooserPositions = new SendableChooser();
 
-		autoChooserObstacles.addDefault("Rough Terrain", 0);// these numbers
-															// represent piston
-															// configs, change
-															// as necessary
-		// rough terrain: all off
-		autoChooserObstacles.addObject("Moat", 3);// moat: front on
-		autoChooserObstacles.addObject("Rock Wall", 2);// rock wall: all on
-		autoChooserObstacles.addObject("Fixed Ramp", 12);// fixed ramp: front
-															// left off
+		autoChooserObstacles.addDefault("Terrain-Based", 0);
+		autoChooserObstacles.addObject("Ramparts", 12);
 		autoChooserObstacles.addObject("Do Nothing", 13);
 		/*
 		 * autoChooserPositions .addObject(
