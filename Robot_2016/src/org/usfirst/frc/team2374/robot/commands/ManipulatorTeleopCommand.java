@@ -40,7 +40,7 @@ public class ManipulatorTeleopCommand extends Command {
             Robot.manipulator.setSpeed(manipulatorSpeed1);
         }
         if (Input.getButton(4)) {
-            Robot.manipulator.setSpeed(-manipulatorSpeed2);
+            Robot.manipulator.setSpeed(manipulatorSpeed2);
         }
     }
 }
