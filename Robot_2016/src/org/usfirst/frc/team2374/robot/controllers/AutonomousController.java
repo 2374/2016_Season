@@ -80,6 +80,12 @@ public class AutonomousController extends Controller {
 			forwards.start();
 			forwards.thenRun(manipulator).thenRun(forwards);
 		}
+		else if (autoCaseSelected()==3){
+		forwards = new ForwardsCommand(1.5);
+		manipulator = new ManipulatorAutonomousCommand(false);
+		forwards.start();
+		forwards.thenRun(manipulator).thenRun(forwards);
+	}
 
 		//piston.start();
 		//forwards.start();

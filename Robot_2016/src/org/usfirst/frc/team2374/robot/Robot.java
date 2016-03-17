@@ -64,6 +64,7 @@ public class Robot extends SampleRobot {
 		autoChooserObstacles.addDefault("Terrain-Based", 0);
 		autoChooserObstacles.addObject("Ramparts", 12);//needs to be tested
 		autoChooserObstacles.addObject("Cheval de Frise", 2);//needs to be tested
+		autoChooserObstacles.addObject("Portcullis", 3);//needs to be tested
 		autoChooserObstacles.addObject("Do Nothing", 13);
 		/*
 		 * autoChooserPositions .addObject(
