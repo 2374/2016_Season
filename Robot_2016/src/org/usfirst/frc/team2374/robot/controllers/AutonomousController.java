@@ -60,7 +60,8 @@ public class AutonomousController extends Controller {
 	public void start() {
 		Command piston;
 		Command forwards;
-		Command manipulator;
+		Command manipulatorUp;
+		Command manipulatorDown;
 		if (autoCaseSelected() == 13) {
 			Command nothing = new ForwardsCommand(0);
 			nothing.finish();
@@ -76,15 +77,17 @@ public class AutonomousController extends Controller {
 			forwards.start();
 		} else if (autoCaseSelected()==2){
 			forwards = new ForwardsCommand(1.5);
-			manipulator = new ManipulatorAutonomousCommand(true);
-			forwards.start();
-			forwards.thenRun(manipulator).thenRun(forwards);
+			manipulatorDown = new ManipulatorAutonomousCommand(true);
+			manipulatorUp = new ManipulatorAutonomousCommand(false);
+			manipulatorUp.start();
+			manipulatorUp.thenRun(forwards).thenRun(manipulatorDown).thenRun(forwards);
 		}
 		else if (autoCaseSelected()==3){
-		forwards = new ForwardsCommand(1.5);
-		manipulator = new ManipulatorAutonomousCommand(false);
-		forwards.start();
-		forwards.thenRun(manipulator).thenRun(forwards);
+			forwards = new ForwardsCommand(1.5);
+			manipulatorDown = new ManipulatorAutonomousCommand(true);
+			manipulatorUp = new ManipulatorAutonomousCommand(false);
+			manipulatorDown.start();
+			manipulatorDown.thenRun(forwards).thenRun(manipulatorUp).thenRun(forwards);
 	}
 
 		//piston.start();
