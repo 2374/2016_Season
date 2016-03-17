@@ -1,6 +1,8 @@
 package org.usfirst.frc.team2374.robot.components;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Talon;
+
 import org.usfirst.frc.team2374.robot.Component;
 
 public class Manipulator extends Component {
@@ -9,14 +11,18 @@ public class Manipulator extends Component {
      * The robot's manipulator motor.
      */
     private final Talon motor;
+    public final DigitalInput LimitSwitchFront;
+    public final DigitalInput LimitSwitchBack;
 
     /**
      * Creates a manipulator with motor set to the given port.
      *
      * @param port The port for the motor.
      */
-    public Manipulator(int port) {
+    public Manipulator(int port, int port1, int port2) {
         motor = new Talon(port);
+        LimitSwitchFront = new DigitalInput(port1);
+        LimitSwitchBack = new DigitalInput(port2);
     }
 
     /**

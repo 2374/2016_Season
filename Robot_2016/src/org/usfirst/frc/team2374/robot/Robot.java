@@ -52,7 +52,7 @@ public class Robot extends SampleRobot {
 		// Create all the robot's components
 		drivetrain = new Drivetrain(0, 1, 2, 3, 2, 3, 0, 1);
 		intake = new Intake(6);
-		manipulator = new Manipulator(7);
+		manipulator = new Manipulator(7,8,9);//change ports later
 		pistons = new Pistons(6, 7, 0, 1, 4, 5, 2, 3);
 		shooter = new Shooter(4, 5, 4, 5);
 		camera = new MountedCamera("10.23.74.142"); // Roborio IP Address
