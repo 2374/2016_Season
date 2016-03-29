@@ -51,17 +51,13 @@ public class PistonsTeleopCommand extends Command {
 			mostRecentPushedButton = 0;
 		}
 
-		if (!frontLeft && !frontRight && !backLeft && !backRight) {
-			if (Input.JOYSTICK1.getPOV() == -1) {
-				Robot.pistons.setPistons(false, false, false, false);
-			} else {
-				int mode = PISTON_MODES[mostRecentPushedButton][Input.JOYSTICK1
-						.getPOV() / 90];
-				Robot.pistons.setPistonMode(mode);
-			}
-		} else {
-			Robot.pistons
-					.setPistons(frontLeft, frontRight, backLeft, backRight);
-		}
+		/*
+		 * if (!frontLeft && !frontRight && !backLeft && !backRight) { if
+		 * (Input.JOYSTICK1.getPOV() == -1) { Robot.pistons.setPistons(false,
+		 * false, false, false); } else { int mode =
+		 * PISTON_MODES[mostRecentPushedButton][Input.JOYSTICK1 .getPOV() / 90];
+		 * Robot.pistons.setPistonMode(mode); } } else { Robot.pistons
+		 * .setPistons(frontLeft, frontRight, backLeft, backRight); }
+		 */
 	}
 }
