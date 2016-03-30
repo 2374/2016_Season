@@ -12,8 +12,11 @@ public class ShooterAutonomous extends Command {
 	@Override
 	public boolean isFinished() {
 		// TODO Auto-generated method stub
-		return Robot.shooter.getRate() > .55//consider changing this to return null, I doubt that we want the shooter to stop running in autonomous
-		|| !Robot.robot.isAutonomous();
+		return Robot.shooter.getRate() > .55// consider changing this to return
+											// null, I doubt that we want the
+											// shooter to stop running in
+											// autonomous
+				|| !Robot.robot.isAutonomous();
 	}
 
 	@Override
@@ -25,7 +28,7 @@ public class ShooterAutonomous extends Command {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		Robot.shooter.PIDShooter(0.2);
+		Robot.shooter.setSpeed(0.48);
 	}
 
 }

@@ -3,14 +3,10 @@ package org.usfirst.frc.team2374.robot.controllers;
 import org.usfirst.frc.team2374.robot.Command;
 import org.usfirst.frc.team2374.robot.Controller;
 import org.usfirst.frc.team2374.robot.Robot;
-import org.usfirst.frc.team2374.robot.commands.CrossObstaclePart1Command;
-import org.usfirst.frc.team2374.robot.commands.CrossObstaclePart2Command;
 import org.usfirst.frc.team2374.robot.commands.ForwardsCommand;
 import org.usfirst.frc.team2374.robot.commands.ForwardsPositionCommand;
-import org.usfirst.frc.team2374.robot.commands.IntakeAfterShooter;
 import org.usfirst.frc.team2374.robot.commands.ManipulatorAutonomousCommand;
 import org.usfirst.frc.team2374.robot.commands.PistonAutonomousCommand;
-import org.usfirst.frc.team2374.robot.commands.ShooterAutonomous;
 import org.usfirst.frc.team2374.robot.commands.TurnCommand;
 
 public class AutonomousController extends Controller {
@@ -59,40 +55,45 @@ public class AutonomousController extends Controller {
 	@Override
 	public void start() {
 		Command piston;
+		Command pistonStop;
 		Command forwards;
-		Command manipulatorUp;
+		// Command manipulatorUp;
 		Command manipulatorDown;
 		if (autoCaseSelected() == 13) {
 			Command nothing = new ForwardsCommand(0);
 			nothing.finish();
-		} else if(autoCaseSelected()==0){
+		} else if (autoCaseSelected() == 0) {
 			forwards = new ForwardsCommand(3.5);
 			piston = new PistonAutonomousCommand(0);
 			piston.start();
 			forwards.start();
-		} else if (autoCaseSelected()==12){
+		} else if (autoCaseSelected() == 12) {
 			forwards = new ForwardsCommand(3.5);
 			piston = new PistonAutonomousCommand(12);
+			pistonStop = new PistonAutonomousCommand(0);
 			piston.start();
 			forwards.start();
-		} else if (autoCaseSelected()==2){
+			forwards.thenRun(pistonStop);
+		} else if (autoCaseSelected() == 2) {
 			forwards = new ForwardsCommand(1.5);
 			manipulatorDown = new ManipulatorAutonomousCommand(true);
-			manipulatorUp = new ManipulatorAutonomousCommand(false);
-			manipulatorUp.start();
-			manipulatorUp.thenRun(forwards).thenRun(manipulatorDown).thenRun(forwards);
+			// manipulatorUp = new ManipulatorAutonomousCommand(false);
+			forwards.start();
+			forwards.thenRun(manipulatorDown).thenRun(forwards);
 		}
-		else if (autoCaseSelected()==3){
-			forwards = new ForwardsCommand(1.5);
-			manipulatorDown = new ManipulatorAutonomousCommand(true);
-			manipulatorUp = new ManipulatorAutonomousCommand(false);
-			manipulatorDown.start();
-			manipulatorDown.thenRun(forwards).thenRun(manipulatorUp).thenRun(forwards);
+		/*
+		 * else if (autoCaseSelected()==3){ forwards = new ForwardsCommand(1.5);
+		 * manipulatorDown = new ManipulatorAutonomousCommand(true);
+		 * manipulatorUp = new ManipulatorAutonomousCommand(false);
+		 * manipulatorDown.start();
+		 * manipulatorDown.thenRun(forwards).thenRun(manipulatorUp
+		 * ).thenRun(forwards);
+		 */
 	}
 
-		//piston.start();
-		//forwards.start();
-	}
+	// piston.start();
+	// forwards.start();
+	// }
 
 	public int autoCaseSelected() {
 		return (int) Robot.autoChooserObstacles.getSelected();

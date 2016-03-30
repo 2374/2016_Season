@@ -12,6 +12,14 @@ public class SidePiston extends Component {
 		spike = new Relay(port);
 	}
 
+	/**
+	 * Sets the spike to move forwards, reverse, or to deactivate
+	 * 
+	 * @param val
+	 *            An integer value representing the motion of the spike: 1
+	 *            represents forward, 0 represents off, and -1 represents
+	 *            reverse.
+	 */
 	public void setValue(int val) {
 		if (val == 1) {
 			spike.set(Relay.Value.kForward);

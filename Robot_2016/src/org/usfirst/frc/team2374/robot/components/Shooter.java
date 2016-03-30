@@ -64,30 +64,16 @@ public class Shooter extends Component {
 		// wheelEncoder.getRate());
 	}
 
-	public void PIDShooter(double targetSpeed) {
-		double maxRate = 9.79;
-		double error = targetSpeed * maxRate - getRate();
-		double P = 0.01;
-		double I = 0.00005;
-		double D = -0.005;
-		if (Math.abs(error) >= 0) {
-			motorVoltage += (error * P) + (error - prevError) * D
-					+ (integral * I);
-		if (motorVoltage > maxRate) {
-				motorVoltage = maxRate;
-			} else if (motorVoltage < -maxRate) {
-				motorVoltage = -maxRate;
-			}
-			wheel1.set(motorVoltage / maxRate);
-			wheel2.set(motorVoltage / maxRate);
-			integral += error;
-			prevError = error;
-		}
-	}
-
-	public void resetPid() {
-		prevError = 0;
-		integral = 0;
-		motorVoltage = 0;
-	}
+	/*
+	 * public void PIDShooter(double targetSpeed) { double maxRate = 9.79;
+	 * double error = targetSpeed * maxRate - getRate(); double P = 0.01; double
+	 * I = 0.00005; double D = -0.005; if (Math.abs(error) >= 0) { motorVoltage
+	 * += (error * P) + (error - prevError) * D + (integral * I); if
+	 * (motorVoltage > maxRate) { motorVoltage = maxRate; } else if
+	 * (motorVoltage < -maxRate) { motorVoltage = -maxRate; }
+	 * wheel1.set(motorVoltage / maxRate); wheel2.set(motorVoltage / maxRate);
+	 * integral += error; prevError = error; } }
+	 * 
+	 * public void resetPid() { prevError = 0; integral = 0; motorVoltage = 0; }
+	 */
 }

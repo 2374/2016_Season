@@ -5,28 +5,31 @@ import org.usfirst.frc.team2374.robot.commands.IntakeTeleopCommand;
 import org.usfirst.frc.team2374.robot.commands.ManipulatorTeleopCommand;
 import org.usfirst.frc.team2374.robot.commands.PistonsTeleopCommand;
 import org.usfirst.frc.team2374.robot.commands.ShooterTeleopCommand;
+import org.usfirst.frc.team2374.robot.commands.SidePistonTeleopCommand;
 import org.usfirst.frc.team2374.robot.commands.TankDriveCommand;
 
 public class TeleopController extends Controller {
 
-    @Override
-    public void start() {
-        //This controls the robot's wheels
-        new TankDriveCommand().startAsDefaultCommand();
+	@Override
+	public void start() {
+		// This controls the robot's wheels
+		new TankDriveCommand().startAsDefaultCommand();
 
-        //controls the pistons
-        new PistonsTeleopCommand().startAsDefaultCommand();
+		// controls the pistons
+		new PistonsTeleopCommand().startAsDefaultCommand();
 
-        //controls the intake
-        new IntakeTeleopCommand().startAsDefaultCommand();
+		// controls the intake
+		new IntakeTeleopCommand().startAsDefaultCommand();
 
-        //controls the manipulator
-        new ManipulatorTeleopCommand().startAsDefaultCommand();
-        
-        //controls the shooter (no PID though)
-        new ShooterTeleopCommand().startAsDefaultCommand();
+		// controls the manipulator
+		new ManipulatorTeleopCommand().startAsDefaultCommand();
 
-        //Make the robot go forward for 1 second on the A button
-        //Input.whenPressed(1).runCommand(new ForwardsCommand(1));
-    }
+		// controls the shooter (no PID though)
+		new ShooterTeleopCommand().startAsDefaultCommand();
+
+		new SidePistonTeleopCommand().startAsDefaultCommand();
+
+		// Make the robot go forward for 1 second on the A button
+		// Input.whenPressed(1).runCommand(new ForwardsCommand(1));
+	}
 }

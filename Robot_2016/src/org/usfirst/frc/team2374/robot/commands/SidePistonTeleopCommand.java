@@ -8,6 +8,8 @@ import org.usfirst.frc.team2374.robot.Component;
 import org.usfirst.frc.team2374.robot.Robot;
 import org.usfirst.frc.team2374.robot.events.Input;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class SidePistonTeleopCommand extends Command {
 
 	@Override
@@ -24,11 +26,12 @@ public class SidePistonTeleopCommand extends Command {
 
 	@Override
 	public void update() {
+		SmartDashboard.putNumber("SidePiston", Input.JOYSTICK1.getPOV(0));
 		// TODO Auto-generated method stub
-		if (Input.JOYSTICK1.getPOV() == 1) {
+		if (Input.JOYSTICK1.getPOV(0) == 0) {
 			Robot.sidePiston.setValue(1);
-		} else if (Input.JOYSTICK1.getPOV() == -1) {
-			Robot.sidePiston.setValue(-1);
+			// } else if (Input.JOYSTICK1.getPOV() == 180) {
+			// Robot.sidePiston.setValue(-1);
 		} else {
 			Robot.sidePiston.setValue(0);
 		}

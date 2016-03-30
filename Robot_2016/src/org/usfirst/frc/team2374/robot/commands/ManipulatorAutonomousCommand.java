@@ -48,12 +48,12 @@ public class ManipulatorAutonomousCommand extends Command {
 		if (!Robot.manipulator.LimitSwitchFront.get()) {
 			manipulatorSpeed1 = 0.5;
 		}
-		if (Robot.manipulator.LimitSwitchBack.get()) {
-			manipulatorSpeed2 = 0;
-		}
-		if (!Robot.manipulator.LimitSwitchBack.get()) {
-			manipulatorSpeed2 = -0.5;
-		}
+		// if (Robot.manipulator.LimitSwitchBack.get()) {
+		manipulatorSpeed2 = 0;
+		// }
+		// if (!Robot.manipulator.LimitSwitchBack.get()) {
+		manipulatorSpeed2 = -0.5;
+		// }
 		if (directionIsDown) {
 			Robot.manipulator.setSpeed(manipulatorSpeed1);
 		}
