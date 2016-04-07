@@ -32,8 +32,8 @@ public class ShooterTeleopCommand extends Command {
 
 		if (Input.JOYSTICK1.getRawButton(5)) {
 			Robot.shooter.setSpeed(-SHOOTER_SPEED);// implement PID
-		} else if (Input.JOYSTICK1.getRawButton(7)) {
-			Robot.shooter.setSpeed(-SHOOTER_SPEED);// implement PID
+			// } else if (Input.JOYSTICK1.getRawButton(7)) {
+			// Robot.shooter.setSpeed(-SHOOTER_SPEED);// implement PID
 			// } else if (!FirstControllerActive() &&
 			// Input.JOYSTICK2.getRawButton(5)) {
 			// Robot.shooter.PIDShooter(-SHOOTER_SPEED);// implement PID

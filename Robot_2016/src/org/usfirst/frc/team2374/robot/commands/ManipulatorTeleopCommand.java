@@ -25,12 +25,10 @@ public class ManipulatorTeleopCommand extends Command {
 
 	@Override
 	public void update() {
-		if (Robot.manipulator.LimitSwitchFront.get()) {
-			manipulatorSpeed1 = 0;
-		}
-		if (!Robot.manipulator.LimitSwitchFront.get()) {
-			manipulatorSpeed1 = 0.5;
-		}
+		/*
+		 * if (Robot.manipulator.LimitSwitchFront.get()) { manipulatorSpeed1 =
+		 * 0; } else { manipulatorSpeed1 = 1; }
+		 */
 		// if (Robot.manipulator.LimitSwitchBack.get()){
 		// manipulatorSpeed2 = 0;
 		// }
@@ -38,10 +36,10 @@ public class ManipulatorTeleopCommand extends Command {
 		// manipulatorSpeed2 = -0.5;
 		// }
 		if (Input.getButton(2)) {
-			Robot.manipulator.setSpeed(manipulatorSpeed1);
+			Robot.manipulator.setSpeed(1);
 		}
 		if (Input.getButton(4)) {
-			Robot.manipulator.setSpeed(-0.5);
+			Robot.manipulator.setSpeed(-1);
 		}
 	}
 }

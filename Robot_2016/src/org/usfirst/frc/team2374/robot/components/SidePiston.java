@@ -22,13 +22,16 @@ public class SidePiston extends Component {
 	 */
 	public void setValue(int val) {
 		if (val == 1) {
-			spike.set(Relay.Value.kForward);
+			spike.setDirection(Relay.Direction.kForward);
+			spike.set(Relay.Value.kOn);
+			// spike.set(Relay.Value.kForward);
 		}
 		if (val == 0) {
 			spike.set(Relay.Value.kOff);
 		}
 		if (val == -1) {
-			spike.set(Relay.Value.kReverse);
+			spike.setDirection(Relay.Direction.kReverse);
+			spike.set(Relay.Value.kOn);
 		}
 	}
 

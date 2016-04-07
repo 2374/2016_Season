@@ -63,12 +63,12 @@ public class AutonomousController extends Controller {
 			Command nothing = new ForwardsCommand(0);
 			nothing.finish();
 		} else if (autoCaseSelected() == 0) {
-			forwards = new ForwardsCommand(3.5);
+			forwards = new ForwardsCommand(2.5);
 			piston = new PistonAutonomousCommand(0);
 			piston.start();
 			forwards.start();
 		} else if (autoCaseSelected() == 12) {
-			forwards = new ForwardsCommand(3.5);
+			forwards = new ForwardsCommand(2.5);
 			piston = new PistonAutonomousCommand(12);
 			pistonStop = new PistonAutonomousCommand(0);
 			piston.start();
